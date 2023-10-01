@@ -1,10 +1,14 @@
-const levels = require("./classLevels.json")
-const saves = require("./classSaves.json")
+const levels = require("./levels.json")
+const saves = require("./saves.json")
 const DieRoll = require('./dieRoll')
 const savingThrow = DieRoll.parse('d20')
 
 function eq(str1, str2) {
   return (String(str1).toLowerCase() === String(str2).toLowerCase())
+}
+
+function getMeta() {
+
 }
 
 function findEditionAndClass(className) {

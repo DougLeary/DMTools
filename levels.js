@@ -1,4 +1,4 @@
-const data = require("./classLevels.json")
+const data = require("./levels.json")
 
 function getLevels(xp) {
   // for each class find the level corresponding to xp

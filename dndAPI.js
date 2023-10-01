@@ -1,8 +1,8 @@
 const appName = "Dnd"
 const express = require('express')
 const path = require('path')
-const attack = require('./attack')
-const levels = require('./classLevels')
+const attack = require('./attacks')
+const levels = require('./levels')
 const saves = require('./saves')
 
 const app = express()
