@@ -1,0 +1,43 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #202020;
+  color: white;
+}
+a, a:visited {
+  color: #80ff80;
+  text-decoration: none;
+}
+label {
+  display: inline-block;
+  width: 120px;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: bold;
+}
+input {
+  width: 60px;
+  margin-top: 5px;
+}
+button {
+  margin-top: 10px;
+  height: 36px;
+  width: 60px;
+  background-color: #20c020;
+  font-size: 18px;
+  font-weight: bold;
+}
+button:hover {
+  background-color: #a0ffa0;
+}
+#bullet {
+  width: 22px;
+  float: left;
+}
+#results {
+  height: 200px;
+  width: 600px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  background-color: black;
+  float: left;
+}

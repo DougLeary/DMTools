@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Saving Throw Roller</title>
+  <link rel="stylesheet" href="dnd.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    function roll() {
+      const x = $('#howMany')
+      console.log(x.innerHTML)
+      const howMany = $('#howMany').val()
+      const edition = $('#edition').val()
+      const className = $('#className').val()
+      const level = $('#level').val()
+      console.log(`Calling api at ./rollsaves/${howMany}/${edition}/${className}/${level}`)
+      $.get(`./rollsaves/${howMany}/${edition}/${className}/${level}`, (data) => {
+        for (let i=0; i < data.saves.length; i++) {
+          $('#saves').append(`${data.saves[i].effect}: ${data.saves[i].need}<br />`)
+        }
+        for (let n=0; n < howMany; n++) {
+          $('#results').append(`Rolled: ${data.rolls[n].roll}, saved: `)
+          for (let i=0; i < data.rolls.length; i++) {
+            if (i > 0) $('#results').append(', ')
+            $('#results').append(`${data.rolls[n].saves[i]}`)
+          }
+          $('#results').append(`<br />`)
+        }
+      });
+    }
+    $(function() {    // document.ready placeholder
+    });
+   </script></head>
+<body>
+  <a href="dnd.html">◀ Home</a>
+  <h1>Saving Throw Roller</h1>
+  <p>Rolls multiple saving throws and reports successes and failures. 
+  </p>
+  <div style="margin:10px; width: 400px; text-align: center;">
+    <label for="edition">Book:</label>
+    <select name="edition" id="edition">
+      <option value="1e">1e Player's Handbook</option>
+      <option value="UA">Unearthed Arcana</option>
+      <option value="OA">Oriental Adventures</option>
+    </select><br />
+    <label for="className">Class:</label>
+      <select id="className" type="text">
+        <option value="0"></option>
+      </select><br />
+    <label for="level">Level:</label>       <select id="level" type="text"></select><br />
+    <label for="howMany">How Many:</label>  <select id="howMany" type="text"></select><br />
+    <button type="button" onclick="roll()">Roll</button>
+  </div>
+
+  <div class="float-container">
+    <div class="float-child">
+      <div id="saves"></div>
+    </div>
+    <div class="float-child">
+      <div id="results"></div>
+    </div>
+  </div>
+</body>

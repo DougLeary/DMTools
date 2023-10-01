@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Level Calculator</title>
+  <link rel="stylesheet" href="dnd.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    function getLevels() {
+      const xp = $('#xp').val()
+      console.log(`Calling api at ./levels/${xp}}`)
+      $('#levels').empty()
+      $.get(`./levels/${xp}`, (data) => {
+        for (let i=0; i < data.length; i++) {
+          const st = `<p>${data[i].name}</p>`
+          $('#levels').append(`${data[i].name}: ${data[i].level}, ${data[i].xpToNext}<br/>`)
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <a href="dnd.html">◀ Home</a>
+  <h1>Level Calculator</h1>
+  <p>Enter an XP value to see what levels it would be in various classes.</p>
+  <div style="margin:10px; width: 400px; text-align: left;">
+    <label for="xp">XP: </label><input id="xp" type="text" />
+    <button type="button" style="width: 120px" onclick="getLevels()">Get Levels</button>
+  </div>
+
+  <div id="levels"></div>
+</body>
