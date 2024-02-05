@@ -4,6 +4,7 @@ const path = require('path')
 const attack = require('./attacks')
 const levels = require('./levels')
 const saves = require('./saves')
+const names = require('./names')
 
 const app = express()
 app.use(express.json())
@@ -55,6 +56,16 @@ app.get('/levels/:xp', (req, res) => {
   console.log(`Levels for XP: ${req.params.xp}`)
   const json = levels.getLevels(req.params.xp)
 //  console.log(`Returning ${JSON.stringify(json)}`)
+  res.json(json)
+})
+
+app.get('/names', (req, res) => {
+  res.sendFile(path.join(__dirname, '/names.html'))
+})
+app.get('/names/:type', (req, res) => {
+  // return a random name for a type of NPC (elf, dwarf, etc)
+  const json = names.newName(req.params.type)
+  console.log(`Result: ${JSON.stringify(json)}`)
   res.json(json)
 })
 

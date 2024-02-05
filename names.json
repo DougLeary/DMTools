@@ -1,0 +1,45 @@
+{ "generators": [
+  { 
+    "type": "dwarf",
+    "rule": "ABC,DE,F...",
+    "blocks": [
+      "2babodadidugigararu",
+      "3borbrodurdrudredeldalgolgalgongengurthothothothu",
+      "4glorglorthonthorthov",
+      "2elinimeneronuragalamaran",
+      "3eoneanearoargengergardordardindul",
+      "4waldmornvornvarnwernwarnvelndurndurlburnbornbordbarnbirngerd"
+    
+    ]
+  },
+  { 
+    "type": "elf",
+    "first": ["Bindel", "Dindel", "Frindel", "Mindel", "Tindel"],
+    "last": []
+  },
+  { 
+    "type": "goblin",
+    "first": [],
+    "last": []
+  },
+  { 
+    "type": "halfling",
+    "first": [],
+    "last": []
+  },
+  { 
+    "type": "human",
+    "first": [],
+    "last": []
+  },
+  { 
+    "type": "orc",
+    "first": [],
+    "last": []
+  },
+  {
+    "type": "other",
+    "first": [],
+    "last": []
+  }  
+]}
