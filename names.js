@@ -2,11 +2,13 @@ const data = require('./names.json')
 const gens = (data) ? data.generators : []
 
 function doBlock(block) {
-  const ch = block.charAt(0)
+  const id = block.charAt(0)
+  const ch = block.charAt(1)
   if (isNaN(ch)) return ''
   const size = parseInt(ch)
-  const pos = Math.floor(Math.random() * (block.length - 1) / size)
-  return block.substr((pos)*size + 1, size)
+  const pos = Math.floor(Math.random() * (block.length - 2) / size)
+  const st = block.substr((pos)*size + 2, size)
+  return (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
 }
 
 function doStep(gen, step) {
@@ -30,22 +32,15 @@ function useRule(gen) {
   return result
 }
 
-function newName(_type='', _flavor='') {
-  if (_type) {
+function newName(type='', flavor='') {
+  if (type) {
     for (let i in gens) {
       const gen = gens[i]
-      if (gen.type == _type) {
-        // console.log(`generating ${_type} name`)
-        // console.dir(gen)
-        if (gen.hasOwnProperty("rule")) return useRule(gen)
-
-        const first = (gen.first && gen.first.length > 0) ? gen.first[Math.floor(Math.random() * gen.first.length)] + ' ' : ''
-        const last = (gen.last && gen.last.length > 0) ? gen.last[Math.floor(Math.random() * gen.last.length)] : ''
-        return `${first}${last}`.trim()
-      }
+      const genFlavor = (gen.hasOwnProperty("flavor")) ? gen.flavor : ''
+      if (gen.type == type && genFlavor == flavor) return useRule(gen)
     }
   }
-  return `NPC ${_type}`
+  return `NPC ${type}`
 }
 
 module.exports = {

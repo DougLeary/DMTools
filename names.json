@@ -1,21 +1,24 @@
 { "generators": [
   { 
     "type": "dwarf",
-    "rule": "ABC,DE,F...",
+    "rule": "ABC,DE,F---,..-,G,H",
     "blocks": [
-      "2babodadidugigararu",
-      "3borbrodurdrudredeldalgolgalgongengurthothothothu",
-      "4glorglorthonthorthov",
-      "2elinimeneronuragalamaran",
-      "3eoneanearoargengergardordardindul",
-      "4waldmornvornvarnwernwarnvelndurndurlburnbornbordbarnbirngerd"
-    
+      "A2BaBoDaDiDuGiGaRaRu",
+      "B3AulBorBroDurDruDreDelDalGolGalGonGenGurThoThoThoThu",
+      "C4GlorGlomGromGronGlonThonThorThov",
+      "D2elinimenerononururagalamarararanan",
+      "E3eoneanjaroargangengergardordardindul",
+      "F4waldmornvornvarnvarnwarnwarnvelndurndurlburnbornbordbarnbirngerd",
+      "G8 Granite Red     Green   Blue    Black   Blood   Stone   Troll  ",
+      "H8Hammer  Hammer  Digger  Arm     Blade   Cleaver Wedge   Night   Born    Burn    Burner  Bane    Bear    Bore    Thane   "
     ]
   },
   { 
     "type": "elf",
-    "first": ["Bindel", "Dindel", "Frindel", "Mindel", "Tindel"],
-    "last": []
+    "rule": "A,B",
+    "blocks": [
+      "5"
+    ]
   },
   { 
     "type": "goblin",
