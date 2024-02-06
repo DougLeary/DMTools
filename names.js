@@ -3,11 +3,9 @@ const gens = (data) ? data.generators : []
 
 function doBlock(block) {
   const id = block.charAt(0)
-  const ch = block.charAt(1)
-  if (isNaN(ch)) return ''
-  const size = parseInt(ch)
-  const pos = Math.floor(Math.random() * (block.length - 2) / size)
-  const st = block.substr((pos)*size + 2, size)
+  const arr = block.substr(2).split(',')
+  const pos = Math.floor(Math.random() * arr.length)
+  const st = arr[pos]
   return (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
 }
 
