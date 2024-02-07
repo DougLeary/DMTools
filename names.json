@@ -34,28 +34,11 @@
     ]
   },
   { 
-    "type": "goblin",
-    "first": [],
-    "last": []
-  },
-  { 
-    "type": "halfling",
-    "first": [],
-    "last": []
-  },
-  { 
-    "type": "human",
-    "first": [],
-    "last": []
-  },
-  { 
-    "type": "orc",
-    "first": [],
-    "last": []
-  },
-  {
-    "type": "other",
-    "first": [],
-    "last": []
-  }  
+    "type": "test",
+    "rule": "A,B",
+    "blocks": [
+      "A:abc,d\"ef",
+      "B:tuv,x,,y,,z"
+    ]
+  }
 ]}

@@ -3,9 +3,10 @@ const gens = (data) ? data.generators : []
 
 function doBlock(block) {
   const id = block.charAt(0)
-  const arr = block.substr(2).split(',')
+  const comma = String.fromCharCode(12)   // temporarily replaces ",,"
+  const arr = block.substr(2).replace(',,', comma).split(',')
   const pos = Math.floor(Math.random() * arr.length)
-  const st = arr[pos]
+  const st = arr[pos].replace(comma, ',')
   return (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
 }
 
@@ -18,7 +19,7 @@ function doStep(gen, step) {
   return ''
 }
 
-function useRule(gen) {
+function doRule(gen) {
   if (!gen.rule || !gen.blocks) return ''
   const steps = gen.rule.split(',')
   let result = ''
@@ -35,7 +36,7 @@ function newName(type='', flavor='') {
     for (let i in gens) {
       const gen = gens[i]
       const genFlavor = (gen.hasOwnProperty("flavor")) ? gen.flavor : ''
-      if (gen.type == type && genFlavor == flavor) return useRule(gen)
+      if (gen.type == type && genFlavor == flavor) return doRule(gen)
     }
   }
   return `NPC ${type}`

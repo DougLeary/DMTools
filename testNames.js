@@ -1,7 +1,7 @@
 const names = require('./names')
 
 function test() {
-  return names.newName('elf')
+  return names.newName('test')
 }
 
 let st = test()
