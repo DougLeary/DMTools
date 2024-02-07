@@ -34,11 +34,14 @@
     ]
   },
   { 
-    "type": "test",
-    "rule": "A,B",
+    "type": "inn",
+    "rule": [" A,BCCDDD", " BCCDDD,E,BBCDD"],
     "blocks": [
-      "A:abc,d\"ef",
-      "B:tuv,x,,y,,z"
+      "A:Rusty,Black,Black,Green,Blue,Purple,Scarlet,Crimson,Velvet,Angry,Happy,Happy,Tipsy,Sleepy,Grumpy,Bashful,Smiling,Growling,Scowling,Lucky,Lucky,Cheerful,Blind,Greedy,Laughing,Well Fed,Skinny",
+      "B:Troll,Goblin,Kobold,Witch,Minotaur,Ogre,Eye",
+      "C:Cauldron,Spoon,Spoon,Shield,Axe,Sword,Halberd,Baldric",
+      "D:Duck,Duck,Goose,Goose,Cow,Mare,Hen,Rooster,Hound,Hound,Dog,Cat,Eagle,Bunny,Hare,Rabbit,Stoat,Weasel,Frog,Toad",
+      "E:and"
     ]
   }
 ]}

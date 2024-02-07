@@ -19,29 +19,45 @@ function doStep(gen, step) {
   return ''
 }
 
-function doRule(gen) {
-  if (!gen.rule || !gen.blocks) return ''
-  const steps = gen.rule.split(',')
+function doRule(gen, rule) {
+  if (!rule || !gen.blocks) return ''
+  const spaced = (rule.substr(0,1) == ' ')
+  const steps = rule.trim().split(',')
   let result = ''
   for (let n in steps) {
      const st = doStep(gen, steps[n])
-     if (st == '.') return result
-     if (st != '-') result += st
+     if (st == '.') return result.trim()
+     if (st != '-') result += st + (spaced ? ' ' : '')
   }
-  return result
+  return result.trim()
 }
 
-function newName(type='', flavor='') {
+function getGenerators() {
+  // return a list of generators and their flavors
+  arr = []
+  for (let i in gens) {
+    const gen = gens[i]
+    arr.push({type: gen.type, flavor: (gen.hasOwnProperty('flavor')) ? gen.flavor : ''})
+  }
+  return arr
+}
+
+function getName(type='', flavor='') {
+  // return a generated name of a given type and flavor
   if (type) {
     for (let i in gens) {
       const gen = gens[i]
       const genFlavor = (gen.hasOwnProperty("flavor")) ? gen.flavor : ''
-      if (gen.type == type && genFlavor == flavor) return doRule(gen)
+      if (gen.type == type && genFlavor == flavor) {
+        // do a plain rule or a selected rule from a rule array
+        return doRule(gen, (Array.isArray(gen.rule)) ? gen.rule[Math.floor(Math.random() * gen.rule.length)] : gen.rule) 
+      }
     }
   }
-  return `NPC ${type}`
+  return `NPC ${type}`.trim()
 }
 
 module.exports = {
-  newName: newName
+  getGenerators: getGenerators,
+  getName: getName
 }

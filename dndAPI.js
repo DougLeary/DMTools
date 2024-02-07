@@ -62,9 +62,14 @@ app.get('/levels/:xp', (req, res) => {
 app.get('/names', (req, res) => {
   res.sendFile(path.join(__dirname, '/names.html'))
 })
+app.get('/names/types', (req, res) => {
+  const json = names.getGenerators()
+  res.json(json)
+})
+
 app.get('/names/:type', (req, res) => {
   // return a random name for a type of NPC (elf, dwarf, etc)
-  const json = names.newName(req.params.type)
+  const json = names.getName(req.params.type)
   console.log(`Result: ${JSON.stringify(json)}`)
   res.json(json)
 })
