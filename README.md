@@ -16,7 +16,7 @@ The most complicated tool here is an engine for creating name generators without
 Each generator consists of a small set of Blocks that contain tokens for building names, and a rule for applying the blocks. See names.json for sample generators.
 
 #### Block ####
-A string that starts with a 1-letter ID followed by a colon, and then a comma-separated list of name tokens. Example block that could represent the first part of a dwarven name: "A:Bor,Thon,Thon,Gron,...". Notice that "Thon" occurs more than once - this is to increase its odds of being picked. The block for the second part could be B:dar,don,gar,ial,olin...". 
+A string that starts with a 1-letter ID followed by a colon, and then a comma-separated list of name tokens. Example block that could represent the first part of a dwarven name: "A:Bor,Thon,Thon,Gron,...". Notice that "Thon" occurs more than once - this is to increase its odds of being picked. The block for the second part of the name could be "B:dar,don,gar,ial,olin...". 
 
 #### Rule ####
 A rule is a series of comma-separated steps for applying blocks. The rule for generating a name from blocks A and B here would have two steps: "A,B". This represents picking a token from block A and a token from block B, preserving capitalization. A sample result would be "Thonial". 
