@@ -21,19 +21,19 @@ A string that starts with a 1-letter ID followed by a colon, and then a comma-se
 #### Rule ####
 A rule is a series of comma-separated steps for applying blocks. The rule for generating a name from blocks A and B here would have two steps: "A,B". This represents picking a token from block A and a token from block B, preserving capitalization. A sample result would be "Thonial". 
 
-A more complicated generator would have a bunch of blocks and a more complex rule. For example, the rule "AAABC,D,E" has 3 steps: pick a token from block A, B or C, then from D, and finally from E. Repeating A 3x in the first step meansit is 3x more likely to be used than B or C. This how odds are determined, same as repeating tokens in a block. 
+A more complicated generator would have a bunch of blocks and a more complex rule. For example, the rule "AAABC,D,E" has 3 steps: pick a token from block A, B or C, then from D, and finally from E. Repeating A 3x in the first step means it is 3x more likely to be used than B or C. 
 
 #### Special Rule Characters ####
-A hyphen '-' skips the current step. For example, in the step "C---" there is 1 out of 4 chance a token will be chosen from block C, and 3 out of 4 chances the step will be skipped, adding nothing to the name.
-A period '.' stops the process and returns the result thus far. For example, the rule "AB,C.,D" will choose a token from block A or B, then half the time it will stop and half the time it will continue, using block C and then block D.
-A blank space at the beginning of a rule means to insert blanks between tokens. This is useful for generating multi-word names, such as tavern names or NPC first and last names. Other than this, blanks in rules are ignored.
+A hyphen '-' skips the current step, adding nothing to the name. For example, the step "C-" means pick from block C or skip this step, with equal odds. In step "C---" there is 3 out of 4 chance the step will be skipped.  
+A period '.' stops the process and returns the result thus far. For example, the rule "AB,C.,D" will choose a token from block A or B, then half the time it will stop and half the time it will pick a token from block C and continue, using block D.  
+A blank space at the beginning of a rule tells the engine to insert blanks between tokens. This is useful for generating multi-word names, such as tavern names or NPC first and last names. Other blanks in a rule are ignored.
 
-Hyphens and periods can be combined for rudimentary flow control. Example: "A,...-,BC" means pick a token from block A, then 3 out of 4 times stop, but 1 out of 4 skip that step and continue to pick from block B or C. 
+Hyphens and periods can be combined for rudimentary flow control. Example: "A,...-,BC" means pick a token from block A, then 3 out of 4 times stop, but 1 out of 4 skip that step and continue, picking from block B or C. 
 
 Arrangement of block IDs within a step does not matter. 
 
 #### Multiple Rules ####
-To choose between multiple naming patterns a rule can specify an array of strings rather than just one string. When this happens a random rule is used. As with tokens in blocks and block IDs in rule steps, repeating a rule multiple times in an array of rules increases its odds of being used. 
-Example: a tavern name generator with the simple rule “ A,B” could generate names with the pattern “Adjective Noun” as in “Happy Goblin”. To also create names with the pattern “Noun and Noun” such as "Dog and Pony" you could use a rule array like [“ A,B”, “ B,C,B”]. Block A would contain adjectives, B would contain nouns, and C would contain only the word " and". To use one rule more often than the other you would enter it multiple times in the array. 
+To choose between multiple naming patterns, a rule can be an array of strings instead of just one string. When this happens a random rule from the array is used. Repeating a rule in the array increases its odds of being used.  
+Example: a tavern name generator with the simple rule “ A,B” could generate names with the pattern “Adjective Noun” as in “Happy Goblin”. To also create names with the pattern “Noun and Noun” such as "Dog and Pony" you could use a rule array like [“ A,B”, “ B,C,B”]. Block A would contain adjectives, B would contain nouns, and C would contain only the word " and".
 
-The generator-inator turned out to be more versatile than I expected. It has let me whip up special-purpose generators in a matter of minutes that create names with consistent cultural flavor. Just one less detail to think about at game time when players capture a group of nameless NPCs and decide to make them henchmen. 
+The generator-inator turned out to be more versatile than I expected. It has let me whip up special-purpose name generators in a matter of minutes. Just one less detail to think about at game time, when players decide to Charm a group of nameless NPC bandits and use them as henchmen. 
