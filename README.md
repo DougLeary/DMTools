@@ -1,25 +1,39 @@
 # DMTools
-Tools for DMing 1st Edition AD&amp;D
+Tools for DMing 1st Edition AD&amp;D. Some of them work with .json files containing hand-entered data from AD&D books - currently the 1e Player's Handbook, Unearthed Arcana, and Oriental Adventures, which the software calls "editions". There is also an edition called "Custom" for things from Dragon, homebrew, or whatever. 
 
-These tools work with .json files containing hand-entered data from AD&D books - currently the 1e Player's Handbook, Unearthed Arcana, and Oriental Adventures, which are referred to internally as "editions". There is also an edition called "Custom" for things from Dragon, homebrew, or whatever. 
-
-Tools available at the moment: 
+## Available Tools ## 
 1. Display class experience levels for an XP value, and how far it is to the next level.
 2. Display saving throws needed by a class and level, or roll a series of saving throws.
 3. Roll a series of attacks by a THAC0 against an AC, showing hits and damage.
-4. Generate names for things using a JSON-based lexical generator.
+4. Name Generator-inator - engine to create name generators.
 
-This project was inspired by the tediousness of DMing a party against a group of creatures at once, like a squad of demons or a swarm of giant wasps. Rather than roll a lot of attacks or saving throws I tend to take shortcuts, which I think trivializes an encounter. So I wanted a handy tool that would let me resolve a bunch of attacks or saves all at once, and show me the results in a way I could easily use. I also like to know where characters are in their levels, so when they are about to level up I can plan for some interesting events that coincide with that. After figuring out the mechanics for classes generally, the next step is to maintain a party list with character stats and apply these same utilities to it. 
+These tools are meant to handle tedious DM gametime tasks. Rolling lots of dice is fun, but checking attack rolls and saving throws for dozens of creatures at a time is not fun. 
+ than roll a lot of attacks or saving throws I tend to take shortcuts, which I think trivializes an encounter. So I wanted a handy tool that would let me resolve a bunch of attacks or saves all at once, and show me the results in a way I could easily use. I also like to know where characters are in their levels, so when they are about to level up I can plan for some interesting events that coincide with that. After figuring out the mechanics for classes generally, the next step is to maintain a party list with character stats and apply these same utilities to it. 
 
-**Name Generator-inator** - a simple engine for creating name generators without coding. The engine itself is less than 50 lines of javascript, and it can generate names for anything - NPCs, towns, taverns, countries, swords, whatever, using name generation structures defined in a JSON file. A generator consists of a small set of building blocks and a rule for applying them. 
+### Name Generator-inator ###
+The most complicated tool here is an engine for creating name generators without coding. The engine itself is less than 50 lines of javascript, but it can generate names for anything - NPCs, towns, taverns, countries, swords, whatever, using name generation structures defined in a JSON file. Generators have type and flavor, for example "elf" and "female" or "inns" and "urban", so they can be sort of classified. The function *getGenerators()* returns a list of all generators in the JSON file so a web page can display a selection list. The function *getName(type, flavor)* generates a name. 
 
-A block is a string that contains a 1-letter ID and a comma-separated list of name segments - for example, "A:Bor,Tho,Tho,Tho,Gron,Glor...". In that example "Tho" is repeated multiple times so it will be picked more often. This block could represent the first part of dwarf names. A second block could be "B:dar,don,ial,olin...". 
+Each generator consists of a small set of Blocks that contain tokens for building names, and a rule for applying the blocks. See names.json for sample generators.
 
-A rule is a series of comma-separated steps for applying the blocks. In a simple case where you just want to pick a beginning and ending piece from 2 blocks the rule would be just be "A,B". A more complicated scheme could have a bunch of blocks and the rule could choose between them. For example, the rule "AAABC,D,E" picks a segment from block A, B or C, then from D and finally from E. In the first step block A is 3x more likely to get picked than B or C. 
+#### Block ####
+A string that starts with a 1-letter ID followed by a colon, and then a comma-separated list of name tokens. Example block that could represent the first part of a dwarven name: "A:Bor,Thon,Thon,Gron,...". Notice that "Thon" occurs more than once - this is to increase its odds of being picked. The block for the second part could be B:dar,don,gar,ial,olin...". 
 
-Special rule characters: 
-A hyphen skips the current step. For example, in the step "C---" there is 1 out of 4 chance a segment will be chosen from block C, and 3 out of 4 chances the step will be skipped.
-A period stops the process and returns the result thus far. For example, the rule "AB,C.,D" will choose a segment from block A or B, then half the time it will stop and half the time it will choose from C and continue to D.
-Hyphens and periods can be combined for rudimentary flow control. Example: "A,.....-,BC" means do A, then 5 out of 6 times stop, but 1 out of 6 skip that step and go on to pick from B or C. 
+#### Rule ####
+A rule is a series of comma-separated steps for applying blocks. The rule for generating a name from blocks A and B here would have two steps: "A,B". This represents picking a token from block A and a token from block B, preserving capitalization. A sample result would be "Thonial". 
 
-The generator-inator turned out to be more versatile than I expected. I lets me whip up special-purpose generators in a matter of minutes that create names with consistent cultural flair. Just one less detail to think about at game time when players capture a group of nameless goblins and decide to ask their names. 
+A more complicated generator would have a bunch of blocks and a more complex rule. For example, the rule "AAABC,D,E" has 3 steps: pick a token from block A, B or C, then from D, and finally from E. Repeating A 3x in the first step meansit is 3x more likely to be used than B or C. This how odds are determined, same as repeating tokens in a block. 
+
+#### Special Rule Characters ####
+A hyphen '-' skips the current step. For example, in the step "C---" there is 1 out of 4 chance a token will be chosen from block C, and 3 out of 4 chances the step will be skipped, adding nothing to the name.
+A period '.' stops the process and returns the result thus far. For example, the rule "AB,C.,D" will choose a token from block A or B, then half the time it will stop and half the time it will continue, using block C and then block D.
+A blank space at the beginning of a rule means to insert blanks between tokens. This is useful for generating multi-word names, such as tavern names or NPC first and last names. Other than this, blanks in rules are ignored.
+
+Hyphens and periods can be combined for rudimentary flow control. Example: "A,...-,BC" means pick a token from block A, then 3 out of 4 times stop, but 1 out of 4 skip that step and continue to pick from block B or C. 
+
+Arrangement of block IDs within a step does not matter. 
+
+#### Multiple Rules ####
+To choose between multiple naming patterns a rule can specify an array of strings rather than just one string. When this happens a random rule is used. As with tokens in blocks and block IDs in rule steps, repeating a rule multiple times in an array of rules increases its odds of being used. 
+Example: a tavern name generator with the simple rule “ A,B” could generate names with the pattern “Adjective Noun” as in “Happy Goblin”. To also create names with the pattern “Noun and Noun” such as "Dog and Pony" you could use a rule array like [“ A,B”, “ B,C,B”]. Block A would contain adjectives, B would contain nouns, and C would contain only the word " and". To use one rule more often than the other you would enter it multiple times in the array. 
+
+The generator-inator turned out to be more versatile than I expected. It has let me whip up special-purpose generators in a matter of minutes that create names with consistent cultural flavor. Just one less detail to think about at game time when players capture a group of nameless NPCs and decide to make them henchmen. 
