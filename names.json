@@ -18,7 +18,7 @@
     "flavor": "female",
     "rule": "A,B--,C",
     "blocks": [
-      "A:Dal,Dan,Dul,Dun,Dol,Dor,Dov,Aim,Al,Ain,Aind,Ald,Alg,Glon,Gond,Gath,Glof,Gir,Rurn,Rurth,Rund",
+      "A:Dal,Dan,Dul,Dun,Dol,Dor,Dov,Aim,Al,Ain,Aid,Ald,Alg,Glon,Gond,Gath,Glof,Gir,Rurn,Rurth,Rund",
       "B:i,i,i,i,e,e",
       "C:ana,al,ara,era,lia,ol,ona,una,iss,ulis"
     ]
@@ -27,7 +27,7 @@
     "type": "elf",
     "rule": "A,B,-D",
     "blocks": [
-      "A:Bin,Bif,Fil,Fin,Fin,Fin,Fen,Fen,Ild,Ilf,Nil,Mil,Mel,Mul,Mib,Mid,Til,Tin,Ril,Rin,Sil,Sin,Sen,Svin,Sven,Vel,Vil,Vin",
+      "A:Bin,Bif,Fil,Fin,Fin,Fin,Fen,Fen,Fon,Ild,Ilf,Nil,Mil,Mel,Mul,Mib,Mid,Til,Tin,Ril,Rin,Sil,Sin,Sen,Svin,Sven,Vel,Vil,Vin",
       "B:bin,bil,bid,dib,did,dif,dil,dim,din,lim,lin,lil,min,mil,nim,nin,tid,sid,tin,sin,shiv,shin",
       "C:il,in,ith,id,ib",
       "D:bil,bel,bin,ben,dil,del,dim,din,den,dip,don,lid,led,len,lod,lon,lin,min,mon,mond,lond,mind,ron,rond,rond,rond,rud,rund,win,wind,mend,end,lend,fend,chin,chen,then,thin"
@@ -35,13 +35,15 @@
   },
   { 
     "type": "inn",
-    "rule": [" A,BCCDDD", " BCCDDD,E,BBCDD"],
+    "rule": [" AABBBCC,DEEFFF", " DDEFFF,G,DEEFFF"],
     "blocks": [
-      "A:Rusty,Black,Black,Green,Blue,Purple,Scarlet,Crimson,Velvet,Angry,Happy,Happy,Tipsy,Sleepy,Grumpy,Bashful,Smiling,Growling,Scowling,Lucky,Lucky,Cheerful,Blind,Greedy,Laughing,Well Fed,Skinny",
-      "B:Troll,Goblin,Kobold,Witch,Minotaur,Ogre,Eye",
-      "C:Cauldron,Spoon,Spoon,Shield,Axe,Sword,Halberd,Baldric",
-      "D:Duck,Duck,Goose,Goose,Cow,Mare,Hen,Rooster,Hound,Hound,Dog,Cat,Eagle,Bunny,Hare,Rabbit,Stoat,Weasel,Frog,Toad",
-      "E:and"
+      "A:Black,White,Green,Blue,Purple,Scarlet,Crimson,Silver,Golden,Gray,Bronze,Copper",
+      "B:Rusty,Velvet,Angry,Happy,Happy,Tipsy,Sleepy,Grumpy,Bashful,Smiling,Lucky,Lucky,Cheerful,Laughing,Well Fed,Skinny",
+      "C:Blind,Spotted,Ticklish,Growling,Scowling,Greasy,Greedy,Slippery,Wily,Crafty",
+      "D:Troll,Goblin,Kobold,Witch,Minotaur,Ogre,Eye",
+      "E:Cauldron,Pot,Spoon,Shield,Axe,Sword,Halberd,Baldric",
+      "F:Duck,Duck,Goose,Goose,Cow,Mare,Hen,Rooster,Hound,Hound,Dog,Cat,Eagle,Bunny,Hare,Rabbit,Stoat,Weasel,Frog,Toad,Squirrel,Badger",
+      "G:and"
     ]
   }
 ]}

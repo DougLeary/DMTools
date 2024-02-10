@@ -1,60 +1,69 @@
 {
-  "party": [
+  "name": "Baker Street Bakers",
+  "xp": 193893,
+  "members": [
     { "name": "Vaseria Dalmov II",
       "race": "Orc",
+      "edition": "1e",
       "class": "Illusionist",
       "ac": 1,
       "int": 18,
       "wis": 12,
-      "plus10": true
+      "xpBonus": true
     },
     { "name": "Maggie",
       "race": "Hengeyokai",
+      "edition": "OA",
       "class": "Wu Jen",
       "ac": -1,
       "int": 18,
       "wis": 13,
-      "plus10": true
+      "xpBonus": true
     },
     { "name": "Renee Veloute Bechamel",
       "race": "Halfling",
+      "edition": "Custom",
       "class": "Chef",
       "ac": 1,
       "int": 9,
       "wis": 13,
-      "plus10": false
+      "xpBonus": false
     },
     { "name": "Thri-Kreen",
       "race": "Thri-Kreen",
+      "edition": "OA",
       "class": "Wu Jen/Ninja",
       "ac": 1,
       "int": 18,
       "wis": 12,
-      "plus10": true
+      "xpBonus": true
     },
     { "name": "Skelver",
       "race": "Elf",
+      "edition": "1e",
       "class": "Ranger",
       "ac": -1,
       "int": 15,
       "wis": 16,
-      "plus10": true
+      "xpBonus": true
     },
     { "name": "Evelina",
       "race": "Elf",
+      "edition": "1e",
       "class": "Magic-User/Cleric",
       "ac": 4,
       "int": 18,
       "wis": 16,
-      "plus10": true
+      "xpBonus": true
     },
     { "name": "Goreguts",
       "race": "Gnome",
+      "edition": "1e",
       "class": "Thief/Illusionist",
       "ac": 2,
       "int": 18,
       "wis": 12,
-      "plus10": true
+      "xpBonus": true
     }
   ]
 }

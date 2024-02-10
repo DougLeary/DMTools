@@ -3,7 +3,7 @@ body {
   background-color: #202020;
   color: white;
 }
-a, a:visited {
+a, a:visited, .clickable {
   color: #80ff80;
   text-decoration: none;
 }
@@ -40,4 +40,7 @@ button:hover {
   scrollbar-gutter: stable;
   background-color: black;
   float: left;
+}
+.clickable:hover {
+  cursor:pointer; 
 }

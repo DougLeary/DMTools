@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Name Generator-inator</title>
+    <link rel="stylesheet" href="dnd.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      function getTypes() {
+        $('#nameTypes').empty()
+        $.get(`./names/types`, (data) => {
+          for (let i=0; i < data.length; i++) {
+            const type = data[i].type
+            const flavor = data[i].flavor || ''
+            const st = `<p>${flavor}${(flavor) ? ' ' : ''}${type}</p>`
+            $('#nameTypes').append(st)
+          }
+          $('#nameTypes p').addClass('clickable').on('click', clickItem)
+        })
+      }
+
+      function getNames(count, type, flavor) {
+        $('#results').empty()
+        $.get(`./names/${count}/${type}/${flavor}`, (data) => {
+          for (let i=0; i < data.length; i++) {
+            $('#results').append(`${data[i]}<br/>`)
+          }
+        })
+      }
+
+      function clickItem(ev) {    // to do: add count parameter input
+        const arr = $(ev.target).text().split(' ')
+        if (arr.length > 1) {
+          getNames(10, arr[1], arr[0]) // type, flavor
+        } else {
+          getNames(10, arr[0], '')     // type only
+        }
+      }
+
+      $(document).ready(getTypes)
+    </script>
+    </head>
+  <body>
+    <a href="index.html">< Home</a>
+    <h1>Name Generator-inator</h1>
+    <p>Generate names for various things.</p>
+    <div id="nameTypes">
+    </div>
+    <div id="results"></div>
+  </body>
+</html>

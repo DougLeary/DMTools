@@ -12,7 +12,7 @@ app.use(express.static('.'))
 
 // routing
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/dnd.html'))
+  res.sendFile(path.join(__dirname, '/index.html'))
 })
 app.get('/attack', (req, res) => {
   res.sendFile(path.join(__dirname, '/attack.html'))
@@ -51,10 +51,19 @@ app.get('/rollsaves/:saves/:edition/:className/:level', (req, res) => {
 app.get('/levels', (req, res) => {
   res.sendFile(path.join(__dirname, '/levels.html'))
 })
-app.get('/levels/:xp', (req, res) => {
+
+app.get('/classlevels/:xp', (req, res) => {
   // display a list of classes and the level the XP value corresponds to in each
   console.log(`Levels for XP: ${req.params.xp}`)
-  const json = levels.getLevels(req.params.xp)
+  const json = levels.getAllLevels(req.params.xp)
+//  console.log(`Returning ${JSON.stringify(json)}`)
+  res.json(json)
+})
+
+app.get('/partylevels/:xp', (req, res) => {
+  // display party member levels for xp; if 0 xp use party xp
+  console.log(`Get party levels for xp ${req.params.xp}`)
+  const json = levels.getPartyLevels(req.params.xp || 0)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
@@ -67,10 +76,22 @@ app.get('/names/types', (req, res) => {
   res.json(json)
 })
 
-app.get('/names/:type', (req, res) => {
-  // return a random name for a type of NPC (elf, dwarf, etc)
-  const json = names.getName(req.params.type)
-  console.log(`Result: ${JSON.stringify(json)}`)
+app.get('/names/:count/:type/:flavor', (req, res) => {
+  // return a random name with type and flavor
+  console.log(`api for ${req.params.flavor} ${req.params.type}`)
+  const json = []
+  for (let i=0; i<req.params.count; i++) {
+    json.push(names.getName(req.params.type, req.params.flavor))
+  }
+  res.json(json)
+})
+
+app.get('/names/:count/:type', (req, res) => {
+  // return a random name of a given type (elf, dwarf, inn...)
+  const json = []
+  for (let i=0; i<req.params.count; i++) {
+    json.push(names.getName(req.params.type))
+  }
   res.json(json)
 })
 
