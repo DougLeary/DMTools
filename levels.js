@@ -56,13 +56,13 @@ function getPartyLevels(xp) {
   for (let m in party.members) {
     const member = party.members[m]
     const result = {name: member.name, class: member.class, level: "0"}
-    const xpParam = xp || party.xp
+    const xpParam = (xp > 0) ? xp : party.xp
     const useXp = (member.xpBonus) ? Math.floor(xpParam * 1.1) : xpParam
-    const arr = member.class.split('/')
+    const chClasses = member.class.split('/')
     let chLevel = ''
     let xpToNext = ''
-    for (let c in arr) {
-      const lev = getCharacterLevel(member.edition, arr[c], useXp)
+    for (let c in chClasses) {
+      const lev = getCharacterLevel(member.edition, chClasses[c], useXp/chClasses.length)
       chLevel += lev.level + '/'
       xpToNext += lev.xpToNext + '/'
     }

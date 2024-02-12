@@ -6,25 +6,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     function apiCall(path) {
-      const xp = $('#xp').val()
+      const xp = $('#xp').val() || 0
       console.log(`Calling api at ./${path}/${xp}}`)
       $('#levels').empty()
+      const nameHead = (path == 'partyLevels') ? `<span class="pc-name">Character</span>` : ``
+      const infoHead = `<span class="pc-class">Class</span><span class="pc-level">Level</span><span class="xp-to-next">XP to Next</span><br>`
+      $('#levels').append(`<strong>${nameHead}${infoHead}</strong><hr>`)
       $.get(`./${path}/${xp}`, (data) => {
         for (let i=0; i < data.length; i++) {
-          if (path == 'partyLevels') {
-            $('#levels').append(`${data[i].name}: ${data[i].class} ${data[i].level}, ${data[i].xpToNext}<br/>`)
-          } else {
-            $('#levels').append(`${data[i].class} ${data[i].level}, ${data[i].xpToNext}<br/>`)
-          }
+          const name = (path == 'partyLevels') ? `<span class="pc-name">${data[i].name}</span>` : ``
+          const info = `<span class="pc-class">${data[i].class}</span><span class="pc-level">${data[i].level}</span><span class="xp-to-next">${data[i].xpToNext}</span><br>`
+          $('#levels').append(`${name}${info}`)
         }
       })
     }
   </script>
 </head>
 <body>
-<!--  <a href="dnd.html">◀ Home</a> -->
-<a href="index.html">< Home</a>
-<h1>Level Calculator</h1>
+  <a href="index.html">< Home</a>
+  <h1>Level Calculator</h1>
   <p>Enter an XP value to see what levels it would be in various classes.</p>
   <div style="margin:10px; width: 650px; text-align: left;">
     <label for="xp" style="width: 40px">XP: </label><input id="xp" type="text" />

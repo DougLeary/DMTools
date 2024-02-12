@@ -44,3 +44,9 @@ button:hover {
 .clickable:hover {
   cursor:pointer; 
 }
+#levels { width: 650px }
+#levels span { display: inline-block; }
+.pc-name { width: 200px; }
+.pc-class { width:200px; }
+.pc-level { width: 80px; }
+.xp-to-next { width: 100px; }
