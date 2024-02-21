@@ -1,5 +1,4 @@
 const data = require("./levels.json")
-const party = require("./party.json")
 
 function getClassLevel(_class, xp) {
   // _class is an object from the editions structure
@@ -21,7 +20,7 @@ function getClassLevel(_class, xp) {
   } else if (nLevels > 1) {
     for (let i=0; i < nLevels; i++) {
       // found xp in the levels array 
-      if (levels[i] > xp) {
+      if (levels[i] >= xp) {
         result.level = i+1
         result.xpToNext = levels[i] + 1 - xp
         return result
@@ -51,31 +50,9 @@ function getCharacterLevel(editionName, className, xp) {
   }
 }
 
-function getPartyLevels(xp) {
-  const list = []
-  for (let m in party.members) {
-    const member = party.members[m]
-    const result = {name: member.name, class: member.class, level: "0"}
-    const xpParam = (xp > 0) ? xp : party.xp
-    const useXp = (member.xpBonus) ? Math.floor(xpParam * 1.1) : xpParam
-    const chClasses = member.class.split('/')
-    let chLevel = ''
-    let xpToNext = ''
-    for (let c in chClasses) {
-      const lev = getCharacterLevel(member.edition, chClasses[c], useXp/chClasses.length)
-      chLevel += lev.level + '/'
-      xpToNext += lev.xpToNext + '/'
-    }
-    result.level = chLevel.slice(0,-1)
-    result.xpToNext = xpToNext.slice(0,-1)
-    list.push(result)
-  }
-  return list
-}
-
 function getAllLevels(xp) {
   // for each known class find the level corresponding to xp
-  const list = []
+  const result = {name: "All Classes", xp: xp, members: []}
   for (let e=0; e < data.editions.length; e++) {
     const ed = data.editions[e]
     for (let c=0; c < ed.classes.length; c++) {
@@ -84,15 +61,14 @@ function getAllLevels(xp) {
 //      console.log(`xp=${xp}, level=${obj.level}, xpToNext=${obj.xpToNext}`)
       obj.edition = ed.name
       obj.class = _class.name
-      list.push(obj)
+      result.members.push(obj)
     }
   }
-  return list
+  return result
 }
 
 module.exports = {
   getClassLevel: getClassLevel,
   getCharacterLevel: getCharacterLevel,
-  getPartyLevels: getPartyLevels,
   getAllLevels: getAllLevels
 }

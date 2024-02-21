@@ -1,6 +1,6 @@
-{
+[{
   "name": "Baker Street Bakers",
-  "xp": 193893,
+  "xp": 200093,
   "members": [
     { "name": "Vaseria Dalmov II",
       "race": "Orc",
@@ -68,11 +68,35 @@
     { "name": "Borbugulus",
       "race": "Bugbear",
       "edition": "1e",
-      "class": "Fighter",
+      "class": "Paladin",
       "ac": 2,
       "int": 18,
       "wis": 12,
       "xpBonus": true
     }
   ]
-}
+},
+{
+  "name": "Some Other Party",
+  "xp": 55555,
+  "members": [
+    { "name": "Maxie",
+    "race": "Gnome",
+    "edition": "1e",
+    "class": "Assassin",
+    "ac": 2,
+    "int": 18,
+    "wis": 12,
+    "xpBonus": false
+  },
+  { "name": "Minnie",
+    "race": "Minotaur",
+    "edition": "1e",
+    "class": "Fighter",
+    "ac": 2,
+    "int": 18,
+    "wis": 12,
+    "xpBonus": true
+  }
+]
+}]

@@ -5,6 +5,7 @@ const attack = require('./attacks')
 const levels = require('./levels')
 const saves = require('./saves')
 const names = require('./names')
+const party = require('./party')
 
 const app = express()
 app.use(express.json())
@@ -54,18 +55,27 @@ app.get('/levels', (req, res) => {
 
 app.get('/classlevels/:xp', (req, res) => {
   // display a list of classes and the level the XP value corresponds to in each
-  console.log(`Levels for XP: ${req.params.xp}`)
+  console.log(`Get levels for XP: ${req.params.xp}`)
   const json = levels.getAllLevels(req.params.xp)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
 
-app.get('/partylevels/:xp', (req, res) => {
+app.get('/partylevels/:partyname/:xp', (req, res) => {
   // display party member levels for xp; if 0 xp use party xp
   console.log(`Get party levels for xp ${req.params.xp}`)
-  const json = levels.getPartyLevels(req.params.xp || 0)
+  const pty = party.getParty(req.params.partyname)
+  const json = party.getPartyLevels(pty, req.params.xp || 0)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
+})
+
+app.get('/partynames', (req, res) => {
+  // return array of available party names
+  console.log(`Get party names`)
+  const arr = party.getPartyNames()
+//  console.log(`Returning ${JSON.stringify(arr)}`)
+  res.json(arr)
 })
 
 app.get('/names', (req, res) => {
