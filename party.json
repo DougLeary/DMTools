@@ -1,6 +1,6 @@
 [{
   "name": "Baker Street Bakers",
-  "xp": 211643,
+  "xp": 215093,
   "members": [
     { "name": "Vaseria Dalmov II",
       "race": "Orc",
@@ -88,15 +88,15 @@
     "int": 18,
     "wis": 12,
     "xpBonus": false
-  },
-  { "name": "Minnie",
-    "race": "Minotaur",
-    "edition": "1e",
-    "class": "Fighter",
-    "ac": 2,
-    "int": 18,
-    "wis": 12,
-    "xpBonus": true
-  }
-]
+    },
+    { "name": "Minnie",
+      "race": "Minotaur",
+      "edition": "1e",
+      "class": "Fighter",
+      "ac": 2,
+      "int": 18,
+      "wis": 12,
+      "xpBonus": true
+    }
+  ]
 }]

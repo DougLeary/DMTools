@@ -2,7 +2,6 @@
   "name": "dmtools",
   "version": "1.0.0",
   "description": "Tools for DMing 1st Edition AD&amp;D",
-  "main": "attack.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

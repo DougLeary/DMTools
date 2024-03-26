@@ -29,7 +29,7 @@ function getPartyLevels(party, xp) {
     let chLevel = ''
     let xpToNext = ''
     for (let c in chClasses) {
-      const lev = levels.getCharacterLevel(mem.edition, chClasses[c], Math.floor(useXp / chClasses.length))
+      const lev = levels.getCharacterLevel(mem.edition, chClasses[c], Math.floor(useXp / chClasses.length), mem.xpBonus)
       chLevel += lev.level + '/'
       xpToNext += lev.xpToNext + '/'
     }
