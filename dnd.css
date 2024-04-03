@@ -44,10 +44,10 @@ button:hover {
 .clickable:hover {
   cursor:pointer; 
 }
-#party, #levels { width: 650px }
+#party, #levels { width: 750px }
 #levels span { display: inline-block; }
-.pc-name { width: 200px; }
+.pc-name { width: 240px; }
 .pc-edition { width:100px; }
 .pc-class { width:200px; }
 .pc-level { width: 80px; }
-.xp-to-next { width: 100px; }
+.xp-to-next { width: 120px; }
