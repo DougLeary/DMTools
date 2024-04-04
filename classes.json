@@ -1,5 +1,6 @@
 { "editions": [
   { "name": "1e",
+    "text": "AD&D First Edition",
     "effects": [
       "Paralyzation, Poison or Death Magic",
       "Petrification or Polymorph",
@@ -120,6 +121,7 @@
     ]
   },
   { "name": "UA",
+    "text": "Unearthed Arcana",
     "classes": 
     [
       {
@@ -152,6 +154,7 @@
     ]
   },
   { "name": "OA",
+    "text": "Oriental Adventures",
     "classes": 
     [
       {
@@ -247,6 +250,7 @@
       ]
   },
   { "name": "OSE",
+    "text": "Old School Essentials",
     "effects": [
       "Death or Poison (D)",
       "Wands (W)",
@@ -437,25 +441,21 @@
         "saves": [
           { "upto": 5, "need": [8, 9, 10, 14, 11]},
           { "upto": 999, "need": [6, 7, 8, 11, 9]}]},
-
-///// Add about 15 more OSE classes here //////
-
       {
         "name": "Other",
         "hitDie": "d6",
         "bonusDie": 0,
         "maxHD": 9,
         "thenHP": 2,
-        "levels": [0, ],
+        "levels": [0, 1000],
         "saves": [
           { "upto": 4, "need": []},
           { "upto": 8, "need": []},
           { "upto": 12, "need": []},
           { "upto": 999, "need": []}]}
-
-
     ]},
   { "name": "Custom",
+    "text": "Custom",
     "classes": [
       {
         "name": "Chef",

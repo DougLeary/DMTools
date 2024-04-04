@@ -1,6 +1,7 @@
 const appName = "Dnd"
 const express = require('express')
 const path = require('path')
+const classes = require('./classes')
 const attack = require('./attacks')
 const levels = require('./levels')
 const saves = require('./saves')
@@ -15,6 +16,22 @@ app.use(express.static('.'))
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'))
 })
+
+app.get('/editions', (req, res) => {
+  // return names of known editions
+  console.log('Edition names')
+  const results = classes.getEditions()
+  res.json(st)
+})
+
+app.get('/classes', (req, res) => {
+  // return class names by edition
+  console.log(`Get editions and classes`)
+  const json = classes.getClasses()
+//  console.log(`Returning ${JSON.stringify(json)}`)
+  res.json(json)
+})
+
 app.get('/attack', (req, res) => {
   res.sendFile(path.join(__dirname, '/attack.html'))
 })
@@ -25,7 +42,6 @@ app.get('/attack/:attacks/:thaco/:damage/:ac', (req, res) => {
 //  console.log(`Returning ${st}`)
   res.json(st)
 })
-
 app.get('/saves/:edition/:className/:level', (req, res) => {
   // return saving throws for an edition class and level
   console.log(`Saving throws for ${req.params.edition} ${req.params.className} level ${req.params.level}`)

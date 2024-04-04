@@ -34,6 +34,19 @@
     ]
   },
   { 
+    "type": "orc",
+    "rule": ["A,B,C","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G","A,B,C,D,E","A,B,C,D,E","A,B,C,F,---G,D,E"],
+    "blocks": [
+      "A:B,B,D,D,F,G,G,G,K,K,M,N,P,T,V,X",
+      "B:r,r,r,l,l,h,-,-,-",
+      "C:ad,ah,ak,ak,al,am,an,ar,ar,ar,arh,oh,ok,ogh,ol,om,on,or,ud,ug,uk,ul,um,un,ur,us,ust,urs,urg",
+      "D: the",
+      "E: Bold, Brave, Bruiser, Daring, Fearless, Harsh, Killer, Marauder, Mauler, Shatterer, Thrasher",
+      "F:gor,gur,",
+      "G:t,n,d"
+    ]
+  },
+  { 
     "type": "inn",
     "rule": [" AABBBCC,DEEFFF", " DDEFFF,G,DEEFFF"],
     "blocks": [

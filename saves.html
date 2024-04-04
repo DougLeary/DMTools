@@ -5,10 +5,34 @@
   <link rel="stylesheet" href="dnd.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
-    function selectEdition() {
+    const state = { editions: [], currentEdition: "" }
 
+    function loadClasses(forEdition) {
+      elem = $('#className')
+      $(elem).empty()
+      for (let e in state.editions) {
+        const ed = state.editions[e]
+        if (ed.edition == forEdition) {
+          for (let c in ed.classes) {
+            console.log(`class ${ed.classes[c]}`)
+            $(elem).append(`<option value="${ed.classes[c]}">${ed.classes[c]}</option>`)
+          }
+        }
+      }
     }
     
+    function loadEditions(data) {
+      state.editions = data
+      elem = $('#edition')
+      $(elem).empty()
+      for (let e in state.editions) {
+        $(elem).append(`<option value="${data[e].edition}">${data[e].text}</option>`)
+      }
+      if (state.editions.length > 0) {
+        loadClasses(state.editions[0].edition)
+      }
+    }
+
     function roll() {
       const x = $('#howMany')
       console.log(x.innerHTML)
@@ -21,22 +45,31 @@
 
       console.log(`Calling api at ./rollsaves/${howMany}/${edition}/${className}/${level}`)
       $.get(`./rollsaves/${howMany}/${edition}/${className}/${level}`, (data) => {
+        let elem = $('#saves')
+        $(elem).empty()
         for (let i=0; i < data.saves.length; i++) {
-          $('#saves').append(`${data.saves[i].effect}: ${data.saves[i].need}<br />`)
+          $(elem).append(`${data.saves[i].effect}: ${data.saves[i].need}<br />`)
         }
+        elem = $('#results')
+        $(elem).empty()
         for (let n=0; n < howMany; n++) {
-          $('#results').append(`Rolled: ${data.rolls[n].roll}, saved: `)
-          for (let i=0; i < data.rolls.length; i++) {
-            if (i > 0) $('#results').append(', ')
-            $('#results').append(`${data.rolls[n].saves[i]}`)
+          $(elem).append(`Rolled: ${data.rolls[n].roll}, saved: `)
+          for (let i=0; i < data.saves.length; i++) {
+            if (i > 0) $(elem).append(', ')
+            $(elem).append(`${data.rolls[n].saves[i]}`)
           }
-          $('#results').append(`<br />`)
+          $(elem).append(`<br />`)
         }
       })
     }
-    $(function() {    // document.ready placeholder
+
+    $(function() {    // document.ready
+      $.get('./classes', (data) => {
+        loadEditions(data)
+      })
     })
-   </script></head>
+   </script>
+   </head>
 <body>
   <a href="index.html">< Home</a>
   <h1>Saving Throws</h1>
@@ -44,13 +77,10 @@
   </p>
   <div style="margin:10px; width: 400px; text-align: center;">
     <label for="edition">Book:</label>
-    <select name="edition" id="edition" onchange="selectEdition(this.value);">
-      <option value="1e">1e Player's Handbook</option>
-      <option value="UA">Unearthed Arcana</option>
-      <option value="OA">Oriental Adventures</option>
+    <select name="edition" id="edition" onchange="loadClasses(this.value)">
     </select><br />
     <label for="className">Class:</label>
-      <select id="className" type="text" onchange="selectClass(this.value);">
+      <select id="className" type="text" onchange="selectClass(this.value)">
         <option value="0"></option>
       </select><br />
     <label for="level">Level:</label>       <input id="level" type="text"></input><br />
