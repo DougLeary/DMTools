@@ -1,4 +1,4 @@
-const levels = require("./levels.json")
+const classes = require("./classes.json")
 const saves = require("./saves.json")
 const DieRoll = require('./dieRoll')
 const savingThrow = DieRoll.parse('d20')
@@ -13,8 +13,8 @@ function getMeta() {
 
 function findEditionAndClass(className) {
   // find the first matching class in any edition
-  for (let e=0; e < levels.editions.length; e++) {
-    const ed = levels.editions[e]
+  for (let e=0; e < classes.editions.length; e++) {
+    const ed = classes.editions[e]
     for (let c=0; c < ed.classes.length; c++) {
       if (eq(ed.classes[c].name, className)) {
         // found the class
@@ -27,8 +27,8 @@ function findEditionAndClass(className) {
 
 function findClassInEdition(editionName, className) {
   // find a class in a specific edition
-  for (let e=0; e < levels.editions.length; e++) {
-    const ed = levels.editions[e]
+  for (let e=0; e < classes.editions.length; e++) {
+    const ed = classes.editions[e]
     if (eq(ed.name, editionName)) {
       // found the edition
       for (let c=0; c < ed.classes.length; c++) {

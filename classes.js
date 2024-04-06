@@ -64,9 +64,10 @@ function getClassLevel(_class, xp) {
       // xp is beyond the table
       levelRange = levels[nLevels-1] - levels[nLevels-2]
       const xpExcess = xp - levels[nLevels-1]
-      const extraLevels = Math.floor(xpExcess / levelRange)
+      const extraLevels = Math.floor(xpExcess / levelRange) + 1
       result.level = nLevels + extraLevels
-      result.xpToNext = levels[nLevels-1] + (extraLevels * levelRange) + 1 - (xpExcess % levelRange)
+      //console.log(`${_class.name} xp ${xp} beyond table, range=${levelRange}, highest=${nLevels} (${levels[nLevels-1]}), excess=${xpExcess}, extraLevels=${extraLevels}, result=${result.level}`)
+      result.xpToNext = (extraLevels * levelRange) - xpExcess
     }
   }
   return result
@@ -102,8 +103,9 @@ function getAllLevels(xp) {
 }
 
 module.exports = {
-  getClassLevel: getClassLevel,
-  getCharacterLevel: getCharacterLevel,
-  getAllLevels: getAllLevels,
-  getClasses: getClasses
+  getClasses,
+  getEditionClasses,
+  getClassLevel,
+  getCharacterLevel,
+  getAllLevels
 }

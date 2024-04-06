@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path')
 const classes = require('./classes')
 const attack = require('./attacks')
-const levels = require('./levels')
 const saves = require('./saves')
 const names = require('./names')
 const party = require('./party')
@@ -72,14 +71,15 @@ app.get('/levels', (req, res) => {
 app.get('/classlevels/:xp', (req, res) => {
   // display a list of classes and the level the XP value corresponds to in each
   console.log(`Get levels for XP: ${req.params.xp}`)
-  const json = levels.getAllLevels(req.params.xp)
+  const json = classes.getAllLevels(req.params.xp)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
 
 app.get('/partylevels/:partyname/:xp', (req, res) => {
   // display party member levels for xp; if 0 xp use party xp
-  console.log(`Get party levels for xp ${req.params.xp}`)
+  const xp = req.params.xp
+  console.log(`Get party levels for ${(xp > 0) ? xp : 'stored'} xp`)
   const pty = party.getParty(req.params.partyname)
   const json = party.getPartyLevels(pty, req.params.xp || 0)
 //  console.log(`Returning ${JSON.stringify(json)}`)
@@ -121,11 +121,12 @@ app.get('/names/:count/:type', (req, res) => {
   res.json(json)
 })
 
-if (process.env.node_js_ports) {
-  const nodeJsPorts = JSON.parse(process.env.node_js_ports)
-  console.log("App Name:", appName, " Env Port:", nodeJsPorts[appName])
-  const port = nodeJsPorts[appName] || 3000  // env variable or default
-  app.listen(port, () => console.log(`================== Listening on port ${port} ===================`))
+const nodeJsPorts = (process.env.node_js_ports ? JSON.parse(process.env.node_js_ports) : [])
+if (nodeJsPorts) {
+  const now = new Date()
+  console.log(`Starting ${appName} server    ${now.toDateString()} ${now.toTimeString().substring(0,8)}`)
+  const port = nodeJsPorts[appName] || 3000
+  app.listen(port, () => console.log(`============= Listening on port ${port} ==============`))
 } else {
   app.listen() 
 }

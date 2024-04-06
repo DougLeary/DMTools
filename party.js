@@ -1,5 +1,5 @@
 const parties = require("./party.json")
-const levels = require("./levels")
+const classes = require("./classes")
 
 function getPartyNames() {
   const arr = []
@@ -32,7 +32,7 @@ function getPartyLevels(party, xp) {
       const getsBonus = (mem.xpBonus.substring(c,c+1) == 'y')
       const useXp = getsBonus ? Math.floor(xpParam * 1.1) : xpParam
       //console.log(`${member.name} bonus: ${mem.xpBonus}, ${c}:${mem.xpBonus.substring(c,c)} ${chClasses[c]} useXp ${useXp} getsBonus ${getsBonus}`)
-      const lev = levels.getCharacterLevel(mem.edition, chClasses[c], Math.floor(useXp / chClasses.length))
+      const lev = classes.getCharacterLevel(mem.edition, chClasses[c], Math.floor(useXp / chClasses.length))
       chLevel.push(lev.level)
       xpToNext .push(getsBonus ? Math.floor(lev.xpToNext / 1.1) : lev.xpToNext)
     }
