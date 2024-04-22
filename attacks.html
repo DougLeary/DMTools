@@ -10,7 +10,7 @@
       console.log(x.innerHTML)
       const attacks = $('#attacks').val()
       const thaco = $('#thaco').val()
-      const damage = $('#damage').val()
+      const damage = $('#damage').val().replaceAll('/', '%2f')
       const ac = $('#ac').val()
       // console.log(`Calling api at ./attack/${attacks}/${thaco}/${damage}/${ac}`)
       $.get(`./attack/${attacks}/${thaco}/${damage}/${ac}`, (data) => {
@@ -30,11 +30,14 @@
 <h1>Attacks</h1>
   <p>Rolls multiple attacks and reports successful hits and damage. 
   </p>
-  <div style="margin:10px; width: 400px; text-align: center;">
-    <label for="attacks">Attacks: </label><input id="attacks" type="text" /><br />
+  <div id="attackForm" style="margin:10px; width: 600px; text-align: center;">
+    <label for="attacks">Attack(er)s: </label><input id="attacks" type="text" /><br />
     <label for="thaco">THAC0: </label><input id="thaco" type="text" /><br />
     <label for="damage">Damage Dice: </label><input id="damage" type="text" /><br />
     <label for="ac">Target AC: </label><input id="ac" type="text" /><br />
+    <p>For multiple attacks per attacker, Damage Dice can be like d4/d4/d6+1.<br />
+      3 Attackers with d8 are the same as 1 Attacker with d8/d8/d8.
+    </p>
     <button type="button" onclick="roll()">Roll</button>
     <button type="button" onclick="clearResults()" style="margin:left:20px">Clear</button>
   </div>

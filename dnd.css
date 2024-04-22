@@ -18,6 +18,9 @@ input {
   width: 60px;
   margin-top: 5px;
 }
+#attackForm input {
+  width: 100px;
+}
 button {
   margin-top: 10px;
   height: 36px;

@@ -13,29 +13,34 @@ const defaultAC = 0
 function roll(attacks, thaco, damage, ac) {
   const _attacks = attacks || defaultAttacks
   const _thaco = thaco || defaultThaco
-  const _damageDice = DieRoll.parse(damage || defaultDamage)
   const _ac = ac || defaultAC
-  
-  if (isNaN(attacks) || isNaN(ac) 
-  || Math.floor(attacks) != attacks
-  || Math.floor(thaco) != thaco 
-  || Math.floor(ac) != ac) {
-    console.log("Number of attacks and target AC must both be integers.")
-    return
-  }
-
+  const damages = (damage || defaultDamage).replace(' ','').split('/')    // multiple damages as in "d4/d4/d8" mean multiple attacks 
   let hits = []
   let totalDamage = 0
-  for (let i=0; i<_attacks; i++) {
-    const roll = attackDice.roll().total
-    if (_thaco - _ac <= roll) {
-      // it's a hit
-      const dmg = _damageDice.roll().total
-      hits.push(dmg)
-      totalDamage += dmg
+  let content = "no hits"
+
+  for (let i in damages) {
+    const _damageDice = DieRoll.parse(damages[i])
+
+    if (isNaN(attacks) || isNaN(ac) 
+    || Math.floor(attacks) != attacks
+    || Math.floor(thaco) != thaco 
+    || Math.floor(ac) != ac) {
+      console.log("Number of attacks and target AC must both be integers.")
+      return
+    }
+
+    for (let i=0; i<_attacks; i++) {
+      const roll = attackDice.roll().total
+      if (_thaco - _ac <= roll) {
+        // it's a hit
+        const dmg = _damageDice.roll().total
+        hits.push(dmg)
+        totalDamage += dmg
+      }
     }
   }
-  let content = "no hits"
+
   if (totalDamage > 0) {
     const hitsTag = (hits.length == 1) ? 'hit' : 'hits'
     const totalTag = (hits.length > 1) ? `total ${totalDamage}` : ''
