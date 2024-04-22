@@ -29,17 +29,12 @@ button {
 button:hover {
   background-color: #a0ffa0;
 }
-#bullet {
-  width: 22px;
-  float: left;
-}
 #results {
   height: 200px;
   width: 600px;
   overflow-y: auto;
   scrollbar-gutter: stable;
   background-color: black;
-  float: left;
 }
 .clickable:hover {
   cursor:pointer; 

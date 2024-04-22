@@ -12,10 +12,15 @@
       const thaco = $('#thaco').val()
       const damage = $('#damage').val()
       const ac = $('#ac').val()
-      console.log(`Calling api at ./attack/${attacks}/${thaco}/${damage}/${ac}`)
+      // console.log(`Calling api at ./attack/${attacks}/${thaco}/${damage}/${ac}`)
       $.get(`./attack/${attacks}/${thaco}/${damage}/${ac}`, (data) => {
-        $('#results').prepend(`${data}<br />`)
+        $('#results').append(`${data}<br />`)
+        const elem = document.getElementById('results')
+        elem.scrollTop = elem.scrollHeight
       });
+    }
+    function clearResults() {
+      $('#results').empty()
     }
   </script>
 </head>
@@ -31,14 +36,8 @@
     <label for="damage">Damage Dice: </label><input id="damage" type="text" /><br />
     <label for="ac">Target AC: </label><input id="ac" type="text" /><br />
     <button type="button" onclick="roll()">Roll</button>
+    <button type="button" onclick="clearResults()" style="margin:left:20px">Clear</button>
   </div>
 
-  <div class="float-container">
-    <div class="float-child" >
-      <div id="bullet">&#9654;</div>
-    </div>
-    <div class="float-child">
-      <div id="results"></div>
-    </div>
-  </div>
+  <div id="results"></div>
 </body>
