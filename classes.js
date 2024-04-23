@@ -1,5 +1,9 @@
 const data = require("./classes.json")
 
+function eq(str1, str2) {
+  return (String(str1).toLowerCase() === String(str2).toLowerCase())
+}
+
 function getEditions() {
   const list = []
   for (let e in data.editions) {
@@ -8,30 +12,72 @@ function getEditions() {
   return list
 }
 
-function getClasses() {
-  const list = []
-  for (let e in data.editions) {
-    const ed = data.editions[e]
-    const item = { edition: ed.name, text: ed.text, classes: [] }
-    for (let c in ed.classes) {
-      item.classes.push(ed.classes[c].name)
-    }
-    list.push(item)
-  }
-  return list
-}
-
-function getEditionClasses(editionName) {
-  const list = []
+function getEffects(editionName) {
   for (let e in data.editions) {
     const ed = data.editions[e]
     if (ed.name == editionName) {
-      for (let c in ed.classes) {
-        list.push(ed.classes[c].name)
-      }
+      return ed.effects
     }
   }
+  return null
+}
+
+function getClasses(editionName) {
+  const list = []
+  if (editionName) {
+    for (let e in data.editions) {
+      const ed = data.editions[e]
+      if (ed.name == editionName) {
+        for (let c in ed.classes) {
+          list.push(ed.classes[c].name)
+        }
+      }
+    }
+  } else {
+      for (let e in data.editions) {
+        const ed = data.editions[e]
+        const item = { edition: ed.name, text: ed.text, classes: [] }
+        for (let c in ed.classes) {
+          item.classes.push(ed.classes[c].name)
+        }
+        list.push(item)
+      }
+    }
   return list
+}
+
+function getClass(className, editionName) {
+  if (editionName) {
+  // find a class in a specific edition
+    for (let e=0; e < data.editions.length; e++) {
+      const ed = data.editions[e]
+      if (eq(ed.name, editionName)) {
+        // found the edition
+        for (let c=0; c < ed.classes.length; c++) {
+          if (eq(ed.classes[c].name, className)) {
+            // found the class
+            return {edition: ed, class: ed.classes[c]}
+          }
+        }
+        // no matching class in this edition
+        return null
+      }
+    }
+  } else {
+    // find the first matching class in any edition
+    for (let e=0; e < data.editions.length; e++) {
+      const ed = data.editions[e]
+      for (let c=0; c < ed.classes.length; c++) {
+        if (eq(ed.classes[c].name, className)) {
+          // found the class
+          return {edition: ed, class: ed.classes[c]}
+        }
+      }
+    }
+    return null
+  }
+  // no matching edition
+  return null
 }
 
 function getClassLevel(_class, xp) {
@@ -104,7 +150,8 @@ function getAllLevels(xp) {
 
 module.exports = {
   getClasses,
-  getEditionClasses,
+  getEffects,
+  getClass,
   getClassLevel,
   getCharacterLevel,
   getAllLevels
