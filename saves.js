@@ -3,7 +3,7 @@ const DieRoll = require('./dieRoll')
 const savingThrow = DieRoll.parse('d20')
 
 function eq(str1, str2) {
-  return (String(str1).toLowerCase() === String(str2).toLowerCase())
+  return (String(str1).toLowerCase() == String(str2).toLowerCase())
 }
 
 function getSaves(editionName, className, level) {
@@ -11,6 +11,7 @@ function getSaves(editionName, className, level) {
   //   if edition is missing use the first edition with a matching class.
   // A class saves as its saveAs class or multiple classes ("class1/class2/...");
   //   if multiple get the best save for each effect
+  // console.log(`getSaves ${className} ${level}`)
   let theClass = null
   if (editionName) {
     // find the class in the edition
@@ -26,22 +27,26 @@ function getSaves(editionName, className, level) {
     const saveAs = rawSaveAs.split('/')
     const needs = []
     // start with a list of worst possible saves for all effects
-    for (let i=0; i < theClass.edition.effects.length; i++) {
+    for (let e in theClass.edition.effects) {
       needs.push({
-        effect: theClass.edition.effects[i],
+        effect: theClass.edition.effects[e],
         need: 20
       })
     }
     // for every class the class can save as, update the needs list with best values
-    for (let sa = 0; sa < saveAs.length; sa++) {
-      for (let s=0; s < theClass.edition.classes.length; s++) {
-        const aClass = theClass.edition.classes[s]
+    for (let sa in saveAs) {
+      for (let c in theClass.edition.classes) {
+        const aClass = theClass.edition.classes[c]
         if (eq(aClass.name, saveAs[sa])) {
-          for (let n=0; n < aClass.levels.length; n++) {
-            if (aClass.levels[n].upto >= level) {
+          // console.log(`  getting ${aClass.name} saves`)
+          for (let v in aClass.levels) {
+            // console.log(`  is level ${level} upto ${aClass.saves[v].upto}`)
+            if (aClass.saves[v].upto >= level) {
+              // console.log(`save as upto ${aClass.saves[v].upto}`)
               // found the level; replace needs values if the found values are better
-              for (let i=0; i < theClass.edition.effects.length; i++) {
-                needs[i].need = Math.min(needs[i].need, aClass.levels[n].need[i])
+              for (let e in theClass.edition.effects) {
+                // console.log(`  comparing ${needs[e].need} with ${aClass.saves[v].need[e]}`)
+                needs[e].need = Math.min(needs[e].need, aClass.saves[v].need[e])
               }
               break
             }
