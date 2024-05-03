@@ -1,5 +1,25 @@
 const parties = require("./party.json")
 const classes = require("./classes")
+const fs = require('fs')
+const partyFilename = './party.json'
+
+function savePartyData() {
+  const result = {success: true}
+  try {
+    fs.writeFileSync(partyFilename, JSON.stringify(parties, null, 2), 'utf8')
+    console.log(`${partyFilename} updated`)
+  } catch (error) {
+    console.log(`Error writing file ${partyFilename}`)
+    result.success = false
+  }
+  return result
+}
+
+function addPartyXp(party, xp) {
+  const partyXp = parseInt(party.xp) + parseInt(xp)
+  party.xp = String(partyXp)
+  return savePartyData()
+}
 
 function getPartyNames() {
   const arr = []
@@ -73,7 +93,8 @@ function getPartyLevels(party, xp) {
 }
 
 module.exports = {
-  getParty: getParty,
-  getPartyNames: getPartyNames,
-  getPartyLevels: getPartyLevels
+  getParty,
+  getPartyNames,
+  getPartyLevels,
+  addPartyXp
 }

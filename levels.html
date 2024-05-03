@@ -19,13 +19,17 @@
       const infoHead = `<span class="pc-class">Class</span><span class="pc-level">Level</span><span class="xp-to-next">XP to Next</span><br>`
       $('#levels').append(`<strong>${nameHead}${infoHead}</strong><hr>`)
       $.get(`./${path}/${xp}`, (data) => {
-        console.dir(data.members)
         $('#party').append(`${data.name}, <strong>XP</strong>: ${data.xp}<br><hr>`)
         for (let i=0; i < data.members.length; i++) {
           const member = data.members[i]
           const name = `<span class=${(path.startsWith('partyLevels')) ? '"pc-name">' + formatName(member) : '"pc-edition">' + member.edition}</span>`
           const info = `<span class="pc-class">${member.class}</span><span class="pc-level">${member.level}</span><span class="xp-to-next">${member.xpToNext}</span><br>`
           $('#levels').append(`${name}${info}`)
+        }
+        if (path.startsWith('party')) {
+          $('#xpEdit').show()
+        } else {
+          $('#xpEdit').hide()
         }
       })
     }
@@ -36,8 +40,19 @@
       apiCall(`partyLevels/${name}`)
     }
 
+    function addPartyXp() {
+      const xp = $('#xpToAdd').val()
+      const name = $('#partyNames').val()
+      console.log(`Adding ${xp} xp to ${name}`)
+      $.get(`./addpartyxp/${name}/${xp}`, (result) => {
+        $('#xpToAdd').val('')
+        getPartyLevels()
+      })
+    }
+
     // document onload
     $(() => {
+      $('#xpEdit').hide()
       $.get(`./partynames`, (names) => {
         for (let p in names) {
           $('#partyNames').append(`<option>${names[p]}</option>`)
@@ -51,12 +66,16 @@
   <h1>Level Calculator</h1>
   <p>Enter an XP value to see what levels it would be in various classes.</p>
   <div style="margin:10px; width: 650px; text-align: left;">
-    <label for="partyNames" style="width: 200px">Party: </label><select id="partyNames"></select>
+    <label for="partyNames" style="width: 100px">Party: </label><select id="partyNames"></select>
     <label for="xp" style="width: 40px">XP: </label><input id="xp" type="text" />
-    <button type="button" style="width: 180px" onclick="getPartyLevels()">Party Levels</button>
+    <br /><button type="button" style="width: 180px" onclick="getPartyLevels()">Party Levels</button>
     <button type="button" style="width: 180px" onclick="apiCall('classLevels')">All Class Levels</button>
   </div>
 
+  <div id="xpEdit" style="margin-bottom: 20px;">
+    <label for="xpToAdd">Add Party XP: </label><input id="xpToAdd" type="text" />
+    <button type="button" style="width: 60px; height: 24px; font-size: 16px;" onclick="addPartyXp()">Add</button>
+  </div>
   <div id="party"></div>
   <div id="levels"></div>
 </body>
