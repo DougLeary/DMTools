@@ -42,7 +42,7 @@ function getPartyLevels(party, xp) {
       member.xpToNext = ''
     } else {
       member.level = chLevel.join('/')
-      member.xpToNext = xpToNext.join('/')
+      member.xpToNext = xpToNext.join(' / ')
     }
     result.members.push(member)
   }
