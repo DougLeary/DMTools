@@ -1,7 +1,7 @@
 # DMTools
 Tools for DMing 1st Edition AD&amp;D. Some of them work with .json files containing hand-entered data from AD&D books - currently the 1e Player's Handbook, Unearthed Arcana, and Oriental Adventures, which the software calls "editions". There is also an edition called "Custom" for things from Dragon, homebrew, or whatever. 
 
-### Note on V0.1
+### Notes on V0.1
 This branch constitutes version 0.1, which works in a limited but fairly usable state aimed mainly at AD&D version 1e, including character classes from the Player's Handbook, Unearthed Arcana and Oriental Adventures. These books were copyrighted by TSR Inc. in the 1970s and 80s. The code in this project contains no copyrighted material, only numerical values and the operating concepts used by a Dungeon Master to perform calculations while running a game. The code uses data in JSON format in two files: 
 
 - Classes.json - static data about level advancement and saving throws. 
