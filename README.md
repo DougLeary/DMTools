@@ -14,7 +14,7 @@ The books mentioned are referred to in the code as "editions", abbreviated 1e, U
 
 In classes.json the hazards that correspond to Saving Throws (Breath Weapon, Spell, etc.) are defined for 1e and used by the other "editions". A class either has a list of saving throw values that correspond to those hazards, or a "saveAs" property that 
 specifies the class whose saving throw values should be used. Classes.json also contains an incomplete list of OSE (Old School Essentials) classes, their hazards and saving throws, but saving throw functionality is not tested for OSE, and probably doesn't work.
-The definition of hazards really belongs at a Game System level to get proper separation. This and other improvements are planned for the next version, which will require a fair amount of reorganization of the JSON structure and is why I decided to declare the current code as v0.1. 
+The definition of hazards really belongs at a Game System level to get proper separation, rather than calling OSE an "edition". This and other improvements such as split classes and individual character XP are planned for the next version, which will require a fair amount of JSON restructuring, and is why I decided to declare the current code as v0.1. 
 
 ## Available Tools ## 
 1. Display class experience levels for an XP value, or party member levels based on stored party XP.
