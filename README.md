@@ -1,8 +1,23 @@
 # DMTools
 Tools for DMing 1st Edition AD&amp;D. Some of them work with .json files containing hand-entered data from AD&D books - currently the 1e Player's Handbook, Unearthed Arcana, and Oriental Adventures, which the software calls "editions". There is also an edition called "Custom" for things from Dragon, homebrew, or whatever. 
 
+### Note on V0.1
+This branch constitutes version 0.1, which works in a limited but fairly usable state aimed mainly at AD&D version 1e, including character classes from the Player's Handbook, Unearthed Arcana and Oriental Adventures. These books were copyrighted by TSR Inc. in the 1970s and 80s. The code in this project contains no copyrighted material, only numerical values and the operating concepts used by a Dungeon Master to perform calculations while running a game. The code uses data in JSON format in two files: 
+
+- Classes.json - static data about level advancement and saving throws. 
+- Party.json - data about parties and their member characters. 
+
+The code was written to suit the needs of a specific gaming group that awards the same XP to all members of an adventuring party. That XP value, stored in party.json, is used to compute the level of each character based on the leveling tables in classes.json.
+To award experience for a game session it is necessary to manually edit the xp value for the party in party.json and restart the node app, which reads the json files once at startup. 
+
+The books mentioned are referred to in the code as "editions", abbreviated 1e, UA and OE. A party member can have one or multiple classes. Multiple classes, which must be from a single edition, are separated with slashes as in "Fighter/Thief". Split classes and Bards are not handled in this version. A character's XP are assumed to be divided equally between classes. Individual variations in XP among characters are also not handled. Everybody gets the XP defined for the party. 
+
+In classes.json the hazards that correspond to Saving Throws (Breath Weapon, Spell, etc.) are defined for 1e and used by the other "editions". A class either has a list of saving throw values that correspond to those hazards, or a "saveAs" property that 
+specifies the class whose saving throw values should be used. Classes.json also contains an incomplete list of OSE (Old School Essentials) classes, their hazards and saving throws, but saving throw functionality is not tested for OSE, and probably doesn't work.
+The definition of hazards really belongs at a Game System level to get proper separation. This and other improvements are planned for the next version, which will require a fair amount of reorganization of the JSON structure and is why I decided to declare the current code as v0.1. 
+
 ## Available Tools ## 
-1. Display class experience levels for an XP value, and how far it is to the next level.
+1. Display class experience levels for an XP value, or party member levels based on stored party XP.
 2. Display saving throws needed by a class and level, or roll a series of saving throws.
 3. Roll a series of attacks by a THAC0 against an AC, showing hits and damage.
 4. Name Generator-inator - engine to create name generators.
