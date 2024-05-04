@@ -1,4 +1,4 @@
-const appName = "Dmt"
+const appName = "Dnd"
 const express = require('express')
 const path = require('path')
 const classes = require('./classes')
