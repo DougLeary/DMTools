@@ -1,125 +1,139 @@
-[{
-  "name": "Baker Street Bakers",
-  "xp": 247543,
-  "members": [
-    { "name": "Vaseria Dalmov II",
-      "race": "Orc",
-      "edition": "1e",
-      "class": "Illusionist/Magic-User",
-      "ac": 1,
-      "str": 14,
-      "int": 18,
-      "wis": 12,
-      "dex": 16,
-      "con": 14,
-      "cha": 13,
-      "xpBonus": "ny"
-    },
-    { "name": "Maggie",
-      "race": "Hengeyokai",
-      "edition": "OA",
-      "class": "Wu Jen",
-      "ac": -1,
-      "int": 18,
-      "wis": 13,
-      "xpBonus": "y"
-    },
-    { "name": "Birch (Ulfgar Hammerhead)",
-      "boss": "Maggie",
-      "race": "Dwarf",
-      "edition": "1e",
-      "class": "Fighter/Thief",
-      "ac": 2,
-      "str": 14,
-      "int": 12,
-      "wis": 9,
-      "dex": 14,
-      "con": 13,
-      "cha": 17,
-      "xpBonus": "nn"
-    },
-    { "name": "Renee Veloute Bechamel",
-      "hide": true,
-      "race": "Halfling",
-      "edition": "Custom",
-      "class": "Chef",
-      "ac": 1,
-      "int": 9,
-      "wis": 13,
-      "xpBonus": "n"
-    },
-    { "name": "Thri-Kreen 1",
-      "race": "Thri-Kreen",
-      "edition": "OA",
-      "class": "Wu Jen/Ninja",
-      "ac": 1,
-      "int": 18,
-      "wis": 12,
-      "xpBonus": "yn"
-    },
-    { "name": "Borbugulus",
-      "race": "Bugbear",
-      "edition": "1e",
-      "class": "Paladin",
-      "ac": 2,
-      "int": 18,
-      "wis": 13,
-      "xpBonus": "n"
-    },
-    { "name": "Skelver",
-      "race": "Elf",
-      "edition": "1e",
-      "class": "Ranger",
-      "ac": -1,
-      "int": 15,
-      "wis": 16,
-      "xpBonus": "y"
-    },
-    { "name": "Evelina",
-      "race": "Elf",
-      "edition": "1e",
-      "class": "Magic-User/Cleric",
-      "ac": 4,
-      "int": 18,
-      "wis": 16,
-      "xpBonus": "yy"
-    },
-    { "name": "Goreguts",
-      "race": "Gnome",
-      "edition": "1e",
-      "class": "Thief/Illusionist",
-      "ac": 2,
-      "str": 12,
-      "int": 15,
-      "wis": 13,
-      "dex": 16,
-      "con": 9,
-      "cha": 14,
-      "xpBonus": "yn"
-    }
-  ]
-},
-{
-  "name": "Some Other Party",
-  "xp": 55555,
-  "members": [
-    { "name": "Maxie",
-    "race": "Gnome",
-    "edition": "1e",
-    "class": "Assassin",
-    "ac": 2,
-    "int": 18,
-    "wis": 12,
-    "xpBonus": "n"
-    },
-    { "name": "Minnie",
-      "race": "Minotaur",
-      "edition": "1e",
-      "class": "Fighter",
-      "ac": 2,
-      "int": 18,
-      "wis": 12,
-      "xpBonus": "y"
-    }
-  ]
-}]
+[
+  {
+    "name": "Baker Street Bakers",
+    "xp": "247543",
+    "temp": 8,
+    "members": [
+      {
+        "name": "Vaseria Dalmov II",
+        "race": "Orc",
+        "edition": "1e",
+        "class": "Illusionist/Magic-User",
+        "ac": 1,
+        "str": 14,
+        "int": 18,
+        "wis": 12,
+        "dex": 16,
+        "con": 14,
+        "cha": 13,
+        "xpBonus": "ny"
+      },
+      {
+        "name": "Maggie",
+        "race": "Hengeyokai",
+        "edition": "OA",
+        "class": "Wu Jen",
+        "ac": -1,
+        "int": 18,
+        "wis": 13,
+        "xpBonus": "y"
+      },
+      {
+        "name": "Birch (Ulfgar Hammerhead)",
+        "boss": "Maggie",
+        "race": "Dwarf",
+        "edition": "1e",
+        "class": "Fighter/Thief",
+        "ac": 2,
+        "str": 14,
+        "int": 12,
+        "wis": 9,
+        "dex": 14,
+        "con": 13,
+        "cha": 17,
+        "xpBonus": "nn"
+      },
+      {
+        "name": "Renee Veloute Bechamel",
+        "hide": true,
+        "race": "Halfling",
+        "edition": "Custom",
+        "class": "Chef",
+        "ac": 1,
+        "int": 9,
+        "wis": 13,
+        "xpBonus": "n"
+      },
+      {
+        "name": "Thri-Kreen 1",
+        "race": "Thri-Kreen",
+        "edition": "OA",
+        "class": "Wu Jen/Ninja",
+        "ac": 1,
+        "int": 18,
+        "wis": 12,
+        "xpBonus": "yn"
+      },
+      {
+        "name": "Borbugulus",
+        "race": "Bugbear",
+        "edition": "1e",
+        "class": "Paladin",
+        "ac": 2,
+        "int": 18,
+        "wis": 13,
+        "xpBonus": "n"
+      },
+      {
+        "name": "Skelver",
+        "race": "Elf",
+        "edition": "1e",
+        "class": "Ranger",
+        "ac": -1,
+        "int": 15,
+        "wis": 16,
+        "xpBonus": "y"
+      },
+      {
+        "name": "Evelina",
+        "race": "Elf",
+        "edition": "1e",
+        "class": "Magic-User/Cleric",
+        "ac": 4,
+        "int": 18,
+        "wis": 16,
+        "xpBonus": "yy"
+      },
+      {
+        "name": "Goreguts",
+        "race": "Gnome",
+        "edition": "1e",
+        "class": "Thief/Illusionist",
+        "ac": 2,
+        "str": 12,
+        "int": 15,
+        "wis": 13,
+        "dex": 16,
+        "con": 9,
+        "cha": 14,
+        "xpBonus": "yn"
+      }
+    ]
+  },
+  {
+    "name": "Some Other Party",
+    "xp": "50555",
+    "members": [
+      {
+        "name": "Maxie",
+        "race": "Gnome",
+        "edition": "1e",
+        "class": "Assassin",
+        "ac": 2,
+        "int": 18,
+        "wis": 12,
+        "xpBonus": "n"
+      },
+      {
+        "name": "Minnie",
+        "race": "Minotaur",
+        "edition": "1e",
+        "class": "Fighter",
+        "ac": 2,
+        "int": 18,
+        "wis": 12,
+        "xpBonus": "y"
+      }
+    ]
+  }
+]
