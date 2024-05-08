@@ -70,8 +70,10 @@ app.get('/levels', (req, res) => {
 
 app.get('/classlevels/:xp', (req, res) => {
   // display a list of classes and the level the XP value corresponds to in each
+  let xp = req.params.xp
+  if (isNaN(xp)) xp = 0
   console.log(`Get levels for XP: ${req.params.xp}`)
-  const json = classes.getAllLevels(req.params.xp)
+  const json = classes.getAllLevels("AD&D", req.params.xp)    // TO DO: systemName
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })

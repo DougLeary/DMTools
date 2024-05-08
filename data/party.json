@@ -1,5 +1,6 @@
 [
   {
+    "system": "AD&D",
     "name": "Baker Street Bakers",
     "xp": "247543",
     "temp": 8,
@@ -111,6 +112,7 @@
     ]
   },
   {
+    "system": "AD&D",
     "name": "Some Other Party",
     "xp": "50555",
     "members": [

@@ -1,7 +1,7 @@
-const parties = require("./party.json")
+const partyFilename = './data/party.json'
+const parties = require(partyFilename)
 const classes = require("./classes")
 const fs = require('fs')
-const partyFilename = './party.json'
 
 function savePartyData() {
   const result = {success: true}
@@ -52,7 +52,7 @@ function getPartyLevels(party, xp) {
       const getsBonus = (mem.xpBonus.substring(c,c+1) == 'y')
       const useXp = getsBonus ? Math.floor(xpParam * 1.1) : xpParam
       //console.log(`${member.name} bonus: ${mem.xpBonus}, ${c}:${mem.xpBonus.substring(c,c)} ${chClasses[c]} useXp ${useXp} getsBonus ${getsBonus}`)
-      const lev = classes.getCharacterLevel(mem.edition, chClasses[c], Math.floor(useXp / chClasses.length))
+      const lev = classes.getCharacterLevel(party.system, mem.edition, chClasses[c], Math.floor(useXp / chClasses.length))
       chLevel.push(lev.level)
       xpToNext .push(getsBonus ? Math.floor(lev.xpToNext / 1.1) : lev.xpToNext)
     }
