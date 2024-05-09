@@ -1,8 +1,9 @@
+// OSDnD Discord Bot
 const classes = require('./classes')
 const party = require('./party')
 const partyName = 'Baker Street Bakers'   // todo: make this selectable
 
-const loginToken = "NzU4NTcyNzgwMjkwOTY1NTUy.GO4gCK.FwzEg__DM0d5RccnsWu5UBgCffNuSRTKOMvNvg"
+const loginToken = "MTIzODAxNDEyNDQ1ODUxMjM5Ng.GkMAEe.tDp2qdLdLr3Bg6XcrNorECGq7g_wQS2QDViv2Q" 
 
 const { Client, GatewayIntentBits } = require('discord.js')
 const fetchAll = require('discord-fetch-all')
