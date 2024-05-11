@@ -1,89 +1,101 @@
-const data = require("./classes.json")
+const systems = require("./data/classes.json").systems
+// systems.forEach((sys) => { 
+//   console.log(`${sys.name}: ${sys.text}`)
+//   sys.editions.forEach((ed) => {
+//     console.log(`  ${ed.name}: ${ed.text}`)
+//   })
+// })
 
 function eq(str1, str2) {
-  return (String(str1).toLowerCase() === String(str2).toLowerCase())
+  return (String(str1).toLowerCase() == String(str2).toLowerCase())
 }
 
-function getEditions() {
-  const list = []
-  for (let e in data.editions) {
-    list.push(data.editions[e].name)
+function getSystem(systemName) {
+  for (let s in systems) {
+    const system = systems[s]
+    if (eq(system.name, systemName)) return system
   }
-  return list
+  return null
 }
 
-function getEffects(editionName) {
-  for (let e in data.editions) {
-    const ed = data.editions[e]
-    if (ed.name == editionName) {
-      return ed.effects
+function getEdition(systemName, editionName) {
+  const system = getSystem(systemName)
+  if (system) {
+    for (let e in system.editions) {
+      const edition = system.editions[e]
+      if (eq(edition.name, editionName)) return edition
     }
   }
   return null
 }
 
-function getClasses(editionName) {
+function getEditions(systemName) {
   const list = []
-  if (editionName) {
-    for (let e in data.editions) {
-      const ed = data.editions[e]
-      if (ed.name == editionName) {
-        for (let c in ed.classes) {
-          list.push(ed.classes[c].name)
-        }
-      }
-    }
-  } else {
-      for (let e in data.editions) {
-        const ed = data.editions[e]
-        const item = { edition: ed.name, text: ed.text, classes: [] }
-        for (let c in ed.classes) {
-          item.classes.push(ed.classes[c].name)
-        }
-        list.push(item)
-      }
-    }
+  const system = getSystem(systemName)
+  if (system) {
+    system.editions.forEach((edition) => {
+      list.push(edition.name)
+    })
+  }
   return list
 }
 
-function getClass(className, editionName) {
+function getEffects(systemName, editionName) {
+  const edition = getEdition(systemName, editionName)
+  return (edition) ? edition.effects : []
+}
+
+function getClasses(systemName, editionName) {
+  // systemName is required; if editionName is present get that edition's classes, else get all classes in the system 
+  const list = []
   if (editionName) {
-  // find a class in a specific edition
-    for (let e=0; e < data.editions.length; e++) {
-      const ed = data.editions[e]
-      if (eq(ed.name, editionName)) {
-        // found the edition
-        for (let c=0; c < ed.classes.length; c++) {
-          if (eq(ed.classes[c].name, className)) {
-            // found the class
-            return {edition: ed, class: ed.classes[c]}
+    const edition = getEdition(systemName, editionName)
+    edition.classes.forEach((cls) => {
+      list.push(cls.name)
+    })
+  } else {
+    const system = getSystem(systemName)
+    if (system) {
+      system.editions.forEach((ed) => {
+        const item = { edition: ed.name, text: ed.text, classes: [] }
+        ed.classes.forEach ((cls) => {
+          item.classes.push(ed.classes[c].name)
+        })
+        list.push(item)
+      })
+    }
+    return list
+  }
+}
+
+function getClass(systemName, editionName, className) {
+  const system = getSystem(systemName)
+  if (system) {
+    if (editionName) {
+      const ed = getEdition(systemName, editionName)
+      for (let c in ed.classes) {
+        const cls = ed.classes[c]
+        if (eq(cls.name, className)) {
+          return {edition: ed.name, class: cls}
+        }
+      }
+    } else {
+      // find the first matching class in any edition
+      for (let ed in system.editions) {
+        for (cls in system.editions[ed].classes) {
+          if (eq(cls.name, className)) {
+            return {edition: system.editions[ed].name, class: cls}
           }
         }
-        // no matching class in this edition
-        return null
       }
     }
-  } else {
-    // find the first matching class in any edition
-    for (let e=0; e < data.editions.length; e++) {
-      const ed = data.editions[e]
-      for (let c=0; c < ed.classes.length; c++) {
-        if (eq(ed.classes[c].name, className)) {
-          // found the class
-          return {edition: ed, class: ed.classes[c]}
-        }
-      }
-    }
-    return null
   }
   // no matching edition
   return null
 }
 
-function getClassLevel(_class, xp) {
-  // _class is an object from the editions structure
-  // returns object {level: n, xpToNext n}
-  const levels = _class.levels
+function getClassLevel(cls, xp) {
+  const levels = cls.levels
   const nLevels = levels.length
   const result = { name: "unknown", class: "unknown", level: 0, xpToNext: 1 }
 
@@ -112,38 +124,33 @@ function getClassLevel(_class, xp) {
       const xpExcess = xp - levels[nLevels-1]
       const extraLevels = Math.floor(xpExcess / levelRange) + 1
       result.level = nLevels + extraLevels
-      //console.log(`${_class.name} xp ${xp} beyond table, range=${levelRange}, highest=${nLevels} (${levels[nLevels-1]}), excess=${xpExcess}, extraLevels=${extraLevels}, result=${result.level}`)
+      //console.log(`${cls.name} xp ${xp} beyond table, range=${levelRange}, highest=${nLevels} (${levels[nLevels-1]}), excess=${xpExcess}, extraLevels=${extraLevels}, result=${result.level}`)
       result.xpToNext = (extraLevels * levelRange) - xpExcess
     }
   }
   return result
 }
 
-function getCharacterLevel(editionName, className, xp) {
-  for (let e in data.editions) {
-    if (data.editions[e].name == editionName) {
-      for (let c in data.editions[e].classes) {
-        if (data.editions[e].classes[c].name == className) {
-          return (getClassLevel(data.editions[e].classes[c], xp))
-        }
-      }
-    }
-  }
+function getCharacterLevel(systemName, editionName, className, xp) {
+  const cls = getClass(systemName, editionName, className)
+  if (cls) return getClassLevel(cls.class, xp)
+  return null
 }
 
-function getAllLevels(xp) {
-  // for each known class find the level corresponding to xp
+function getAllLevels(systemName, xp) {
+  // for each class in the system find the level corresponding to xp
   const result = {name: "All Classes", xp: xp, members: []}
-  for (let e=0; e < data.editions.length; e++) {
-    const ed = data.editions[e]
-    for (let c=0; c < ed.classes.length; c++) {
-      const _class = data.editions[e].classes[c]
-      const obj = getClassLevel(_class, xp)
+  const system = getSystem(systemName)
+  if (system) {
+    system.editions.forEach((ed) => {
+      ed.classes.forEach((cls) => {
+        const obj = getClassLevel(cls, xp)
 //      console.log(`xp=${xp}, level=${obj.level}, xpToNext=${obj.xpToNext}`)
-      obj.edition = ed.name
-      obj.class = _class.name
-      result.members.push(obj)
-    }
+        obj.edition = ed.name
+        obj.class = cls.name
+        result.members.push(obj)
+      })
+    })
   }
   return result
 }

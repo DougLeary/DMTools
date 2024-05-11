@@ -1,0 +1,482 @@
+{ "systems": [
+  { "name": "AD&D",
+    "text": "Advanced Dungeons & Dragons",
+    "editions": [
+      { "name": "1e",
+        "text": "First Edition",
+        "effects": [
+          "Paralyzation, Poison or Death Magic",
+          "Petrification or Polymorph",
+          "Rod, Staff or Wand",
+          "Breath Weapon",
+          "Spell"],
+        "classes": [
+          { "name": "Cleric",
+            "hitDie": "d8",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [1500, 3000, 6000, 13000, 27500, 55000, 110000, 225000, 450000, 675000, 900000],
+            "saves": [
+              { "upto": 3, "need": [10, 13, 14, 16, 15]},
+              { "upto": 6, "need": [9, 12, 13, 15, 14]},
+              { "upto": 9, "need": [7, 10, 11, 13, 12]},
+              { "upto": 12, "need": [6, 9, 10, 12, 11]},
+              { "upto": 15, "need": [5, 8, 9, 11, 10]},
+              { "upto": 18, "need": [4, 7, 8, 10, 9]},
+              { "upto": 999, "need": [2, 5, 6, 8, 7]}]},
+          { "name": "Druid",
+            "hitDie": "d8",
+            "bonusDie": 0,
+            "maxHD": 14,
+            "thenHP": 2,
+            "levels": [2000, 4000, 7500, 12500, 20000, 35000, 60000, 90000, 125000, 200000, 300000, 750000, 1500000, 2000000000],
+            "saveAs": "Cleric"},
+          { "name": "Fighter",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 3,
+            "levels": [2000, 4000, 8000, 18000, 35000, 70000, 125000, 250000, 500000, 750000, 1000000],
+            "saves": [
+              { "upto": 0, "need": [16, 17, 18, 20, 19]},
+              { "upto": 2, "need": [14, 15, 16, 17, 17]},
+              { "upto": 4, "need": [13, 14, 15, 16, 16]},
+              { "upto": 6, "need": [11, 12, 13, 13, 14]},
+              { "upto": 8, "need": [10, 11, 12, 12, 13]},
+              { "upto": 10, "need": [8, 9, 10, 9, 11]},
+              { "upto": 12, "need": [7, 8, 9, 8, 10]},
+              { "upto": 14, "need": [5, 6, 7, 5, 8]},
+              { "upto": 16, "need": [4, 5, 6, 4, 7]},
+              { "upto": 999, "need": [3, 4, 5, 4, 6]}]},
+          { "name": "Paladin",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 3,
+            "levels": [2750, 5500, 12000, 24000, 45000, 95000, 175000, 350000, 700000, 1050000, 1400000],
+            "saveAs": "Fighter"},
+          { "name": "Ranger",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 10,
+            "thenHP": 2,
+            "levels": [2250, 4500, 10000, 20000, 40000, 90000, 150000, 225000, 325000, 650000, 975000, 1300000],
+            "saveAs": "Fighter"},
+          { "name": "Magic-User",
+            "hitDie": "d4",
+            "bonusDie": 0,
+            "maxHD": 11,
+            "thenHP": 1,
+            "levels": [2500, 5000, 10000, 22500, 40000, 60000, 90000, 135000, 250000, 375000, 750000, 1125000, 1500000, 1875000, 2250000, 2625000, 3000000, 3375000],
+            "saves": [
+              { "upto": 5, "need": [14, 13, 11, 15, 12]},
+              { "upto": 10, "need": [13, 11, 9, 13, 10]},
+              { "upto": 15, "need": [11, 9, 7, 11, 8]},
+              { "upto": 20, "need": [10, 7, 5, 9, 6]},
+              { "upto": 999, "need": [8, 5, 3, 7, 4]}]},
+          {
+            "name": "Illusionist",
+            "hitDie": "d4",
+            "bonusDie": 0,
+            "maxHD": 10,
+            "thenHP": 1,
+            "levels": [2250, 4500, 9000, 18000, 35000, 60000, 95000, 145000, 220000, 440000, 660000, 880000],
+            "saveAs": "Magic-User"},
+          {
+            "name": "Thief",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 10,
+            "thenHP": 2,
+            "levels": [1250, 2500, 5000, 10000, 20000, 42500, 70000, 110000, 160000, 220000, 440000, 660000],
+            "saves": [
+              { "upto": 4, "need": [13, 12, 14, 16, 15]},
+              { "upto": 8, "need": [12, 11, 12, 15, 13]},
+              { "upto": 12, "need": [11, 10, 10, 14, 11]},
+              { "upto": 16, "need": [10, 9, 8, 13, 9]},
+              { "upto": 20, "need": [9, 8, 6, 12, 7]},
+              { "upto": 999, "need": [8, 7, 4, 11, 5]}]},
+          {
+            "name": "Assassin",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 15,
+            "thenHP": 2,
+            "levels": [1500, 3000, 6000, 12000, 25000, 50000, 100000, 200000, 300000, 425000, 575000, 750000, 1000000, 1500000, 2000000000],
+            "saveAs": "Thief"},
+          {
+            "name": "Monk",
+            "hitDie": "d4",
+            "bonusDie": 1,
+            "maxHD": 17,
+            "thenHP": 2,
+            "levels": [2250, 4750, 10000, 22500, 47500, 98000, 200000, 350000, 500000, 700000, 950000, 1250000, 1750000, 2250000, 2750000, 3250000, 2000000000],
+            "saveAs": "Thief"},
+          {
+            "name": "Bard",
+            "hitDie": "d6",
+            "bonusDie": -1,
+            "maxHD": 11,
+            "thenHP": 1,
+            "levels": [2000, 4000, 8000, 16000, 25000, 40000, 60000, 85000, 110000, 150000, 200000, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1600000, 1800000, 2000000, 2200000, 3000000, 2000000000],
+            "saveAs": "Cleric"}
+        ]
+      },
+      { "name": "UA",
+        "text": "Unearthed Arcana",
+        "classes": 
+        [
+          {
+            "name": "Barbarian",
+            "hitDie": "d12",
+            "bonusDie": 0,
+            "maxHD": 8,
+            "thenHP": 4,
+            "levels": [6000, 12000, 24000, 48000, 80000, 150000, 275000, 500000],
+            "saveAs": "1e:Fighter"
+          },
+          {
+            "name": "Cavalier",
+            "hitDie": "d12",
+            "bonusDie": 0,
+            "maxHD": 10,
+            "thenHP": 3,
+            "levels": [2500, 5000, 10000, 18500, 37000, 85000, 140000, 220000, 300000, 600000],
+            "saveAs": "1e:Fighter"
+          },
+          {
+            "name": "Thief-Acrobat",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 12,
+            "thenHP": 2,
+            "levels": [1250, 2500, 5000, 10000, 20000, 45000, 75000, 125000, 180000, 250000, 500000, 750000],
+            "saveAs": "1e:Thief"
+          }
+        ]
+      },
+      { "name": "OA",
+        "text": "Oriental Adventures",
+        "classes": 
+        [
+          {
+            "name": "Barbarian",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 8,
+            "thenHP": 4,
+            "levels": [4000, 8000, 16000, 32000, 75000, 130000, 240000, 460000, 900000, 1400000, 1900000],
+            "saveAs": "1e:Fighter"
+          },
+          {
+            "name": "Bushi",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [1500, 3000, 6000, 14000, 30000, 60000, 120000, 240000, 480000, 710000, 1000000, 1250000],
+            "saveAs": "1e:Fighter"
+          },
+          {
+            "name": "Kensai",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [3000, 5500, 10000, 22000, 44000, 88000, 150000, 250000, 500000, 750000, 1000000, 1250000],
+            "saveAs": "1e:Fighter"
+          },
+          {
+            "name": "Monk",
+            "hitDie": "d4",
+            "bonusDie": 1,
+            "maxHD": 17,
+            "thenHP": 1,
+            "levels": [2250, 4750, 10000, 22500, 47500, 98000, 200000, 350000, 500000, 700000, 950000, 1250000, 1750000, 2250000, 2750000, 3250000, 2000000000],
+            "saveAs": "1e:Thief"
+          },
+          {
+              "name": "Ninja",
+              "hitDie": "d2",
+              "bonusDie": 0,
+              "maxHD": 9,
+              "thenHP": 2,
+              "levels": [4000, 8000, 15000, 30000, 60000, 120000, 240000, 500000, 1000000, 1300000, 1600000, 1900000],
+              "saveAs": "1e:Thief"
+            },
+            {
+              "name": "Samurai",
+              "hitDie": "d10",
+              "bonusDie": 0,
+              "maxHD": 9,
+              "thenHP": 2,
+              "levels": [2500, 5000, 10000, 18000, 36500, 75000, 135000, 235000, 400000, 650000, 1000000, 1300000],
+              "saveAs": "1e:Fighter"
+            },
+            {
+              "name": "Shukenja",
+              "hitDie": "d6",
+              "bonusDie": 0,
+              "maxHD": 9,
+              "thenHP": 1,
+              "levels": [1250, 3000, 5500, 11000, 22000, 44000, 90000, 150000, 300000, 600000, 900000, 1200000],
+              "saveAs": "1e:Cleric"
+            },
+            {
+              "name": "Sohei",
+              "hitDie": "d10",
+              "bonusDie": 0,
+              "maxHD": 9,
+              "thenHP": 1,
+              "levels": [2000, 4000, 7000, 13000, 24000, 48000, 85000, 150000, 350000, 550000, 750000, 950000],
+              "saveAs": "1e:Cleric"
+            },
+            {
+              "name": "Wu Jen",
+              "hitDie": "d4",
+              "bonusDie": 0,
+              "maxHD": 9,
+              "thenHP": 1,
+              "levels": [2000, 4000, 8000, 18000, 36000, 65000, 100000, 140000, 280000, 500000, 800000],
+              "saveAs": "1e:Magic-User"
+            },
+            {
+              "name": "Yakuza",
+              "hitDie": "d6",
+              "bonusDie": 0,
+              "maxHD": 9,
+              "thenHP": 1,
+              "levels": [2000, 4000, 8000, 16000, 30000, 60000, 130000, 260000, 520000, 800000, 1100000, 1400000],
+              "saveAs": "1e:Thief"
+            }
+          ]
+      },
+      { "name": "Custom",
+        "text": "Custom",
+        "classes": [
+          {
+            "name": "Chef",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 1,
+            "levels": [2000, 4000, 8000, 17750, 33750, 57500, 100000, 180000, 350000, 712500, 825000, 1125000],
+            "saveAs": "1e:Cleric/1e:Magic-User"
+          }
+        ]
+      }
+    ]
+  },
+  { "name": "OSE",
+    "text": "Old School Essentials",
+    "editions": [
+      { "name": "OSE",
+        "text": "Old School Essentials",
+        "effects": [
+          "Death or Poison (D)",
+          "Wands (W)",
+          "Paralysis or Petrification (P)",
+          "Breath Attacks (B)",
+          "Spells, Rods or Staves (S)"],
+        "classes": [
+          {
+            "name": "Acolyte",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 1,
+            "levels": [0, 1500, 3000, 6000, 12000, 25000, 50000, 100000, 200000],
+            "saves": [
+              { "upto": 4, "need": [13, 14, 13, 16, 15]},
+              { "upto": 8, "need": [12, 13, 11, 14, 13]},
+              { "upto": 12, "need": [10, 11, 9, 12, 10]},
+              { "upto": 999, "need": [8, 9, 7, 10, 8]}]},
+          {
+            "name": "Acrobat",
+            "hitDie": "d4",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 1200, 2400, 4800, 9600, 20000, 40000, 80000, 160000, 280000],
+            "saves": [
+              { "upto": 4, "need": [11, 12, 14, 16, 15]},
+              { "upto": 8, "need": [9, 10, 12, 14, 12]},
+              { "upto": 12, "need": [6, 7, 9, 11, 9]},
+              { "upto": 999, "need": [3, 5, 7, 8, 7]}]},
+          {
+            "name": "Arcane Bard",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 2000, 4000, 8000, 16000, 32000, 64000, 120000, 240000],
+            "saves": [
+              { "upto": 4, "need": [13, 14, 13, 16, 15]},
+              { "upto": 8, "need": [12, 13, 11, 14, 13]},
+              { "upto": 12, "need": [10, 11, 9, 12, 10]},
+              { "upto": 999, "need": [8, 9, 7, 10, 8]}]},
+          {
+            "name": "Autnagrag",
+            "hitDie": "d8",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 0,
+            "levels": [0, 2000, 4000, 8000, 16000, 32000, 64000, 120000, 240000],
+            "saves": [
+              { "upto": 3, "need": [8, 9, 10, 13, 12]},
+              { "upto": 6, "need": [6, 7, 8, 10 ,10]},
+              { "upto": 999, "need": [4, 5, 6, 8, 8]}]},
+          {
+            "name": "Assassin",
+            "hitDie": "d4",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 1500, 3000, 6000, 12000, 25000, 50000, 100000, 200000, 300000, 425000, 575000, 750000, 900000],
+            "saveAs": "Acolyte"},
+          {
+            "name": "Barbarian",
+            "hitDie": "d8",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 3,
+            "levels": [0, 2500, 5000, 10000, 18500, 37000, 85000, 140000, 270000],
+            "saves": [
+              { "upto": 3, "need": [10, 13, 12, 15, 16]},
+              { "upto": 6, "need": [8, 11, 10, 13, 13]},
+              { "upto": 9, "need": [6, 9, 8, 10, 10]},
+              { "upto": 12, "need": [4, 7, 6, 8, 7]},
+              { "upto": 999, "need": [3, 5, 4, 5, 5]}]},
+          {
+            "name": "Bard",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 2000, 4000, 8000, 16000, 32000, 64000, 120000, 240000],
+            "saveAs": "Acolyte"},
+          {
+            "name": "Cleric",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 1,
+            "levels": [0, 1500, 3000, 6000, 12000, 25000, 50000, 100000, 200000],
+            "saveAs": "Acrobat"},
+          {
+            "name": "Drow",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 4000, 8000, 16000, 32000, 64000, 120000, 250000, 400000, 600000],
+            "saves": [
+              { "upto": 3, "need": [12, 13, 13, 15, 12]},
+              { "upto": 6, "need": [10, 11, 11, 13, 10]},
+              { "upto": 9, "need": [8, 9, 9, 10, 8]},
+              { "upto": 999, "need": [6, 7, 8, 8, 6]}]},
+          {
+            "name": "Druid",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 1,
+            "levels": [0, 2000, 4000, 7500, 12500, 20000, 35000, 60000, 90000, 125000, 200000, 300000, 750000, 1500000],
+            "saveAs": "Acrobat"},
+          {
+            "name": "Duergar",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 3,
+            "levels": [0, 2800, 5600, 11200, 23000, 46000, 100000, 200000],
+            "saves": [
+              { "upto": 3, "need": [8, 9, 10, 13, 12]},
+              { "upto": 6, "need": [6, 7, 8, 10 ,10]},
+              { "upto": 9, "need": [4, 5, 6, 7, 8]},
+              { "upto": 999, "need": [2, 3, 4, 4, 6]}]},
+          {
+            "name": "Dwarf",
+            "hitDie": "d8",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 3,
+            "levels": [0, 2200, 4400, 8800, 17000, 35000, 70000, 140000, 270000],
+            "saveAs": "Duergar"},
+          {
+            "name": "Elf",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 4000, 8000, 16000, 32000, 64000, 120000, 250000, 400000, 600000],
+            "saves": [
+              { "upto": 3, "need": [12, 13, 14, 15, 15]},
+              { "upto": 6, "need": [10, 11, 11, 13, 12]},
+              { "upto": 9, "need": [8, 9, 9, 10, 10]},
+              { "upto": 999, "need": [6, 7, 8, 8, 8]}]},
+          {
+            "name": "Errant Friar",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 1,
+            "levels": [0, 1200, 2400, 4800, 9600, 20000, 40000, 80000, 160000, 280000],
+            "saves": [
+              { "upto": 4, "need": [13, 14, 13, 16, 15]},
+              { "upto": 8, "need": [12, 13, 11, 14, 13]},
+              { "upto": 12, "need": [10, 11, 9, 12, 10]},
+              { "upto": 999, "need": [8, 9, 7, 10, 8]}]},
+          {
+            "name": "Fighter",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 2000, 4000, 8000, 16000, 32000, 64000, 120000, 240000],
+            "saves": [
+              { "upto": 3, "need": [12, 13, 14, 15, 16]},
+              { "upto": 6, "need": [10, 11, 12, 13, 14]},
+              { "upto": 9, "need": [8, 9, 10, 10, 12]},
+              { "upto": 12, "need": [6, 7, 8, 8, 10]},
+              { "upto": 999, "need": [4, 5, 6, 5, 8]}]},
+          {
+            "name": "Gargantua",
+            "hitDie": "d10",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 3,
+            "levels": [0, 2500, 5000, 10000, 20000, 40000, 80000, 160000, 300000, 500000],
+            "saves": [
+              { "upto": 3, "need": [8, 9, 10, 13, 12]},
+              { "upto": 6, "need": [6, 7, 8, 10, 10]},
+              { "upto": 9, "need": [4, 5, 6, 7, 8]},
+              { "upto": 999, "need": [2, 3, 4, 4, 6]}]},
+          {
+            "name": "Gnome",
+            "hitDie": "d4",
+            "bonusDie": 0,
+            "maxHD": 8,
+            "thenHP": 0,
+            "levels": [0, 3000, 6000, 12000, 30000, 60000, 120000, 240000],
+            "saves": [
+              { "upto": 5, "need": [8, 9, 10, 14, 11]},
+              { "upto": 999, "need": [6, 7, 8, 11, 9]}]},
+          {
+            "name": "Other",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 9,
+            "thenHP": 2,
+            "levels": [0, 1000],
+            "saves": [
+              { "upto": 4, "need": []},
+              { "upto": 8, "need": []},
+              { "upto": 12, "need": []},
+              { "upto": 999, "need": []}]}
+        ]
+      }
+    ]
+  }]
+}

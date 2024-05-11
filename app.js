@@ -1,4 +1,4 @@
-const appName = "Dnd"
+const appName = "Dmt"
 const express = require('express')
 const path = require('path')
 const classes = require('./classes')
@@ -70,9 +70,20 @@ app.get('/levels', (req, res) => {
 
 app.get('/classlevels/:xp', (req, res) => {
   // display a list of classes and the level the XP value corresponds to in each
+  let xp = req.params.xp
+  if (isNaN(xp)) xp = 0
   console.log(`Get levels for XP: ${req.params.xp}`)
-  const json = classes.getAllLevels(req.params.xp)
+  const json = classes.getAllLevels("AD&D", req.params.xp)    // TO DO: systemName
 //  console.log(`Returning ${JSON.stringify(json)}`)
+  res.json(json)
+})
+
+app.get('/addpartyxp/:partyname/:xp', (req, res) => {
+  // display party member levels for xp; if 0 xp use party xp
+  const xp = req.params.xp
+  console.log(`Add ${xp} xp to ${req.params.partyname}`)
+  const pty = party.getParty(req.params.partyname)
+  const json = party.addPartyXp(pty, xp || 0)
   res.json(json)
 })
 

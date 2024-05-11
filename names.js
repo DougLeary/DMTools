@@ -1,4 +1,4 @@
-const data = require('./names.json')
+const data = require('./data/names.json')
 const gens = (data) ? data.generators : []
 
 function doBlock(block) {
