@@ -10,7 +10,8 @@
       "E:ian,ian,eon,ean,jar,oar,gan,gen,ger,gar,dor,dar,din,dul",
       "F:born,morn,vorn,varn,varn,veln,wald,warn,warn,durn,durl,burn,born,bord,barn,birn,gard,garn,gurd,gurn",
       "G: Granite, Red, Green, Blue, Black, Blood, Stone, Troll",
-      "H:Hammer,Hammer,Digger,Arm,Blade,Cleaver,Wedge,Night,Born,Burn,Burner,Bane,Bear,Bore,Thane"
+      "H:Hammer,Hammer,Digger,Arm,Blade,Wedge,Night,Born,Burn,Burner,Bane,Bear,Bore,Thane",
+      "I:Foe,Scourge,Cleaver,Bane,Slayer,Tracker,Ward,Guard"
     ]
   },
   {
@@ -35,7 +36,7 @@
   },
   { 
     "type": "orc",
-    "rule": ["A,B,C","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G","A,B,C,D,E","A,B,C,D,E","A,B,C,F,---G,D,E"],
+    "rule": ["A,B,C","A,B,C,D,E","A,B,C,D,E","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G,D,E"],
     "blocks": [
       "A:B,B,D,D,F,G,G,G,K,K,M,N,P,T,V,X",
       "B:r,r,r,l,l,h,-,-,-",
@@ -57,6 +58,25 @@
       "E:Cauldron,Pot,Spoon,Shield,Axe,Sword,Halberd,Baldric",
       "F:Duck,Duck,Goose,Goose,Cow,Mare,Hen,Rooster,Hound,Hound,Dog,Cat,Eagle,Bunny,Hare,Rabbit,Stoat,Weasel,Frog,Toad,Squirrel,Badger",
       "G:and"
+    ]
+  },
+  { 
+    "type": "author",
+    "rule": "A",
+    "blocks": [
+      "A:[elf],[elf],[elf],[elf],[orc]"
+    ]
+  },
+  { 
+    "type": "book",
+    "rule": [" AB,C,D,E", " AB,C,D,E", " AB,C,D,E", " A,C,D,E,F"],
+    "blocks": [
+      "A:The,A",
+      "B:[author]'s",
+      "C:Authoritative,Comprehensive,First,Final,Beginner’s",
+      "D:Guide to,Book of,Treatise on,Encyclopedia of,Tome of",
+      "E:Animals,Creatures,Alchemy,the Arcane Arts,Wizardry,Reptiles,Wand Making,Enchantment,Golems,Curses,Magical Remedies,Undead",
+      "F:,, by [author]"
     ]
   }
 ]}

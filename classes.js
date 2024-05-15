@@ -97,7 +97,7 @@ function getClass(systemName, editionName, className) {
 function getClassLevel(cls, xp) {
   const levels = cls.levels
   const nLevels = levels.length
-  const result = { name: "unknown", class: "unknown", level: 0, xpToNext: 1 }
+  const result = { level: 0, xpToNext: 1 }
 
   let level = 0
   let xpToNext = 1      // XP to reach the next level (i.e. top of current level +1)
@@ -124,7 +124,7 @@ function getClassLevel(cls, xp) {
       const xpExcess = xp - levels[nLevels-1]
       const extraLevels = Math.floor(xpExcess / levelRange) + 1
       result.level = nLevels + extraLevels
-      //console.log(`${cls.name} xp ${xp} beyond table, range=${levelRange}, highest=${nLevels} (${levels[nLevels-1]}), excess=${xpExcess}, extraLevels=${extraLevels}, result=${result.level}`)
+      //console.log(`${cls.p ${xp} beyond table, range=${levelRange}, highest=${nLevels} (${levels[nLevels-1]}), excess=${xpExcess}, extraLevels=${extraLevels}, result=${result.level}`)
       result.xpToNext = (extraLevels * levelRange) - xpExcess
     }
   }

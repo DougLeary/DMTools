@@ -1,3 +1,6 @@
+//  names.js - Name Generator-inator
+//  This module generates names from a json file that contains a set of generators.
+
 const data = require('./data/names.json')
 const gens = (data) ? data.generators : []
 
@@ -6,7 +9,11 @@ function doBlock(block) {
   const comma = String.fromCharCode(12)   // temporarily replaces ",,"
   const arr = block.substr(2).replace(',,', comma).split(',')
   const pos = Math.floor(Math.random() * arr.length)
-  const st = arr[pos].replace(comma, ',')
+  let st = arr[pos].replace(comma, ',')
+  if (st.includes('[') && st.includes(']')) {
+    const gen = st.substring(st.indexOf('[') + 1, st.indexOf(']'))
+    st = st.replace(`[${gen}]`, getName(gen))
+  }
   return (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
 }
 
@@ -27,19 +34,12 @@ function doRule(gen, rule) {
   for (let n in steps) {
      const st = doStep(gen, steps[n])
      if (st == '.') return result.trim()
-     if (st != '-') result += st + (spaced ? ' ' : '')
+     if (st != '-') {
+      if (spaced && st.startsWith(',')) result = result.trim()    // remove space before comma
+      result += st + (spaced ? ' ' : '')
+     }
   }
   return result.trim()
-}
-
-function getGenerators() {
-  // return a list of generators and their flavors
-  arr = []
-  for (let i in gens) {
-    const gen = gens[i]
-    arr.push({type: gen.type, flavor: (gen.hasOwnProperty('flavor')) ? gen.flavor : ''})
-  }
-  return arr
 }
 
 function getName(type='', flavor='') {
@@ -57,7 +57,17 @@ function getName(type='', flavor='') {
   return `NPC ${type}`.trim()
 }
 
+function getGenerators() {
+  // return a list of generators and their flavors
+  arr = []
+  for (let i in gens) {
+    const gen = gens[i]
+    arr.push({type: gen.type, flavor: (gen.hasOwnProperty('flavor')) ? gen.flavor : ''})
+  }
+  return arr
+}
+
 module.exports = {
-  getGenerators: getGenerators,
-  getName: getName
+  getName, 
+  getGenerators
 }

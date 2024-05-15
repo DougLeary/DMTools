@@ -11,10 +11,10 @@
           for (let i=0; i < data.length; i++) {
             const type = data[i].type
             const flavor = data[i].flavor || ''
-            const st = `<p>${flavor}${(flavor) ? ' ' : ''}${type}</p>`
+            const st = `<span>${flavor}${(flavor) ? ' ' : ''}${type}</span></br>`
             $('#nameTypes').append(st)
           }
-          $('#nameTypes p').addClass('clickable').on('click', clickItem)
+          $('#nameTypes span').addClass('clickable').on('click', clickItem)
         })
       }
 

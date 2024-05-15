@@ -2,139 +2,151 @@
   {
     "name": "Baker Street Bakers",
     "system": "AD&D",
-    "xp": "247543",
-    "temp": 8,
+    "xp": 247543,
     "members": [
       {
         "name": "Vaseria Dalmov II",
         "race": "Orc",
         "edition": "1e",
-        "class": "Illusionist/Magic-User",
+        "classes": [
+          {"name": "Illusionist", "active": true, "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}, 
+          {"name": "Magic-User", "active": true, "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
         "ac": 1,
         "str": 14,
         "int": 18,
         "wis": 12,
         "dex": 16,
         "con": 14,
-        "cha": 13,
-        "xpBonus": "ny"
+        "cha": 13
       },
       {
         "name": "Maggie",
         "race": "Hengeyokai",
         "edition": "OA",
-        "class": "Wu Jen",
+        "classes": [{"name": "Wu Jen", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
         "ac": -1,
         "int": 18,
-        "wis": 13,
-        "xpBonus": "y"
+        "wis": 13
       },
       {
         "name": "Birch (Ulfgar Hammerhead)",
         "boss": "Maggie",
         "race": "Dwarf",
         "edition": "1e",
-        "class": "Fighter/Thief",
+        "classes": [
+          {"name": "Fighter", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}, 
+          {"name": "Thief", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
         "ac": 2,
         "str": 14,
         "int": 12,
         "wis": 9,
         "dex": 14,
         "con": 13,
-        "cha": 17,
-        "xpBonus": "nn"
+        "cha": 17
       },
       {
         "name": "Renee Veloute Bechamel",
         "hide": true,
         "race": "Halfling",
         "edition": "Custom",
-        "class": "Chef",
+        "classes": [{"name": "Chef", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
         "ac": 1,
         "int": 9,
-        "wis": 13,
-        "xpBonus": "n"
+        "wis": 13
       },
       {
         "name": "Thri-Kreen 1",
         "race": "Thri-Kreen",
         "edition": "OA",
-        "class": "Wu Jen/Ninja",
+        "classes": [
+          {"name": "Wu Jen","level": 0,  "xp": 0, "getsBonus": true, "xpToNext": 1}, 
+          {"name": "Ninja", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
         "ac": 1,
         "int": 18,
-        "wis": 12,
-        "xpBonus": "yn"
+        "wis": 12
       },
       {
         "name": "Borbugulus",
         "race": "Bugbear",
         "edition": "1e",
-        "class": "Paladin",
+        "classes": [{"name": "Paladin", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
         "ac": 2,
         "int": 18,
-        "wis": 13,
-        "xpBonus": "n"
+        "wis": 13
       },
       {
         "name": "Skelver",
         "race": "Elf",
         "edition": "1e",
-        "class": "Ranger",
+        "classes": [{"name": "Ranger", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
         "ac": -1,
         "int": 15,
-        "wis": 16,
-        "xpBonus": "y"
+        "wis": 16
       },
       {
         "name": "Evelina",
         "race": "Elf",
         "edition": "1e",
-        "class": "Magic-User/Cleric",
+        "classes": [
+          {"name": "Magic-User", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1},
+          {"name": "Cleric", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
         "ac": 4,
         "int": 18,
-        "wis": 16,
-        "xpBonus": "yy"
+        "wis": 16
       },
       {
         "name": "Goreguts",
         "race": "Gnome",
         "edition": "1e",
-        "class": "Thief/Illusionist",
+        "classes": [
+          {"name": "Thief", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1},
+          {"name": "Illusionist", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
         "ac": 2,
         "str": 12,
         "int": 15,
         "wis": 13,
         "dex": 16,
         "con": 9,
-        "cha": 14,
-        "xpBonus": "yn"
+        "cha": 14
       }
     ]
   },
   {
     "name": "Some Other Party",
     "system": "AD&D",
-    "xp": "50555",
+    "xp": 88500,
     "members": [
       {
         "name": "Maxie",
         "race": "Gnome",
         "edition": "1e",
-        "class": "Assassin",
+        "classes": [
+          {"name": "Cleric", "level": 0, "xp": 48675, "getsBonus": true, "xpToNext": 1}, 
+          {"name": "Assassin", "level": 0, "xp": 44250, "getsBonus": false, "xpToNext": 1}],
         "ac": 2,
-        "int": 18,
-        "wis": 12,
-        "xpBonus": "n"
+        "int": 15,
+        "wis": 18
       },
       {
         "name": "Minnie",
         "race": "Minotaur",
         "edition": "1e",
-        "class": "Fighter",
+        "classes": [{"name": "Fighter", "level": 0, "xp": 88500, "getsBonus": false, "xpToNext": 1}],
         "ac": 2,
-        "int": 18,
-        "wis": 12,
-        "xpBonus": "y"
+        "int": 11,
+        "wis": 12
+      },
+      {
+        "name": "Splitty",
+        "race": "Human",
+        "edition": "1e",
+        "splitClass": "Thief",
+        "classes": [
+          {"name": "Fighter", "level": 0, "xp": 72000, "getsBonus": false, "xpToNext": 1}, 
+          {"name": "Thief", "level": 0, "xp": 18150, "getsBonus": true, "xpToNext": 1}],
+        "ac": 2,
+        "int": 10,
+        "wis": 12
       }
     ]
   }
