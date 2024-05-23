@@ -18,7 +18,7 @@
         })
       }
 
-      function getNames(count, type, flavor) {
+      function generateNames(count, type, flavor) {
         $('#results').empty()
         $.get(`./names/${count}/${type}/${flavor}`, (data) => {
           for (let i=0; i < data.length; i++) {
@@ -30,9 +30,9 @@
       function clickItem(ev) {    // to do: add count parameter input
         const arr = $(ev.target).text().split(' ')
         if (arr.length > 1) {
-          getNames(10, arr[1], arr[0]) // type, flavor
+          generateNames(10, arr[1], arr[0]) // type, flavor
         } else {
-          getNames(10, arr[0], '')     // type only
+          generateNames(10, arr[0], '')     // type only
         }
       }
 
@@ -43,7 +43,7 @@
     <a href="index.html">< Home</a>
     <h1>Name Generator-inator</h1>
     <p>Generate names for various things.</p>
-    <div id="nameTypes">
+    <div id="nameTypes" style="margin-bottom:10px">
     </div>
     <div id="results"></div>
   </body>

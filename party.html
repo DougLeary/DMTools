@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Level Calculator</title>
+  <link rel="stylesheet" href="dnd.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    function formatName(member) {
+      if (member.hasOwnProperty("boss")) return `&nbsp;&nbsp;${member.name}`
+      return member.name
+    }
+
+    function getPartyLevels() {
+      const party = $('#partyNames').val()
+      const showHidden = $('#showHidden').prop("checked")
+
+      $('#party').empty()
+      $('#levels').empty()
+      $('#levels').append(`<strong><span class="pc-name">Character</span><span class="pc-class">Class</span><span class="pc-level">Level</span><span class="xp-to-next">XP to Next</span><br></strong><hr>`)
+      $.get(`./party/levels/${party}/${showHidden}`, (data) => {
+        console.log(data)
+        $('#party').append(`${data.name}, <strong>XP</strong>: ${data.xp}<br><hr>`)
+
+        data.members.forEach((member) => {
+          const name = `<span class="pc-name">${formatName(member)}</span>`
+          const info = `<span class="pc-class">${member.classes}</span><span class="pc-level">${member.levels}</span><span class="xp-to-next">${member.xpToNext}</span><br>`
+          $('#levels').append(`${name}${info}`)
+        })
+
+        if (path.startsWith('party')) {
+          $('#xpEdit').show()
+        } else {
+          $('#xpEdit').hide()
+        }
+      })
+    }
+
+    function addPartyXp() {
+      const xp = $('#xpToAdd').val()
+      const name = $('#partyNames').val()
+      console.log(`Adding ${xp} xp to ${name}`)
+      $.get(`./party/xp/add/${name}/${xp}`, (result) => {
+        $('#xpToAdd').val('')
+        getPartyLevels()
+      })
+    }
+
+    function setPartyXp() {
+      const xp = $('#xpToSet').val()
+      const name = $('#partyNames').val()
+      console.log(`Setting ${name} xp to ${xp}`)
+      $.get(`./party/xp/set/${name}/${xp}`, (result) => {
+        $('#xpToSet').val('')
+        getPartyLevels()
+      })
+    }
+
+    // document onload
+    $(() => {
+      $('#xpEdit').hide()
+      $.get(`./party/names`, (names) => {
+        for (let p in names) {
+          $('#partyNames').append(`<option>${names[p]}</option>`)
+        }
+      })
+    })
+  </script>
+</head>
+<body>
+  <a href="index.html">< Home</a>
+  <h1>Party XP and Levels</h1>
+  <p>Enter an XP value to see what levels it would be in various classes.</p>
+  <div style="margin:10px; width: 650px; text-align: left;">
+    <label for="partyNames" style="margin-right: 10px">Party: </label><select id="partyNames"></select>
+    <input type="checkbox" id="showHidden"/><label for="showHidden" style="width: 200px; text-align:left">Show hidden chars</label>
+    <br/><button type="button" style="width: 180px" onclick="getPartyLevels()">Party Levels</button>
+    <!-- <br /><label for="xp" style="width: 40px">XP: </label><input id="xp" type="text" placeholder="stored" />
+    <button type="button" style="width: 180px" onclick="apiCall('classLevels')">All Class Levels</button> -->
+  </div>
+
+  <div id="xpAdd">
+    <label for="xpToAdd">Add Party XP: </label><input id="xpToAdd" type="text" />
+    <button type="button" style="width: 60px; height: 24px; font-size: 16px;" onclick="addPartyXp()">Add</button>
+  </div>
+  <div id="xpSet" style="margin-bottom: 20px;">
+    <label for="xpToSet">Set Party XP: </label><input id="xpToSet" type="text" />
+    <button type="button" style="width: 60px; height: 24px; font-size: 16px;" onclick="setPartyXp()">Set</button>
+  </div>
+  <div id="party"></div>
+  <div id="levels"></div>
+</body>

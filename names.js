@@ -2,7 +2,11 @@
 //  This module generates names from a json file that contains a set of generators.
 
 const data = require('./data/names.json')
-const gens = (data) ? data.generators : []
+const gens = (data) ? data : []
+
+function eq(str1, str2) {
+  return (String(str1).toLowerCase() == String(str2).toLowerCase())
+}
 
 function doBlock(block) {
   const id = block.charAt(0)
@@ -44,30 +48,39 @@ function doRule(gen, rule) {
 
 function getName(type='', flavor='') {
   // return a generated name of a given type and flavor
-  if (type) {
-    for (let i in gens) {
-      const gen = gens[i]
-      const genFlavor = (gen.hasOwnProperty("flavor")) ? gen.flavor : ''
-      if (gen.type == type && genFlavor == flavor) {
-        // do a plain rule or a selected rule from a rule array
-        return doRule(gen, (Array.isArray(gen.rule)) ? gen.rule[Math.floor(Math.random() * gen.rule.length)] : gen.rule) 
-      }
+
+  // First fill an array with generators that satisfy the criteria:
+  //  - there is no type preference, OR
+  //  - gen.type is right and there's no flavor preference, OR
+  //  - gen.type is right and gen.flavor is right
+  arr = []
+  gens.forEach((gen) => {
+    if ((!type) || (eq(gen.type, type) && (!(flavor) || eq(gen.flavor, flavor)))) {
+      arr.push(gen)
     }
+  })
+  if (arr.length > 0) {
+  // perform one of the found generators
+    let gen = arr[Math.floor(Math.random() * arr.length)]
+    return doRule(gen, (Array.isArray(gen.rule)) ? gen.rule[Math.floor(Math.random() * gen.rule.length)] : gen.rule) 
+  } else {
+    // return a dummy result
+    return `random ${type}`.trim()
   }
-  return `NPC ${type}`.trim()
 }
 
-function getGenerators() {
-  // return a list of generators and their flavors
+function getGeneratorNames(type=null) {
+  // return a list of all generators or just those of a given type
   arr = []
-  for (let i in gens) {
-    const gen = gens[i]
-    arr.push({type: gen.type, flavor: (gen.hasOwnProperty('flavor')) ? gen.flavor : ''})
-  }
+  gens.forEach((gen) => {
+    if (!type || eq(gen.type, type)) {
+      arr.push({type: gen.type, flavor: gen.flavor || ''})
+    }
+  })
   return arr
 }
 
 module.exports = {
   getName, 
-  getGenerators
+  getGeneratorNames
 }

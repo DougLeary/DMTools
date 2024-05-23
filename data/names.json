@@ -1,4 +1,4 @@
-{ "generators": [
+[
   { 
     "type": "dwarf",
     "rule": "ABC,DE,F---,..-,G,H",
@@ -61,22 +61,36 @@
     ]
   },
   { 
+    "type": "wizard",
+    "rule": ["AB,CD,E,F","AB,E,FG","AB,CD,E,FG","AB,-CD,E,F,E,G","AB,CD,E,F,E,G"],
+    "blocks": [
+      "A:Al,Ar,An,Alza,Altha,Ama,Bar,Bal,Bon,Del,Dar,Dag,Dan,Eth,En,El,Em,Ez,Fro,Fla,Gra,Gro,Grey,Hon,Kor,Kan,Kaz,Lin,Len",
+      "B:Mor,Mal,Mang,Naga,Ol,Og,Odi,Ovi,Peri,Pan,Par,Qua,Sah,Sen,Sel,Trel,Tron,Tag,Taz,U,Ung,Vol,Var,Ven",
+      "C:b,d,f,h,k,l,m,n,p,r,s,t,v,w,y,z",
+      "D:gh,th,sh,zh,ph,gr,gn,dr",
+      "E:a,e,i,o,u",
+      "F:ld,lg,nd,ng,rd,z,x,th,ch,sh",
+      "G:zel,born,baz,ben,bel,bar,bar,dar,dar,dor,dor,der,dal,din,far,far,fel,fen,fin,fend,gard,gar,gor,grim,graz,grax,grend,mor,mort,nor,mal,mel,nir,phir,phor,ster,star,sten,zar,zan"
+    ]
+  },
+  { 
     "type": "author",
     "rule": "A",
     "blocks": [
-      "A:[elf],[elf],[elf],[elf],[orc]"
+      "A:[elf],[elf],[elf],[dwarf],[orc],[wizard],[wizard],[wizard]"
     ]
   },
   { 
     "type": "book",
-    "rule": [" AB,C,D,E", " AB,C,D,E", " AB,C,D,E", " A,C,D,E,F"],
+    "rule": [" AB,--C,D,EF"," AB,--C,D,EF,G"],
     "blocks": [
       "A:The,A",
       "B:[author]'s",
-      "C:Authoritative,Comprehensive,First,Final,Beginner’s",
+      "C:Authoritative,Comprehensive,Basic,Ultimate,Final,Beginner’s",
       "D:Guide to,Book of,Treatise on,Encyclopedia of,Tome of",
-      "E:Animals,Creatures,Alchemy,the Arcane Arts,Wizardry,Reptiles,Wand Making,Enchantment,Golems,Curses,Magical Remedies,Undead",
-      "F:,, by [author]"
+      "E:Animals,Creatures,Alchemy,the Arcane Arts,Wizardry,Monsters,Potions,Protective Potions",
+      "F:Magical Remedies,Undead,Magical Constructs,the Healing Arts,the Formulation of Potions,Wand Making,Enchantment,Golems,Curses",
+      ",, by [author]"
     ]
   }
-]}
+]

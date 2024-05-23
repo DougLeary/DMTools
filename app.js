@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path')
 const classes = require('./classes')
 const attack = require('./attacks')
-const saves = require('./saves')
 const names = require('./names')
 const party = require('./party')
 
@@ -44,7 +43,7 @@ app.get('/attack/:attacks/:thaco/:damage/:ac', (req, res) => {
 app.get('/saves/:edition/:className/:level', (req, res) => {
   // return saving throws for an edition class and level
   console.log(`Saving throws for ${req.params.edition} ${req.params.className} level ${req.params.level}`)
-  const json = saves.getSaves(req.params.edition, req.params.className, req.params.level)
+  const json = classes.getSaves(req.params.edition, req.params.className, req.params.level)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
@@ -52,14 +51,14 @@ app.get('/saves/:className/:level', (req, res) => {
   // return saving throws for a class and level, using the first class instance found across editions
   // TODO: probably should return results for ALL instances found, always returning an array
   console.log(`Saving throws for ${req.params.className} level ${req.params.level}`)
-  const json = saves.getSaves(null, req.params.className, req.params.level)
+  const json = classes.getSaves(null, req.params.className, req.params.level)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
 app.get('/rollsaves/:saves/:edition/:className/:level', (req, res) => {
   // roll a series of saving throws for an edition class and level, and return how many saved against each thing
   console.log(`${req.params.saves} saving throws for ${req.params.className} level ${req.params.level}`)
-  const json = saves.rollSaves(req.params.saves, req.params.edition, req.params.className, req.params.level)
+  const json = classes.rollSaves(req.params.saves, req.params.edition, req.params.className, req.params.level)
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
@@ -78,26 +77,26 @@ app.get('/classlevels/:xp', (req, res) => {
   res.json(json)
 })
 
-app.get('/addpartyxp/:partyname/:xp', (req, res) => {
-  // display party member levels for xp; if 0 xp use party xp
+app.get('/party/xp/:action/:partyname/:xp', (req, res) => {
+  // add or set party xp
   const xp = req.params.xp
-  console.log(`Add ${xp} xp to ${req.params.partyname}`)
+  const action = req.params.action.toLowerCase()
+  console.log(`${action} ${xp} party xp, ${req.params.partyname}`)
   const pty = party.getParty(req.params.partyname)
-  const json = party.addPartyXp(pty, xp || 0)
+  const json = party.updateXp(action, pty, !isNaN(xp) ? xp : 0)
   res.json(json)
 })
 
-app.get('/partylevels/:partyname/:xp', (req, res) => {
+app.get('/party/levels/:partyName/:showHidden', (req, res) => {
   // display party member levels for xp; if 0 xp use party xp
-  const xp = req.params.xp
-  console.log(`Get party levels for ${(xp > 0) ? xp : 'stored'} xp`)
-  const pty = party.getParty(req.params.partyname)
-  const json = party.getPartyLevels(pty, req.params.xp || 0)
+  console.log(`Get party levels for ${req.params.partyName}, showHidden ${req.params.showHidden}`)
+  const pty = party.getParty(req.params.partyName)
+  const json = party.getPartyLevels(pty, (req.params.showHidden == "true"))
 //  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
 
-app.get('/partynames', (req, res) => {
+app.get('/party/names', (req, res) => {
   // return array of available party names
   console.log(`Get party names`)
   const arr = party.getPartyNames()
@@ -109,7 +108,7 @@ app.get('/names', (req, res) => {
   res.sendFile(path.join(__dirname, '/names.html'))
 })
 app.get('/names/types', (req, res) => {
-  const json = names.getGenerators()
+  const json = names.getGeneratorNames()
   res.json(json)
 })
 

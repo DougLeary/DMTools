@@ -2,15 +2,27 @@
   {
     "name": "Baker Street Bakers",
     "system": "AD&D",
-    "xp": 247543,
+    "xp": 269943,
     "members": [
       {
         "name": "Vaseria Dalmov II",
         "race": "Orc",
         "edition": "1e",
         "classes": [
-          {"name": "Illusionist", "active": true, "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}, 
-          {"name": "Magic-User", "active": true, "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
+          {
+            "name": "Illusionist",
+            "level": 8,
+            "xp": 125172,
+            "xpToNext": 19829
+          },
+          {
+            "name": "Magic-User",
+            "level": 9,
+            "xp": 137689,
+            "getsBonus": true,
+            "xpToNext": 102101
+          }
+        ],
         "ac": 1,
         "str": 14,
         "int": 18,
@@ -23,33 +35,65 @@
         "name": "Maggie",
         "race": "Hengeyokai",
         "edition": "OA",
-        "classes": [{"name": "Wu Jen", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
+        "classes": [
+          {
+            "name": "Wu Jen",
+            "level": 9,
+            "xp": 275377,
+            "getsBonus": true,
+            "xpToNext": 4203
+          }
+        ],
         "ac": -1,
         "int": 18,
         "wis": 13
       },
       {
-        "name": "Birch (Ulfgar Hammerhead)",
-        "boss": "Maggie",
+        "name": "Birch (Ulfgar)",
         "race": "Dwarf",
         "edition": "1e",
+        "splitClass": "Bard",
         "classes": [
-          {"name": "Fighter", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}, 
-          {"name": "Thief", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
+          {
+            "name": "Fighter",
+            "level": 7,
+            "xp": 80000,
+            "xpToNext": 0
+          },
+          {
+            "name": "Thief",
+            "level": 7,
+            "xp": 50000,
+            "xpToNext": 0
+          },
+          {
+            "name": "Bard",
+            "level": 7,
+            "xp": 52800,
+            "xpToNext": 7201
+          }
+        ],
         "ac": 2,
-        "str": 14,
-        "int": 12,
-        "wis": 9,
-        "dex": 14,
-        "con": 13,
-        "cha": 17
+        "str": 15,
+        "int": 11,
+        "wis": 15,
+        "dex": 15,
+        "con": 12,
+        "cha": 15
       },
       {
         "name": "Renee Veloute Bechamel",
         "hide": true,
         "race": "Halfling",
         "edition": "Custom",
-        "classes": [{"name": "Chef", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
+        "classes": [
+          {
+            "name": "Chef",
+            "level": 0,
+            "xp": 0,
+            "xpToNext": 1
+          }
+        ],
         "ac": 1,
         "int": 9,
         "wis": 13
@@ -59,8 +103,20 @@
         "race": "Thri-Kreen",
         "edition": "OA",
         "classes": [
-          {"name": "Wu Jen","level": 0,  "xp": 0, "getsBonus": true, "xpToNext": 1}, 
-          {"name": "Ninja", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
+          {
+            "name": "Wu Jen",
+            "level": 8,
+            "xp": 137689,
+            "getsBonus": true,
+            "xpToNext": 2101
+          },
+          {
+            "name": "Ninja",
+            "level": 7,
+            "xp": 125172,
+            "xpToNext": 114829
+          }
+        ],
         "ac": 1,
         "int": 18,
         "wis": 12
@@ -69,7 +125,14 @@
         "name": "Borbugulus",
         "race": "Bugbear",
         "edition": "1e",
-        "classes": [{"name": "Paladin", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
+        "classes": [
+          {
+            "name": "Paladin",
+            "level": 8,
+            "xp": 250343,
+            "xpToNext": 99658
+          }
+        ],
         "ac": 2,
         "int": 18,
         "wis": 13
@@ -78,7 +141,15 @@
         "name": "Skelver",
         "race": "Elf",
         "edition": "1e",
-        "classes": [{"name": "Ranger", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
+        "classes": [
+          {
+            "name": "Ranger",
+            "level": 9,
+            "xp": 275377,
+            "getsBonus": true,
+            "xpToNext": 45112
+          }
+        ],
         "ac": -1,
         "int": 15,
         "wis": 16
@@ -88,8 +159,21 @@
         "race": "Elf",
         "edition": "1e",
         "classes": [
-          {"name": "Magic-User", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1},
-          {"name": "Cleric", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1}],
+          {
+            "name": "Magic-User",
+            "level": 9,
+            "xp": 137689,
+            "getsBonus": true,
+            "xpToNext": 102101
+          },
+          {
+            "name": "Cleric",
+            "level": 8,
+            "xp": 137689,
+            "getsBonus": true,
+            "xpToNext": 79374
+          }
+        ],
         "ac": 4,
         "int": 18,
         "wis": 16
@@ -99,8 +183,20 @@
         "race": "Gnome",
         "edition": "1e",
         "classes": [
-          {"name": "Thief", "level": 0, "xp": 0, "getsBonus": true, "xpToNext": 1},
-          {"name": "Illusionist", "level": 0, "xp": 0, "getsBonus": false, "xpToNext": 1}],
+          {
+            "name": "Thief",
+            "level": 9,
+            "xp": 137689,
+            "getsBonus": true,
+            "xpToNext": 20283
+          },
+          {
+            "name": "Illusionist",
+            "level": 8,
+            "xp": 125172,
+            "xpToNext": 19829
+          }
+        ],
         "ac": 2,
         "str": 12,
         "int": 15,
@@ -121,8 +217,20 @@
         "race": "Gnome",
         "edition": "1e",
         "classes": [
-          {"name": "Cleric", "level": 0, "xp": 48675, "getsBonus": true, "xpToNext": 1}, 
-          {"name": "Assassin", "level": 0, "xp": 44250, "getsBonus": false, "xpToNext": 1}],
+          {
+            "name": "Cleric",
+            "level": 0,
+            "xp": 48675,
+            "getsBonus": true,
+            "xpToNext": 1
+          },
+          {
+            "name": "Assassin",
+            "level": 0,
+            "xp": 44250,
+            "xpToNext": 1
+          }
+        ],
         "ac": 2,
         "int": 15,
         "wis": 18
@@ -131,7 +239,14 @@
         "name": "Minnie",
         "race": "Minotaur",
         "edition": "1e",
-        "classes": [{"name": "Fighter", "level": 0, "xp": 88500, "getsBonus": false, "xpToNext": 1}],
+        "classes": [
+          {
+            "name": "Fighter",
+            "level": 0,
+            "xp": 88500,
+            "xpToNext": 1
+          }
+        ],
         "ac": 2,
         "int": 11,
         "wis": 12
@@ -142,8 +257,20 @@
         "edition": "1e",
         "splitClass": "Thief",
         "classes": [
-          {"name": "Fighter", "level": 0, "xp": 72000, "getsBonus": false, "xpToNext": 1}, 
-          {"name": "Thief", "level": 0, "xp": 18150, "getsBonus": true, "xpToNext": 1}],
+          {
+            "name": "Fighter",
+            "level": 0,
+            "xp": 72000,
+            "xpToNext": 1
+          },
+          {
+            "name": "Thief",
+            "level": 0,
+            "xp": 18150,
+            "getsBonus": true,
+            "xpToNext": 1
+          }
+        ],
         "ac": 2,
         "int": 10,
         "wis": 12

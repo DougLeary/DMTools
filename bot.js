@@ -27,8 +27,9 @@ function formatPartyLevels(party) {
   const gutter = 3
   const indent = 2
   party.members.forEach((member) => {   // get max lengths of fields
+    console.dir(member)
     maxName = Math.max(maxName, member.name.length)
-    maxClass = Math.max(maxClass, member.class.length)
+    maxClass = Math.max(maxClass, member.classes.length)
   })
   
   st += 'Character' + ' '.repeat(maxName - 9 + indent + gutter)    // headings
@@ -43,8 +44,8 @@ function formatPartyLevels(party) {
   party.members.forEach((member) => {     
     st += ((member.boss) ? ' '.repeat(indent) : '')
       + member.name + ' '.repeat(maxName - member.name.length + gutter) + ((member.boss) ? '' : ' '.repeat(indent))
-      + member.class + ' '.repeat(maxClass - member.class.length + gutter)
-      + member.level + ' '.repeat(maxLevel - member.level.length + gutter) 
+      + member.classes + ' '.repeat(maxClass - member.classes.length + gutter)
+      + member.levels + ' '.repeat(maxLevel - member.levels.length + gutter) 
       + member.xpToNext + '\n'
   })
   st += "\`\`\`"
@@ -68,7 +69,7 @@ function addPartyXp(channel, xpToAdd) {
 }
 
 client.once('ready', () => {
-  console.log('DragonBone emulator connected to Discord server')
+  console.log('OSDnD bot connected to Discord')
 })
 
 // handle discord commands

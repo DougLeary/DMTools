@@ -1,3 +1,11 @@
+const DieRoll = require('./dieRoll')
+const savingThrow = DieRoll.parse('d20')
+const maxSave = savingThrow.max()
+
+function eq(str1, str2) {
+  return (String(str1).toLowerCase() == String(str2).toLowerCase())
+}
+
 const systems = require("./data/classes.json").systems
 // systems.forEach((sys) => { 
 //   console.log(`${sys.name}: ${sys.text}`)
@@ -5,10 +13,6 @@ const systems = require("./data/classes.json").systems
 //     console.log(`  ${ed.name}: ${ed.text}`)
 //   })
 // })
-
-function eq(str1, str2) {
-  return (String(str1).toLowerCase() == String(str2).toLowerCase())
-}
 
 function getSystem(systemName) {
   for (let s in systems) {
@@ -69,6 +73,7 @@ function getClasses(systemName, editionName) {
 }
 
 function getClass(systemName, editionName, className) {
+  console.log(`getClass(${systemName}, ${editionName}, ${className})`)
   const system = getSystem(systemName)
   if (system) {
     if (editionName) {
@@ -95,6 +100,7 @@ function getClass(systemName, editionName, className) {
 }
 
 function getClassLevel(cls, xp) {
+  console.log(`getClassLevel(${cls.name}, ${xp})`)
   const levels = cls.levels
   const nLevels = levels.length
   const result = { level: 0, xpToNext: 1 }
@@ -132,6 +138,7 @@ function getClassLevel(cls, xp) {
 }
 
 function getCharacterLevel(systemName, editionName, className, xp) {
+  console.log(`getCharacterLevel(${systemName}, ${editionName}, ${className}, ${xp})`)
   const cls = getClass(systemName, editionName, className)
   if (cls) return getClassLevel(cls.class, xp)
   return null
@@ -155,11 +162,72 @@ function getAllLevels(systemName, xp) {
   return result
 }
 
+function getSaves(systemName, editionName, className, level) {
+  // Get saving throw values for a class and level
+  // A class saves as its saveAs class or multiple classes ("class1/class2/...");
+  //   if multiple get the best save for each effect
+  // console.log(`getSaves ${className} ${level}`)
+  const theClass = classes.getClass(systemName, className, editionName)
+
+  if (theClass) {
+    // found the class, now get their best saves
+    const rawSaveAs = theClass.class.saveAs || theClass.class.name
+    const saveAs = rawSaveAs.split('/')
+    const needs = []
+    // start with a list of worst possible saves for all effects
+    for (let e in theClass.edition.effects) {
+      needs.push({
+        effect: theClass.edition.effects[e],
+        need: maxSave
+      })
+    }
+    // for every class the class can save as, update the needs list with best values
+    saveAs.forEach((saveClass) => {
+      for (let c in theClass.edition.classes) {
+        const aClass = theClass.edition.classes[c]
+        if (eq(aClass.name, saveClass)) {
+          // console.log(`  getting ${aClass.name} saves`)
+          for (let v in aClass.levels) {
+            // console.log(`  is level ${level} upto ${aClass.saves[v].upto}`)
+            if (aClass.saves[v].upto >= level) {
+              // console.log(`save as upto ${aClass.saves[v].upto}`)
+              // found the level; replace needs values if the found values are better
+              for (let e in theClass.edition.effects) {
+                // console.log(`  comparing ${needs[e].need} with ${aClass.saves[v].need[e]}`)
+                needs[e].need = Math.min(needs[e].need, aClass.saves[v].need[e])
+              }
+              break
+            }
+          }
+        }
+      }
+    })
+    return { edition: theClass.edition.name, class: theClass.class.name, saveAs: theClass.class.saveAs, level: level, saves: needs }
+  }
+  return {}
+}
+
+function rollSaves(saves, editionName, className, level) {
+  // roll a series of saving throws and return results (true=success, false=failure) for all effects
+  const results = getSaves(editionName, className, level)
+  results.rolls = []
+  for (let i=0; i < saves; i++) {
+    const roll = savingThrow.roll().total
+    results.rolls.push({roll: roll, saves: []})
+    for (let n=0; n < results.saves.length; n++) {
+      results.rolls[i].saves.push(roll >= results.saves[n].need)
+    }
+  }
+  return results
+}
+
 module.exports = {
   getClasses,
   getEffects,
   getClass,
   getClassLevel,
   getCharacterLevel,
-  getAllLevels
+  getAllLevels,
+  getSaves,
+  rollSaves
 }

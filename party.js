@@ -2,6 +2,7 @@ const partyFilename = './data/party.json'
 let parties = require(partyFilename)
 const classes = require("./classes")
 const fs = require('fs')
+const Actions = { set:"set", add:"add" }
 
 function eq(str1, str2) {
   return (String(str1).toLowerCase() == String(str2).toLowerCase())
@@ -14,11 +15,11 @@ function getPartyNames() {
 }
 
 function getParty(name) {
-  let p = null
+  let result = null
   parties.forEach((party) => { 
-    if (eq(party.name, name)) { p = party }
+    if (eq(party.name, name)) { result = party }
   })
-  return p
+  return result
 }
 
 function getPartyMember(party, memberName) {
@@ -40,108 +41,163 @@ function savePartyData() {
   return result
 }
 
-function reloadPartyData() {
+function reload() {
   parties = require(".classes")
 }
 
-function addMemberXp(member, xp, toClass = null) {
-  // internal function to add xp to a party member, optionally to one class
+function updateMemberXp(action, party, member, xp, toClass = null) {
+  console.log(`MemberXp(${party.name}, ${member.name}, ${xp}, ${toClass}`)
+  // internal function to add xp to a whole party (divided between active members),
+  // or to a single member (divided between their classes), or optionally to one of a member's classes
   if (!member || isNaN(xp) || member.hide) return false
-  if (member.splitClass) {
+  if (member.boss) {
+    // henchman; set levels = boss's lowest level-2; henchman cannot be split-class
+    let minBossLevel = 99999
+    // find the boss and get their lowest level
+    party.members.forEach((mem) => {
+      if (eq(mem.name, member.boss)) {
+        mem.classes.forEach((cls) => {
+          minBossLevel = Math.min(minBossLevel, cls.level)
+        })
+      }
+    })
+    member.classes.forEach((cls) => {
+      cls.xp = 0
+      cls.level = minBossLevel - 2
+      cls.xpToNext = 0
+    })
+  } else if (member.splitClass) {
     // add xp to split class only
+    let classXp = xp / 1
     member.classes.forEach((cls) => {
       if (eq(cls.name, member.splitClass)) {
         // if toClass is given it can only be the split class
         if (!toClass || eq(cls.name, toClass)) {
-          cls.xp += (cls.getsBonus) ? Math.round(xp * 1.1) : xp
-          cls.level = classes.getCharacterLevel(party.system, member.edition, cls, cls.xp)
+          console.log(`${member.name}  ${cls.name}  adding ${classXp}`)
+          if (action == Actions.add) {
+            cls.xp += (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
+          } else {
+            cls.xp = (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
+          }
+          const obj = classes.getCharacterLevel(party.system, member.edition, cls.name, cls.xp)
+          cls.level = obj.level
+          cls.xpToNext = cls.getsBonus ? Math.floor(obj.xpToNext / 1.1) : obj.xpToNext
         }
       }
     })
   } else {
-    // divide xp between classes
-    let classXp = Math.round(xp / member.classes.count)
+    // divide xp between classes or add entirely to toClass
+    let classXp = (toClass) ? xp / 1 : Math.round(xp / member.classes.length)
     member.classes.forEach((cls) => {
-      cls.xp += (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
+      if (!toClass || eq(cls.name, toClass)) {
+        const prevXp = cls.xp
+        if (action == Actions.add) {
+          cls.xp += (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
+        } else {
+          cls.xp = (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
+        }
+        const obj = classes.getCharacterLevel(party.system, member.edition, cls.name, cls.xp)
+        cls.level = obj.level
+        cls.xpToNext = cls.getsBonus ? Math.floor(obj.xpToNext / 1.1) : obj.xpToNext
+      }
     })
   }
   return true
 }
 
-function addXp(member, xp, toClass = null) {
-  // external path to addMemberXp; saves json data after adding
-  if (addXp(member, xp, toClass)) return savePartyData()
-  return false
-}
-
-function addPartyXp(party, xp) {
-  // add  to the common party xp and update all members by this amount, +10% bonus for those who get it
-  if (!party || isNaN(xp)) return false
-  party.xp += xp
+function updatePartyXp(action, party, xp) {
+  // add to the common party xp and add a share to all members, +10% bonus for those who get it
+  if (!party || isNaN(xp) || !xp) return false
+  // determine member share
+  let shares = 0
   party.members.forEach((member) => {
-    if (!member.hide) { addMemberXp(member, xp) }
+    if (!member.hide) shares++ 
   })
-  return savePartyData()
+  const memberXp = Math.round(xp / shares)
+
+  let ok = true
+  party.members.forEach((member) => {
+    if (!member.hide) { ok = ok && updateMemberXp(action, party, member, memberXp) }
+  }) 
+  if (!ok) return false     // to do: if one update fails roll back those that have succeeded, otherwise we leave member xp in a weird state 
+
+  if (action == Actions.add) {
+    party.xp = parseInt(party.xp) + parseInt(xp)
+  } else {
+    party.xp = parseInt(xp)
+  }
+  
+  return true
 }
 
-function getPartyLevels(party, xp) {
-  // for each class of each non-hidden party member, return the class level and the xp needed to level up;
-  const result = {name: party.name, xp: (xp == 0) ? party.xp : xp, members: []}
+function updateXp(action, xp, party, member = null, toClass = null) {
+  // update member xp or party xp, saving JSON if successful
+  if (member) {
+    return updateMemberXp(action, xp, party, member, toClass) && savePartyData()
+  }
+  return updatePartyXp(action, xp, party) && savePartyData()
+}
+
+function getPartyLevels(party, showHidden) {
+  // return each party member's name, class/class/..., level/level/..., xpToNext/xpToNext/...
+  console.log(`getPartyLevels, ${showHidden ? "" : "don't "}show hidden`)
+  const result = {name: party.name, xp: party.xp, members: []}
   party.members.forEach((mem) => {
-    if (!mem.hide) {    // skip hidden members
-      const member = {name: mem.name, class: mem.class, level: "0"}
-      const chLevel = []
-      let xpToNext = []
-      for (let c in chClasses) {
-        const xpParam = (xp > 0) ? xp : party.xp
-        const getsBonus = (mem.xpBonus.substring(c,c+1) == 'y')
-        const useXp = getsBonus ? Math.floor(xpParam * 1.1) : xpParam
-        //console.log(`${member.name} bonus: ${mem.xpBonus}, ${c}:${mem.xpBonus.substring(c,c)} ${chClasses[c]} useXp ${useXp} getsBonus ${getsBonus}`)
-        const lev = classes.getCharacterLevel(party.system, mem.edition, chClasses[c], Math.floor(useXp / chClasses.length))
-        chLevel.push(lev.level)
-        xpToNext .push(getsBonus ? Math.floor(lev.xpToNext / 1.1) : lev.xpToNext)
-      }
-      if (mem.hasOwnProperty("boss")) {
-        member.boss = mem.boss
-        member.level = ''
-        member.xpToNext = ''
+    if (showHidden || !mem.hasOwnProperty("hide")) {
+      const member = {name: mem.name, classes: "", levels: "", xpToNext: ""}
+      if (mem.splitClass) {
+        mem.classes.forEach((cls) => {
+          if (cls.name == mem.splitClass) {
+            member.classes = cls.name
+            member.levels = String(cls.level)
+            member.xpToNext = String(cls.xpToNext)
+          }
+        })
       } else {
-        member.level = chLevel.join('/')
-        member.xpToNext = xpToNext.join(' / ')
+        if (mem.hasOwnProperty("boss")) {
+          // henchman; report all class levels as their boss's lowest level - 2
+          member.boss = mem.boss
+          let minBossLevel = 99999
+          // find the boss and get their lowest level
+          party.members.forEach((boss) => {
+            if (eq(boss.name, member.boss)) {
+              boss.classes.forEach((cls) => {
+                minBossLevel = Math.min(minBossLevel, cls.level)
+              })
+            }
+          })
+          mem.classes.forEach((cls) => {
+            // separate class props with /
+            member.classes += `${cls.name}/`
+            member.levels += `${minBossLevel - 2}/`
+            member.xpToNext = ''
+          })
+        } else {
+          // multiclass character
+          mem.classes.forEach((cls) => {
+            // separate class props with /
+            member.classes += `${cls.name}/`
+            member.levels += `${cls.level}/`
+            member.xpToNext += `${cls.xpToNext} / `
+            console.log(`${member.name} class #{cls.name} xptoNext: ${cls.xpToNext}, reporting ${member.xpToNext}`)
+          })
+        }
+        // remove trailing /
+        member.classes = member.classes.substring(0, member.classes.length-1)
+        member.levels = member.levels.substring(0, member.levels.length-1)
+        member.xpToNext = member.xpToNext.substring(0, member.xpToNext.length-3)
       }
       result.members.push(member)
-    }
-  })
-  // report all henchman levels as their boss's lowest level - 2
-  result.members.forEach((hench) => {
-    if (hench.hasOwnProperty("boss")) {
-      let minBossLevel = 99999
-      // find the boss
-      result.members.forEach((mem) => {
-        if (eq(mem.name, hench.boss)) {
-          // get the boss's lowest level
-          const bossLevels = mem.level.split('/')
-          minBossLevel = bossLevels[0]
-          for (let i = 1; i < bossLevels.length; i++) {
-            minBossLevel = Math.min(minBossLevel, bossLevels[i])
-          }
-        }
-      })
-      const henchLevels = []
-      for (let c in hench.class.split('/')) {
-        henchLevels.push(minBossLevel - 2)
-      }
-      hench.level = henchLevels.join('/')
     }
   })
   return result
 }
 
 module.exports = {
+  Actions,
   getParty,
   getPartyNames,
   getPartyLevels,
-  addPartyXp,
-  addMemberXp,
-  reloadPartyData
+  updateXp,
+  reload
 }
