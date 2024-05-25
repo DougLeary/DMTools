@@ -107,6 +107,12 @@ app.get('/party/names', (req, res) => {
 app.get('/names', (req, res) => {
   res.sendFile(path.join(__dirname, '/names.html'))
 })
+
+app.get('/names/reload', (req, res) => {
+  names.init()
+  res.json(true)
+})
+
 app.get('/names/types', (req, res) => {
   const json = names.getGeneratorNames()
   res.json(json)

@@ -82,15 +82,24 @@
   },
   { 
     "type": "book",
-    "rule": [" AB,--C,D,EF"," AB,--C,D,EF,G"],
+    "rule": [" AB,--C,D,EF"," AB,--C,D,EF"," ---A,--C,D,EF,G"],
     "blocks": [
       "A:The,A",
       "B:[author]'s",
-      "C:Authoritative,Comprehensive,Basic,Ultimate,Final,Beginner’s",
+      "C:Authoritative,Comprehensive,Basic,Ultimate,Final,Beginner’s,Novice's,Arcane Student's",
       "D:Guide to,Book of,Treatise on,Encyclopedia of,Tome of",
       "E:Animals,Creatures,Alchemy,the Arcane Arts,Wizardry,Monsters,Potions,Protective Potions",
       "F:Magical Remedies,Undead,Magical Constructs,the Healing Arts,the Formulation of Potions,Wand Making,Enchantment,Golems,Curses",
-      ",, by [author]"
+      "G:,, by [author]"
+    ]
+  },
+  { 
+    "type": "sword",
+    "rule": [" A,C"," B,C"],
+    "blocks": [
+      "A:Soul,Blessed,Astral,Shard of,Author of,Blinding,Celestial,Death's,Grim,Valorous,Truth,Hope,Abyssal,Crescent,Titan's,Rabid,Storm,Stone,Dire,Whispering,Shining,Grinning,Dark,Trickster's,Moon,Herald of,Dire,Widow's",
+      "B:Red,Black,Silver,Crimson,Azure,Cerulean,Ochre,Noir,Dark,Golden,Crystal",
+      "C:Blade,Thorn,Truth,Death,Ascension,One,Hand,Maw,Heart,Song,Wind,Dream,Singer,Oath,Tremor,Wind,Keeper,Kiss,Lash,Fall,Fang,Edge,Peril,Hound,Tooth,Breaker,Biter,Knell,Omen,Doom,Piercer,Ruin,Bane,Vanquisker,Defender,Wind,Omen,Solace,Nice,Cutter,Hunter,Seeker"
     ]
   }
 ]

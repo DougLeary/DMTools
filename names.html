@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="dnd.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+      function reloadData() {
+        console.log(`Reloading data`)
+        $.get(`./names/reload`, (result) => {
+          $('#results').empty().append("Name generators reloaded.")
+        })
+      }
+
       function getTypes() {
         $('#nameTypes').empty()
         $.get(`./names/types`, (data) => {
@@ -43,6 +50,7 @@
     <a href="index.html">< Home</a>
     <h1>Name Generator-inator</h1>
     <p>Generate names for various things.</p>
+    <p style="font-weight: bold; cursor: pointer;" onclick="reloadData()">Reload Generators</p>
     <div id="nameTypes" style="margin-bottom:10px">
     </div>
     <div id="results"></div>
