@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+LOAD<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Name Generator-inator</title>
@@ -8,11 +8,12 @@
       function reloadData() {
         console.log(`Reloading data`)
         $.get(`./names/reload`, (result) => {
+          getGenerators()
           $('#results').empty().append("Name generators reloaded.")
         })
       }
 
-      function getTypes() {
+      function getGenerators() {
         $('#nameTypes').empty()
         $.get(`./names/types`, (data) => {
           for (let i=0; i < data.length; i++) {
@@ -43,7 +44,7 @@
         }
       }
 
-      $(document).ready(getTypes)
+      $(document).ready(getGenerators)
     </script>
     </head>
   <body>

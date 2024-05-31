@@ -1,7 +1,8 @@
 [
   { 
     "type": "dwarf",
-    "rule": "ABC,DE,F---,..-,G,H",
+    "flavor": "male",
+    "rule": "ABC,DE,F---,..-,G,HI",
     "blocks": [
       "A:Ba,Bo,Da,Di,Du,Gi,Ga,Ra,Ru",
       "B:Aul,Ban,Bal,Bor,Bor,Bro,Dur,Dur,Dru,Dre,Del,Dal,Gol,Gal,Gon,Gen,Gur,Tho,Tho,Tho,Thu,Tar,Tar,Tor,Tor",
@@ -20,8 +21,8 @@
     "rule": "A,B--,C",
     "blocks": [
       "A:Dal,Dan,Dul,Dun,Dol,Dor,Dov,Aim,Al,Ain,Aid,Ald,Alg,Glon,Gond,Gath,Glof,Gir,Rurn,Rurth,Rund",
-      "B:i,i,i,i,e,e",
-      "C:ana,al,ara,era,lia,ol,ona,una,iss,ulis"
+      "B:i,i,i,i,e,e,u",
+      "C:ana,al,ara,era,lia,ol,ona,na,iss,lis"
     ]
   },
   { 
@@ -99,7 +100,17 @@
     "blocks": [
       "A:Soul,Blessed,Astral,Shard of,Author of,Blinding,Celestial,Death's,Grim,Valorous,Truth,Hope,Abyssal,Crescent,Titan's,Rabid,Storm,Stone,Dire,Whispering,Shining,Grinning,Dark,Trickster's,Moon,Herald of,Dire,Widow's",
       "B:Red,Black,Silver,Crimson,Azure,Cerulean,Ochre,Noir,Dark,Golden,Crystal",
-      "C:Blade,Thorn,Truth,Death,Ascension,One,Hand,Maw,Heart,Song,Wind,Dream,Singer,Oath,Tremor,Wind,Keeper,Kiss,Lash,Fall,Fang,Edge,Peril,Hound,Tooth,Breaker,Biter,Knell,Omen,Doom,Piercer,Ruin,Bane,Vanquisker,Defender,Wind,Omen,Solace,Nice,Cutter,Hunter,Seeker"
+      "C:Blade,Thorn,Truth,Death,Ascension,One,Hand,Maw,Heart,Song,Wind,Dream,Singer,Oath,Tremor,Wind,Keeper,Kiss,Lash,Fall,Fang,Edge,Peril,Hound,Tooth,Breaker,Biter,Knell,Omen,Doom,Piercer,Ruin,Bane,Vanquisher,Defender,Wind,Omen,Solace,Nice,Cutter,Hunter,Seeker"
+    ]
+  },
+  { 
+    "type": "dragon",
+    "rule": "A,BB-,CCC-,D-",
+    "blocks": [
+      "A:Ab,Ack,Ag,Al,Am,Ar,Ash,Az,Bar,Bon,Bru,Ceph,Cil,Cim,Crel,Cur,Cuar,Cuel",
+      "B:ar,aph,apt,ar,el,en,er,eph,",
+      "C:a,e,i,o,u",
+      "D:bax,bex,bez,bix,bog,bor,borg,box,boz,brag,brax,brex,brox,daz,drack,drag,drak,dram,drax,dex,drex,lex,lix,lox,loz,max,maz,mex,mez,mox,moz,molz,vac,vax,vaz,vec,vex,vez,voz"
     ]
   }
 ]
