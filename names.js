@@ -52,8 +52,8 @@ function doRule(gen, rule) {
       if (priorA) {
         if ("aeiou".includes(st.charAt(0).toLowerCase())) {
           result = result.trim() + "n "
-          priorA = false
         }
+        priorA = false
       } else if (spaced && st.toLowerCase().endsWith("a(n)")) { 
         st = st.replace("(n)", "")
         priorA = true 

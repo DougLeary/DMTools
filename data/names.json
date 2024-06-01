@@ -65,8 +65,8 @@
     "type": "wizard",
     "rule": ["AB,CD,E,F","AB,E,FG","AB,CD,E,FG","AB,-CD,E,F,E,G","AB,CD,E,F,E,G"],
     "blocks": [
-      "A:Al,Ar,An,Alza,Altha,Ama,Bar,Bal,Bon,Del,Dar,Dag,Dan,Eth,En,El,Em,Ez,Fro,Fla,Gra,Gro,Grey,Hon,Kor,Kan,Kaz,Lin,Len",
-      "B:Mor,Mal,Mang,Naga,Ol,Og,Odi,Ovi,Peri,Pan,Par,Qua,Sah,Sen,Sel,Trel,Tron,Tag,Taz,U,Ung,Vol,Var,Ven",
+      "A:Al,Ar,An,Alza,Altha,Ama,Bar,Bal,Bon,Del,Dar,Dag,Dan,Eth,En,El,Em,Ez,Fro,Fla,Gra,Gro,Grey,Hon,Kor,Kan,Kaz",
+      "B:Lin,Len,Mor,Mal,Mang,Naga,Ol,Og,Odi,Ovi,Peri,Pan,Par,Qua,Sah,Sen,Sel,Trel,Tron,Tag,Taz,U,Ung,Vol,Var,Ven",
       "C:b,d,f,h,k,l,m,n,p,r,s,t,v,w,y,z",
       "D:gh,th,sh,zh,ph,gr,gn,dr",
       "E:a,e,i,o,u",
@@ -83,17 +83,19 @@
   },
   { 
     "type": "book",
-    "rule": [" AB,--C,D,EF"," AB,--C,D,EF"," AB,--C,D,G,H"," ---A,--C,D,EF,I"],
+    "rule": [" AB,--C,D,EF"," AB,--C,D,EF"," AB,--C,D,G,H,I,J"," ---A,--C,D,EF,K"],
     "blocks": [
       "A:The,A(n)",
       "B:[author]'s",
       "C:Authoritative,Comprehensive,Basic,Ultimate,Final,Beginner’s,Apprentice's,Novice's,Arcane Student's",
-      "D:Guide to,Book of,Treatise on,Encyclopedia of,Tome of",
-      "E:Alchemy,Abjuration,Alteration,Animals,the Arcane Arts,Conjuration,Creatures,Curses,Divination,Enchantment",
+      "D:Guide to,Book of,Book of,Essay on,Compendium of,Treatise on,Cyclopedia of,Encyclopedia of,Tome of",
+      "E:Abjuration,Alchemy,Alteration,Animals,the Arcane Arts,Conjuration,Creatures,Curses,Divination,Enchantment",
       "F:the Healing Arts,Illusions and Phantasms,Monsters,Potions,Potion Formulation,the Formulation of Potions,Summoning,Wand Making,Undead,Wizardry",
-      "G:the Manufacture of,the Creation of,the Art of",
-      "H:Charms,Magical Constructs,Golems,Potions,Protective Potions,Magical Remedies,Wands",
-      "I:,, by [author]"
+      "G:the",
+      "H:Manufacture,Creation,Art,Contrivance,Production,Science",
+      "I:of",
+      "J:Charms,Magical Constructs,Golems,Potions,Protective Potions,Magical Remedies,Wands",
+      "K:,, by [author]"
     ]
   },
   { 
