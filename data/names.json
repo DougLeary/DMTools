@@ -44,7 +44,7 @@
       "C:ad,ah,ak,ak,al,am,an,ar,ar,ar,arh,oh,ok,ogh,ol,om,on,or,ud,ug,uk,ul,um,un,ur,us,ust,urs,urg",
       "D: the",
       "E: Bold, Brave, Bruiser, Daring, Fearless, Harsh, Killer, Marauder, Mauler, Shatterer, Thrasher",
-      "F:gor,gur,",
+      "F:gor,gur",
       "G:t,n,d"
     ]
   },
@@ -78,20 +78,22 @@
     "type": "author",
     "rule": "A",
     "blocks": [
-      "A:[elf],[elf],[elf],[dwarf],[orc],[wizard],[wizard],[wizard]"
+      "A:[elf],[elf],[dwarf],[orc],[wizard],[wizard],[wizard]"
     ]
   },
   { 
     "type": "book",
-    "rule": [" AB,--C,D,EF"," AB,--C,D,EF"," ---A,--C,D,EF,G"],
+    "rule": [" AB,--C,D,EF"," AB,--C,D,EF"," AB,--C,D,G,H"," ---A,--C,D,EF,I"],
     "blocks": [
-      "A:The,A",
+      "A:The,A(n)",
       "B:[author]'s",
-      "C:Authoritative,Comprehensive,Basic,Ultimate,Final,Beginner’s,Novice's,Arcane Student's",
+      "C:Authoritative,Comprehensive,Basic,Ultimate,Final,Beginner’s,Apprentice's,Novice's,Arcane Student's",
       "D:Guide to,Book of,Treatise on,Encyclopedia of,Tome of",
-      "E:Animals,Creatures,Alchemy,the Arcane Arts,Wizardry,Monsters,Potions,Protective Potions",
-      "F:Magical Remedies,Undead,Magical Constructs,the Healing Arts,the Formulation of Potions,Wand Making,Enchantment,Golems,Curses",
-      "G:,, by [author]"
+      "E:Alchemy,Abjuration,Alteration,Animals,the Arcane Arts,Conjuration,Creatures,Curses,Divination,Enchantment",
+      "F:the Healing Arts,Illusions and Phantasms,Monsters,Potions,Potion Formulation,the Formulation of Potions,Summoning,Wand Making,Undead,Wizardry",
+      "G:the Manufacture of,the Creation of,the Art of",
+      "H:Charms,Magical Constructs,Golems,Potions,Protective Potions,Magical Remedies,Wands",
+      "I:,, by [author]"
     ]
   },
   { 
@@ -105,12 +107,14 @@
   },
   { 
     "type": "dragon",
-    "rule": "A,BB-,CCC-,D-",
+    "rule": "AB,CCC-,DDDD.,EF-",
     "blocks": [
-      "A:Ab,Ack,Ag,Al,Am,Ar,Ash,Az,Bar,Bon,Bru,Ceph,Cil,Cim,Crel,Cur,Cuar,Cuel",
-      "B:ar,aph,apt,ar,el,en,er,eph,",
-      "C:a,e,i,o,u",
-      "D:bax,bex,bez,bix,bog,bor,borg,box,boz,brag,brax,brex,brox,daz,drack,drag,drak,dram,drax,dex,drex,lex,lix,lox,loz,max,maz,mex,mez,mox,moz,molz,vac,vax,vaz,vec,vex,vez,voz"
+      "A:Ab,Ack,Ag,Al,Am,Ar,Ash,Az,Bar,Bon,Bru,Ceph,Cil,Cim,Crel,Cur,Cuar,Cuel,Dol,Dur,Durn,For,Ful,Gar,Gral,Gron,Grag,Lex,Lim,Lir,Liz,Meph,Mez,Nar,Nog,Pa,Phor,Phar,Phel,Po",
+      "B:Quan,Quag,Quel,Ro,Ru,Rul,Sar,Sel,Sen,Star,Stur,Tal,Tel,Tra,Tren,Tiz,Tox,Vax,Var,Vel,Van,Von,Vox,Vur,Vurl,Xa,Xe,Xan,Xen,Xur,Yal,Yan,Yel,Za,Zah,Zal,Zam,Zan,Zaph,Zar,Zer,Zor,Zul,Zuth",
+      "C:ar,aph,apt,ar,el,en,er,eph",
+      "D:a,e,i,o,u",
+      "E:bax,bex,bex,bez,bix,bog,bor,borg,box,boz,brag,brax,brax,brex,brox,daz,daz,drack,drag,drak,dram,drax,dex,dex,drex,lex,lex,lix,lix,lox,loz,max,maz,mex,mex,mez,mox,moz,molz",
+      "F:nax,naz,nex,nex,nez,nox,noz,nolt,par,per,pex,pez,pix,pil,por,por,pul,pur,purn,tax,tex,tez,tor,tor,tur,vac,vax,vaz,vec,vex,vez,voz,x,x,x,z,z,z,z,zar,zal,zel,zim,zin,zir,zor,zur,zur"
     ]
   }
 ]

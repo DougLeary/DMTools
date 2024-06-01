@@ -43,13 +43,23 @@ function doRule(gen, rule) {
   const spaced = (rule.substr(0,1) == ' ')
   const steps = rule.trim().split(',')
   let result = ''
+  let priorA = false   // for converting "A" to "An"
   for (let n in steps) {
-     const st = doStep(gen, steps[n])
-     if (st == '.') return result.trim()
-     if (st != '-') {
-      if (spaced && st.startsWith(',')) result = result.trim()    // remove space before comma
+    let st = doStep(gen, steps[n])
+    if (st == '.') return result.trim()
+    if (st != '-') {
+      if (spaced && st.startsWith(',')) { result = result.trim() }   // remove space before comma
+      if (priorA) {
+        if ("aeiou".includes(st.charAt(0).toLowerCase())) {
+          result = result.trim() + "n "
+          priorA = false
+        }
+      } else if (spaced && st.toLowerCase().endsWith("a(n)")) { 
+        st = st.replace("(n)", "")
+        priorA = true 
+      }
       result += st + (spaced ? ' ' : '')
-     }
+    }
   }
   return result.trim()
 }

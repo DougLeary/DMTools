@@ -1,10 +1,12 @@
-LOAD<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Name Generator-inator</title>
     <link rel="stylesheet" href="dnd.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+      const current = {type: "", flavor: ""}
+
       function reloadData() {
         console.log(`Reloading data`)
         $.get(`./names/reload`, (result) => {
@@ -35,13 +37,20 @@ LOAD<!DOCTYPE html>
         })
       }
 
+      function generate() {
+        generateNames(10, current.type, current.flavor)
+      }
+
       function clickItem(ev) {    // to do: add count parameter input
         const arr = $(ev.target).text().split(' ')
         if (arr.length > 1) {
-          generateNames(10, arr[1], arr[0]) // type, flavor
+          current.type = arr[1]
+          current.flavor = arr[0]
         } else {
-          generateNames(10, arr[0], '')     // type only
+          current.type = arr[0]
+          current.flavor = ""
         }
+        generate()
       }
 
       $(document).ready(getGenerators)
@@ -50,10 +59,10 @@ LOAD<!DOCTYPE html>
   <body>
     <a href="index.html">< Home</a>
     <h1>Name Generator-inator</h1>
-    <p>Generate names for various things.</p>
-    <p style="font-weight: bold; cursor: pointer;" onclick="reloadData()">Reload Generators</p>
     <div id="nameTypes" style="margin-bottom:10px">
     </div>
     <div id="results"></div>
+    <button style="font-size:14px; width: 60px; height: 40px;" onclick="generate()">Same Again</button>
+    <button style="font-size:14px; width: 90px; height: 40px;" onclick="reloadData()">Reload Generators</button>
   </body>
 </html>
