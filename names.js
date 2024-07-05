@@ -1,11 +1,12 @@
 //  names.js - Name Generator-inator
 //  This module generates names from a json file that contains a set of generators.
 const gens = []
+const defaultPath = './names.json'
 
-function init() {
-  const resolved = require.resolve('./data/names.json')
+function load(path = defaultPath) {
+  const resolved = require.resolve(path)
   delete require.cache[resolved]
-  const data = require('./data/names.json')
+  const data = require(path)
   gens.length = 0
   data.forEach((gen) => {
     gens.push(gen)
@@ -33,8 +34,10 @@ function doStep(gen, step) {
   // pick random character from step
   const ch = step.charAt(Math.floor(Math.random() * step.length))
   if (ch < 'A') return ch 
-  const block = String(ch).charCodeAt(0) - 65   // map A,B,C... to 0,1,2...
-  if (block < gen.blocks.length) return doBlock(gen.blocks[block])
+  let block = ""
+  for (let i=0; i<gen.blocks.length; i++) {
+    if (gen.blocks[i].startsWith(ch)) return doBlock(gen.blocks[i])
+  }
   return ''
 }
 
@@ -98,10 +101,8 @@ function getGeneratorNames(type=null) {
   return arr
 }
 
-init()
-
 module.exports = {
-  init,
+  load,
   getName, 
   getGeneratorNames
 }

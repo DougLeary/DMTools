@@ -1,8 +1,18 @@
 const partyFilename = './data/party.json'
-let parties = require(partyFilename)
+const parties = []
 const classes = require("./classes")
 const fs = require('fs')
 const Actions = { set:"set", add:"add" }
+
+function loadParties() {
+  const resolved = require.resolve(partyFilename)
+  delete require.cache[resolved]
+  const data = require(partyFilename)
+  parties.length = 0
+  data.forEach((party) => {
+    parties.push(party)
+  })
+}
 
 function eq(str1, str2) {
   return (String(str1).toLowerCase() == String(str2).toLowerCase())
@@ -39,10 +49,6 @@ function savePartyData() {
     result.success = false
   }
   return result
-}
-
-function reload() {
-  parties = require(".classes")
 }
 
 function updateMemberXp(action, party, member, xp, toClass = null) {
@@ -193,11 +199,13 @@ function getPartyLevels(party, showHidden) {
   return result
 }
 
+loadParties()
+
 module.exports = {
   Actions,
+  loadParties,
   getParty,
   getPartyNames,
   getPartyLevels,
-  updateXp,
-  reload
+  updateXp
 }

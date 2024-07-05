@@ -1,9 +1,9 @@
 // OSDnD Discord Bot
+const secret = require('./secret')
 const classes = require('./classes')
 const party = require('./party')
 const partyName = 'Baker Street Bakers'   // todo: make this selectable
 
-const loginToken = "MTIzODAxNDEyNDQ1ODUxMjM5Ng.GkMAEe.tDp2qdLdLr3Bg6XcrNorECGq7g_wQS2QDViv2Q" 
 
 const { Client, GatewayIntentBits } = require('discord.js')
 const fetchAll = require('discord-fetch-all')
@@ -63,7 +63,7 @@ function showPartyLevels(channel) {
 function addPartyXp(channel, xpToAdd) {
   console.log(`Add ${xpToAdd} xp to ${partyName}`)
   const pty = party.getParty(partyName)
-  party.addPartyXp(pty, xpToAdd)
+  party.updateXp(party.Actions.add, pty, xpToAdd)
   
   showPartyLevels(channel)
 }
@@ -78,6 +78,10 @@ client.on('messageCreate', message => {
 //  console.log(message)
 
   if (message.content.startsWith("!party xp")) {  // add xp to party
+    if (!member.roles.cache.some(role => role.name === 'Mod')) {
+      message.channel.send("Command requires DM role.")
+      return
+    }
     const param = message.content.substring(10)
     if (isNaN(param)) return
     const xpToAdd = parseInt(param)
@@ -89,4 +93,4 @@ client.on('messageCreate', message => {
   }
 })
 
-client.login(loginToken)    // login to discord
+client.login(secret.loginToken)

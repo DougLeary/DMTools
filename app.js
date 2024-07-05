@@ -4,6 +4,8 @@ const path = require('path')
 const classes = require('./classes')
 const attack = require('./attacks')
 const names = require('./names')
+const namesPath = './data/names.json'
+names.load(namesPath)
 const party = require('./party')
 
 const app = express()
@@ -109,7 +111,7 @@ app.get('/names', (req, res) => {
 })
 
 app.get('/names/reload', (req, res) => {
-  names.init()
+  names.load(namesPath)
   res.json(true)
 })
 
