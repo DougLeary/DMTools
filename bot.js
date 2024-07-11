@@ -78,7 +78,7 @@ client.on('messageCreate', message => {
 //  console.log(message)
 
   if (message.content.startsWith("!party xp")) {  // add xp to party
-    if (!member.roles.cache.some(role => role.name === 'Mod')) {
+  if (!message.member.roles.cache.find(role => role.name === 'DM')) {
       message.channel.send("Command requires DM role.")
       return
     }
