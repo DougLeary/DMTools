@@ -1,7 +1,11 @@
 //  names.js - Name Generator-inator
 //  This module generates names from a json file that contains a set of generators.
+const { singularOf, pluralOf } = require('./pluralizer.js') 
+
 const gens = []
 const defaultPath = './names.json'
+
+let pluralizeNextBlock = false
 
 function load(path = defaultPath) {
   const resolved = require.resolve(path)
@@ -20,14 +24,20 @@ function eq(str1, str2) {
 function doBlock(block) {
   const id = block.charAt(0)
   const comma = String.fromCharCode(12)   // temporarily replaces ",,"
-  const arr = block.substr(2).replace(',,', comma).split(',')
+  const colon = block.indexOf(':')
+  const modifiers = block.substr(1,colon-1)
+  const pluralize = pluralizeNextBlock
+  pluralizeNextBlock = modifiers.includes('+')
+  const arr = block.substr(colon+1).replace(',,', comma).split(',')
   const pos = Math.floor(Math.random() * arr.length)
   let st = arr[pos].replace(comma, ',')
   if (st.includes('[') && st.includes(']')) {
     const gen = st.substring(st.indexOf('[') + 1, st.indexOf(']'))
     st = st.replace(`[${gen}]`, getName(gen))
   }
-  return (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
+
+  st = (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
+  return pluralize ? pluralOf(st) : st
 }
 
 function doStep(gen, step) {

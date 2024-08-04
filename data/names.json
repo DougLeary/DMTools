@@ -63,7 +63,7 @@
   },
   { 
     "type": "wizard",
-    "rule": ["AB,CD,E,F","AB,E,FG","AB,CD,E,FG","AB,-CD,E,F,E,G","AB,CD,E,F,E,G"],
+    "rule": ["AB,CD,E,F","AB,E,FGH","AB,CD,E,FGH","AB,-CD,E,F,E,GH","AB,CD,E,F,E,GH"],
     "blocks": [
       "A:Al,Ar,An,Alza,Altha,Ama,Bar,Bal,Bon,Del,Dar,Dag,Dan,Eth,En,El,Em,Ez,Fro,Fla,Gra,Gro,Grey,Hon,Kor,Kan,Kaz",
       "B:Lin,Len,Mor,Mal,Mang,Naga,Ol,Og,Odi,Ovi,Peri,Pan,Par,Qua,Sah,Sen,Sel,Trel,Tron,Tag,Taz,U,Ung,Vol,Var,Ven",
@@ -71,7 +71,8 @@
       "D:gh,th,sh,zh,ph,gr,gn,dr",
       "E:a,e,i,o,u",
       "F:ld,lg,nd,ng,rd,z,x,th,ch,sh",
-      "G:zel,born,baz,ben,bel,bar,bar,dar,dar,dor,dor,der,dal,din,far,far,fel,fen,fin,fend,gard,gar,gor,grim,graz,grax,grend,mor,mort,nor,mal,mel,nir,phir,phor,ster,star,sten,zar,zan"
+      "G:zel,born,baz,ben,bel,bar,bar,dar,dar,dor,dor,der,dal,din,drin,far,far,fel,fen,fend,fin,fir,gard,gar,gor,grim,grend,",
+      "H:ken,kin,lin,lind,lund,mal,mel,min,mor,mort,mund,nar,nir,nor,nur,phir,phor,ster,star,sten,wen,win,wyn,wynd,zar,zan,zel"
     ]
   },
   { 
@@ -83,15 +84,17 @@
   },
   { 
     "type": "book",
-    "rule": [" AB,----Y,--C,D,EFZ"," AB,----Y,--C,D,EFZ"," AB,----Y,--C,D,G,H,I,J"," ---A,--C,D,EFZ,K"],
+    "rule": [" AABB--X,----Y,--C,D,EFMZ"," AABB--X,----Y,--C,D,EFMZ"," AB,----Y,--C,D,G,H,I,J"," ---A,--C,D,EFMZ,K"],
     "blocks": [
       "A:A(n)",
       "B:[author]'s",
+      "X:Untitled",
       "Y:Second,Third,Fourth,Final",
       "C:Authoritative,Comprehensive,Basic,Ultimate,Beginner's,Apprentice's,Novice's,Arcane Student's",
-      "D:Guide to,Guide to,Guide to,Book of,Essay on,Compendium of,Compendium of,Treatise on,Dictionary of,Cyclopedia of,Encyclopedia of,Tome of,Notes on,Meditations on",
+      "D:Guide to,Guide to,Guide to,Book of,Book of,Book of,Essay on,Compendium of,Compendium of,Treatise on,Dictionary of,Cyclopedia of,Encyclopedia of,Tome of,Notes on,Meditations on,Musings on",
       "E:Abjuration,Alchemy,Alteration,Animals,the Arcane Arts,Carnivorous Plants,Conjuration,Creatures,Curses,Divination,Enchantment,Exotic Plants,Flowering Plants and Their Uses",
-      "F:the Healing Arts,Illusions and Phantasms,Insects,Large Insects,Monsters,Plants,Potions,Potion Formulation,the Formulation of Potions,Spiders,Summoning,Wand Making,Undead,Wizardry",
+      "F:the Healing Arts,Illusions and Phantasms,Insects,Large Insects,Monsters,Plants,Potions,the Formulation of Potions,Spiders,Summoning,Wand Making,Undead,Wizardry",
+      "M:Accounting,Mathematics,Geometry,Livestock,Higher Mathematics,Cartography,Celestial Navigation,Maritime Navigation,Military Command,Siege Engines,Wilderness Survival,Games,Games and Amusements,Philosophy",
       "Z:Weapons,Armor,Machines of War,Siege Engines,Castle Defenses,Carpentry,Stonemasonry,Stonework,Quarrying and Milling of Stone,Smithing,Iron Forging,Metalwork,Whetting and Honing",
       "G:the",
       "H:Manufacture,Creation,Art,Contrivance,Production,Science",
@@ -119,6 +122,26 @@
       "D:a,e,i,o,u",
       "E:bax,bex,bex,bez,bix,bog,bor,borg,box,boz,brag,brax,brax,brex,brox,daz,daz,drack,drag,drak,dram,drax,dex,dex,drex,lex,lex,lix,lix,lox,loz,max,maz,mex,mex,mez,mox,moz,molz",
       "F:nax,naz,nex,nex,nez,nox,noz,nolt,par,per,pex,pez,pix,pil,por,por,pul,pur,purn,tax,tex,tez,tor,tor,tur,vac,vax,vaz,vec,vex,vez,voz,x,x,x,z,z,z,z,zar,zal,zel,zim,zin,zir,zor,zur,zur"
+    ]
+  },
+  { 
+    "type": "cult",
+    "rule": [" AABCCC,D"," AABCCC,D"," D,Z,ABB"],
+    "blocks": [
+      "A:Red,Green,Blue,Black,White,Gray,Crimson,Silver,Azure,Cerulean",
+      "B:Ivory,Ebony,Ruby,Emerald,Oak,Granite,Silk,Iron,Copper,Gold,Bronze,Steel",
+      "C:Dark,Blessed,Final,Eternal,Sacred,Holy,Watchful,Archaean,Silent,Ancient,Charnel,Eldritch,Glowing,Immortal,Nameless,Spectral,Stygian,Tenebrous,Abyssal,Twilight,Midnight,Morning,Evening",
+      "D:Brotherhood,Sisterhood,Coven,Blade,Pearl,Stone,Hand,Circle,Bond,Oil,Fire,Flame,Star,Eye,Claw,Talon,Finger,Horn,Dagger,Sword,Knife,Cord,Bell,Rose,Chime,Tower,Keep,Road,Path,Way,Passage",
+      "Z:of"
+    ]
+  },
+  {
+    "type": "flower",
+    "rule": ["A","A","A"," X,A"," B,A"," B,A"," X,B,A"],
+    "blocks": [
+      "A:daisy,rose,carnation,dahlia,lily,orchid",
+      "B+:bouquet of,handful of,bunch of",
+      "X:big,giant,very large,enormous"
     ]
   }
 ]

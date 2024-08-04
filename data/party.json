@@ -2,7 +2,7 @@
   {
     "name": "Baker Street Bakers",
     "system": "AD&D",
-    "xp": 533543,
+    "xp": 559543,
     "members": [
       {
         "name": "Vaseria Dalmov II",
@@ -12,15 +12,15 @@
           {
             "name": "Illusionist",
             "level": 8,
-            "xp": 141649,
-            "xpToNext": 3352
+            "xp": 143274,
+            "xpToNext": 1727
           },
           {
             "name": "Magic-User",
             "level": 9,
-            "xp": 155814,
+            "xp": 157602,
             "getsBonus": true,
-            "xpToNext": 85624
+            "xpToNext": 83999
           }
         ],
         "ac": 1,
@@ -39,9 +39,9 @@
           {
             "name": "Wu Jen",
             "level": 10,
-            "xp": 311623,
+            "xp": 315198,
             "getsBonus": true,
-            "xpToNext": 171252
+            "xpToNext": 168002
           }
         ],
         "ac": -1,
@@ -69,8 +69,8 @@
           {
             "name": "Bard",
             "level": 9,
-            "xp": 85750,
-            "xpToNext": 24251
+            "xp": 89000,
+            "xpToNext": 21001
           }
         ],
         "ac": 2,
@@ -106,15 +106,15 @@
           {
             "name": "Wu Jen",
             "level": 9,
-            "xp": 155814,
+            "xp": 157602,
             "getsBonus": true,
-            "xpToNext": 112897
+            "xpToNext": 111271
           },
           {
             "name": "Ninja",
             "level": 7,
-            "xp": 141649,
-            "xpToNext": 98352
+            "xp": 143274,
+            "xpToNext": 96727
           }
         ],
         "ac": 1,
@@ -129,8 +129,8 @@
           {
             "name": "Paladin",
             "level": 8,
-            "xp": 283293,
-            "xpToNext": 66708
+            "xp": 286543,
+            "xpToNext": 63458
           }
         ],
         "ac": 2,
@@ -145,9 +145,9 @@
           {
             "name": "Ranger",
             "level": 9,
-            "xp": 311623,
+            "xp": 315198,
             "getsBonus": true,
-            "xpToNext": 12161
+            "xpToNext": 8911
           }
         ],
         "ac": -1,
@@ -162,16 +162,16 @@
           {
             "name": "Magic-User",
             "level": 9,
-            "xp": 155814,
+            "xp": 157602,
             "getsBonus": true,
-            "xpToNext": 85624
+            "xpToNext": 83999
           },
           {
             "name": "Cleric",
             "level": 8,
-            "xp": 155814,
+            "xp": 157602,
             "getsBonus": true,
-            "xpToNext": 62897
+            "xpToNext": 61271
           }
         ],
         "ac": 4,
@@ -186,15 +186,15 @@
           {
             "name": "Thief",
             "level": 9,
-            "xp": 155814,
+            "xp": 157602,
             "getsBonus": true,
-            "xpToNext": 3806
+            "xpToNext": 2180
           },
           {
             "name": "Illusionist",
             "level": 8,
-            "xp": 141649,
-            "xpToNext": 3352
+            "xp": 143274,
+            "xpToNext": 1727
           }
         ],
         "ac": 2,
