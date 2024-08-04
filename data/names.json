@@ -137,11 +137,12 @@
   },
   {
     "type": "flower",
-    "rule": ["A","A","A"," X,A"," B,A"," B,A"," X,B,A"],
+    "rule": [" ---Y,A"," ---Y,A"," ---Y,A"," X,A"," ---Y,B,A"," ---Y,B,A"," ---Y,X,B,A"],
     "blocks": [
       "A:daisy,rose,carnation,dahlia,lily,orchid",
       "B+:bouquet of,handful of,bunch of",
-      "X:big,giant,very large,enormous"
+      "X:big,giant,very large,enormous",
+      "Y+:many,lots of,tons of"
     ]
   }
 ]
