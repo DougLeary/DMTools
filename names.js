@@ -26,8 +26,9 @@ function doBlock(block) {
   const comma = String.fromCharCode(12)   // temporarily replaces ",,"
   const colon = block.indexOf(':')
   const modifiers = block.substr(1,colon-1)
-  const pluralize = pluralizeNextBlock
-  pluralizeNextBlock = modifiers.includes('+')
+  const skipPluralizing = modifiers.includes('*')
+  const pluralize = pluralizeNextBlock && !skipPluralizing
+  pluralizeNextBlock = modifiers.includes('+') || (pluralizeNextBlock && skipPluralizing)
   const arr = block.substr(colon+1).replace(',,', comma).split(',')
   const pos = Math.floor(Math.random() * arr.length)
   let st = arr[pos].replace(comma, ',')

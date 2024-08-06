@@ -49,6 +49,18 @@
     ]
   },
   { 
+    "type": "town",
+    "rule": ["A,H","B,H"," R,T"," S,T"],
+    "blocks": [
+      "A:Apple,Birch,Elm,Pine,Maple,Oak",
+      "B:Arrow,Black,Burl,Fair,Fern,Robins,Sand,Sparrows,Tarn",
+      "H:berg,born,bridge,dale,deep,den,dur,durn,gate,haven,hold,point,stead,ton,well,wind,wyn,wood",
+      "R:[elf],[dwarf]",
+      "S:[elf]'s,[dwarf]'s",
+      "T:Bend,Bridge,Crossing,Dale,Deep,Gate,Haven,Hold,Peak,Point,Reach,Town,Well,Wood"
+    ]
+  },
+  { 
     "type": "inn",
     "rule": [" AABBBCC,DEEFFF", " DDEFFF,G,DEEFFF"],
     "blocks": [
@@ -137,12 +149,13 @@
   },
   {
     "type": "flower",
-    "rule": [" ---Y,A"," ---Y,A"," ---Y,A"," X,A"," ---Y,B,A"," ---Y,B,A"," ---Y,X,B,A"],
+    "rule": [" ---Y,----Z,A"," ---Y,----Z,A"," ---Y,----Z,A"," X,----Z,A"," ---Y,--X,B,--X,--Z,A"],
     "blocks": [
       "A:daisy,rose,carnation,dahlia,lily,orchid",
       "B+:bouquet of,handful of,bunch of",
-      "X:big,giant,very large,enormous",
-      "Y+:many,lots of,tons of"
+      "X*:big,giant,very large,enormous",
+      "Y+:many,lots of,tons of",
+      "Z*:blue,pink,purple,red,white"
     ]
   }
 ]
