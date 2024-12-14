@@ -1,0 +1,16 @@
+    [
+      {
+        "type": "Dinner",
+        "show": "true",
+        "rule": [" Z,ABCD,E,F"],
+        "blocks": [
+          "Z:--",
+          "A:Annie's Alfredo Shells,Annie's Shells Macaroni with Pesto,Breaded Chicken Tenders,Breakfast for Dinner,Broasted Chicken",
+          "B:Cheese Lasagna,Fettuccini Alfredo,French Toast,Grilled Cheese Sandwich,Hot dog",
+          "C:Jack in the Box Chicken Nuggets,Jack in the Box Cluck Sandwich,Macaroni and Cheese,Meatballs,Nachos",
+          "D:PBJ Sandwich,Pepperoni Pizza,Cheese Pizza,Quesadilla,Spaghetti,Turkey Breast",
+          "E:+",
+          "F:Apple Slices with Cheese,Apple Slices with Peanut Butter,Broccoli,Carrots,Cauliflower,Frozen Peas,Green Beans in Butter,Green Salad,Corn on the Cob"
+        ]
+      }
+    ]

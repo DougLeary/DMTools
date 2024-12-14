@@ -128,7 +128,7 @@ function updatePartyXp(action, party, xp) {
   if (!ok) return false     // to do: if one update fails roll back those that have succeeded, otherwise we leave member xp in a weird state 
 
   if (action == Actions.add) {
-    party.xp = parseInt(party.xp) + parseInt(xp)
+    party.xp = parseInt(party.xp) + parseInt(memberXp)
   } else {
     party.xp = parseInt(xp)
   }

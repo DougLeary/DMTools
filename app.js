@@ -4,8 +4,9 @@ const path = require('path')
 const classes = require('./classes')
 const attack = require('./attacks')
 const names = require('./names')
-const namesPath = './data/names.json'
-names.load(namesPath)
+const dataPath = './data/'
+const defaultFilename = 'names'
+names.load(`${dataPath}${defaultFilename}.json`)
 const party = require('./party')
 
 const app = express()
@@ -110,8 +111,15 @@ app.get('/names', (req, res) => {
   res.sendFile(path.join(__dirname, '/names.html'))
 })
 
+app.get('/names/reload/:filename', (req, res) => {
+  const source = `${dataPath}${req.params.filename || defaultFilename}.json`
+//  console.log(`param: ${req.params.filename}, reloading ${source}`)
+  names.load(source)
+  res.json(true)
+})
+
 app.get('/names/reload', (req, res) => {
-  names.load(namesPath)
+  names.load(`${dataPath}${defaultFilename}.json`)
   res.json(true)
 })
 

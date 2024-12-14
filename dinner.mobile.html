@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dinner Selector</title>
+    <link rel="stylesheet" href="dinner.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      const current = {type: "", flavor: ""}
+
+      function reloadData() {
+        console.log(`Reloading data`)
+        $.get(`./names/reload/food`, (result) => {
+          $('#results').empty().append("Dinners reloaded.")
+        })
+      }
+
+      function generateNames(count, type, flavor) {
+        $('#results').empty()
+        $.get(`./names/${count}/${type}/${flavor}`, (data) => {
+          for (let i=0; i < data.length; i++) {
+            $('#results').append(`${data[i]}<br/>`)
+          }
+        })
+      }
+
+      function generate() {
+//        $('#typeHeading').html(current.type.charAt(0).toUpperCase() + current.type.substring(1))
+        generateNames(10, 'Dinner', '')
+      }
+
+      $(document).ready(reloadData)
+    </script>
+    </head>
+  <body>
+    <h1>Dinner Selector</h1>
+    <div id="nameTypes" style="margin-bottom:30px">
+    </div>
+    <h2 id="info"></h2>
+    <div id="results"></div>
+    <button style="font-size:42px; width: 220px; height: 120px;" onclick="generate()">Dinners</button>
+    <button style="font-size:42px; width: 220px; height: 120px;" onclick="reloadData()">Reload</button>
+  </body>
+</html>

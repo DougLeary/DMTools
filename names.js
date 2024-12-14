@@ -105,7 +105,7 @@ function getGeneratorNames(type=null) {
   // return a list of all generators or just those of a given type
   arr = []
   gens.forEach((gen) => {
-    if (!type || eq(gen.type, type)) {
+    if (gen.show && (!type || eq(gen.type, type))) {
       arr.push({type: gen.type, flavor: gen.flavor || ''})
     }
   })
