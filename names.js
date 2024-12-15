@@ -3,7 +3,7 @@
 const { singularOf, pluralOf } = require('./pluralizer.js') 
 
 const gens = []
-const defaultPath = './names.json'
+const defaultPath = './data/names.json'
 
 let pluralizeNextBlock = false
 
@@ -105,7 +105,7 @@ function getGeneratorNames(type=null) {
   // return a list of all generators or just those of a given type
   arr = []
   gens.forEach((gen) => {
-    if (gen.show && (!type || eq(gen.type, type))) {
+    if (gen.show &&(!type || eq(gen.type, type))) {
       arr.push({type: gen.type, flavor: gen.flavor || ''})
     }
   })
