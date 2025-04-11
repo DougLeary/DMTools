@@ -2,7 +2,7 @@
   {
     "name": "Baker Street Bakers",
     "system": "AD&D",
-    "xp": 360894,
+    "xp": 384794,
     "members": [
       {
         "name": "Vaseria Dalmov II",
@@ -12,15 +12,15 @@
           {
             "name": "Illusionist",
             "level": 9,
-            "xp": 180450,
-            "xpToNext": 39551
+            "xp": 192400,
+            "xpToNext": 27601
           },
           {
             "name": "Magic-User",
             "level": 9,
-            "xp": 198496,
+            "xp": 211641,
             "getsBonus": true,
-            "xpToNext": 46822
+            "xpToNext": 34872
           }
         ],
         "ac": 1,
@@ -32,16 +32,16 @@
         "cha": 13
       },
       {
-        "name": "Maggie",
+        "name": "Maggie Pie",
         "race": "Hengeyokai",
         "edition": "OA",
         "classes": [
           {
             "name": "Wu Jen",
             "level": 10,
-            "xp": 396984,
+            "xp": 423274,
             "getsBonus": true,
-            "xpToNext": 93651
+            "xpToNext": 69751
           }
         ],
         "ac": -1,
@@ -69,17 +69,38 @@
           {
             "name": "Bard",
             "level": 11,
-            "xp": 163351,
-            "xpToNext": 36650
+            "xp": 187251,
+            "xpToNext": 12750
           }
         ],
-        "ac": 2,
+        "ac": 4,
         "str": 15,
         "int": 11,
         "wis": 15,
         "dex": 15,
         "con": 12,
         "cha": 15
+      },
+      {
+        "name": "Æthelflæd Wickerroot",
+        "race": "Giant Rat",
+        "edition": "Custom",
+        "classes": [
+          {
+            "name": "Witch",
+            "level": 11,
+            "xp": 423274,
+            "getsBonus": true,
+            "xpToNext": 160660
+          }
+        ],
+        "ac": -1,
+        "str": 11,
+        "int": 18,
+        "wis": 14,
+        "dex": 15,
+        "con": 15,
+        "cha": 14
       },
       {
         "name": "Renee Veloute Bechamel",
@@ -106,15 +127,15 @@
           {
             "name": "Wu Jen",
             "level": 9,
-            "xp": 198496,
+            "xp": 211641,
             "getsBonus": true,
-            "xpToNext": 74095
+            "xpToNext": 62145
           },
           {
             "name": "Ninja",
             "level": 7,
-            "xp": 180450,
-            "xpToNext": 59551
+            "xp": 192400,
+            "xpToNext": 47601
           }
         ],
         "ac": 1,
@@ -129,8 +150,8 @@
           {
             "name": "Paladin",
             "level": 9,
-            "xp": 360894,
-            "xpToNext": 339107
+            "xp": 384794,
+            "xpToNext": 315207
           }
         ],
         "ac": 2,
@@ -139,15 +160,16 @@
       },
       {
         "name": "Skelver",
+        "hide": true,
         "race": "Elf",
         "edition": "1e",
         "classes": [
           {
             "name": "Ranger",
             "level": 10,
-            "xp": 396984,
+            "xp": 420854,
             "getsBonus": true,
-            "xpToNext": 230015
+            "xpToNext": 208315
           }
         ],
         "ac": -1,
@@ -156,22 +178,23 @@
       },
       {
         "name": "Evelina",
+        "hide": true,
         "race": "Elf",
         "edition": "1e",
         "classes": [
           {
             "name": "Magic-User",
             "level": 9,
-            "xp": 198496,
+            "xp": 210431,
             "getsBonus": true,
-            "xpToNext": 46822
+            "xpToNext": 35972
           },
           {
             "name": "Cleric",
             "level": 8,
-            "xp": 198496,
+            "xp": 210431,
             "getsBonus": true,
-            "xpToNext": 24095
+            "xpToNext": 13245
           }
         ],
         "ac": 4,
@@ -186,15 +209,36 @@
           {
             "name": "Thief",
             "level": 10,
-            "xp": 198496,
+            "xp": 211641,
             "getsBonus": true,
-            "xpToNext": 19550
+            "xpToNext": 7599
           },
           {
             "name": "Illusionist",
             "level": 9,
-            "xp": 180450,
-            "xpToNext": 39551
+            "xp": 192400,
+            "xpToNext": 27601
+          }
+        ],
+        "ac": 2,
+        "str": 12,
+        "int": 15,
+        "wis": 13,
+        "dex": 16,
+        "con": 9,
+        "cha": 14
+      },
+      {
+        "name": "Harl",
+        "race": "Half-Elf",
+        "edition": "1e",
+        "classes": [
+          {
+            "name": "Ranger",
+            "level": 10,
+            "xp": 423274,
+            "getsBonus": true,
+            "xpToNext": 206115
           }
         ],
         "ac": 2,

@@ -130,7 +130,6 @@ app.get('/names/types', (req, res) => {
 
 app.get('/names/:count/:type/:flavor', (req, res) => {
   // return a random name with type and flavor
-  console.log(`api for ${req.params.flavor} ${req.params.type}`)
   const json = []
   for (let i=0; i<req.params.count; i++) {
     json.push(names.getName(req.params.type, req.params.flavor))

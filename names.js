@@ -32,9 +32,9 @@ function doBlock(block) {
   const arr = block.substr(colon+1).replace(',,', comma).split(',')
   const pos = Math.floor(Math.random() * arr.length)
   let st = arr[pos].replace(comma, ',')
-  if (st.includes('[') && st.includes(']')) {
-    const gen = st.substring(st.indexOf('[') + 1, st.indexOf(']'))
-    st = st.replace(`[${gen}]`, getName(gen))
+  if (st.includes('{') && st.includes('}')) {
+    const gen = st.substring(st.indexOf('{') + 1, st.indexOf('}'))
+    st = st.replace(`\{${gen}\}`, getName(gen))
   }
 
   st = (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
@@ -85,6 +85,7 @@ function getName(type='', flavor='') {
   //  - there is no type preference, OR
   //  - gen.type is right and there's no flavor preference, OR
   //  - gen.type is right and gen.flavor is right
+
   arr = []
   gens.forEach((gen) => {
     if ((!type) || (eq(gen.type, type) && (!(flavor) || eq(gen.flavor, flavor)))) {
