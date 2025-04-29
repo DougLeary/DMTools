@@ -3,7 +3,7 @@
       "type": "dwarf",
       "flavor": "male",
       "show": "true",
-      "rule": "ABC,DE,F---,..-,G,HI",
+      "rules": "ABC,DE,F---,..-,G,HI",
       "blocks": [
         "A:Ba,Bo,Da,Di,Du,Gi,Ga,Ra,Ru",
         "B:Aul,Ban,Bal,Bor,Bor,Bro,Dur,Dur,Dru,Dre,Del,Dal,Gol,Gal,Gon,Gen,Gur,Tho,Tho,Tho,Thu,Tar,Tar,Tor,Tor",
@@ -20,7 +20,7 @@
       "type": "dwarf",
       "flavor": "female",
       "show": "true",
-      "rule": "A,B--,C",
+      "rules": "A,B--,C",
       "blocks": [
         "A:Dal,Dan,Dul,Dun,Dol,Dor,Dov,Aim,Al,Ain,Aid,Ald,Alg,Glon,Gond,Gath,Glof,Gir,Rurn,Rurth,Rund",
         "B:i,i,i,i,e,e,u",
@@ -30,7 +30,7 @@
     { 
       "type": "elf",
       "show": "true",
-      "rule": "A,B,-D",
+      "rules": "A,B,-D",
       "blocks": [
         "A:Bin,Bif,Fil,Fin,Fin,Fin,Fen,Fen,Fon,Ild,Ilf,Nil,Mil,Mel,Mul,Mib,Mid,Til,Tin,Ril,Rin,Sil,Sin,Sen,Svin,Sven,Vel,Vil,Vin",
         "B:bin,bil,bid,dib,did,dif,dil,dim,din,lim,lin,lil,min,mil,nim,nin,tid,sid,tin,sin,shiv,shin",
@@ -40,7 +40,7 @@
     },
     { 
       "type": "human last name",
-      "rule": ["A,-BBB,---C"],
+      "rules": ["A,-BBB,---C"],
       "blocks": [
         "A:Al,An,Bad,Ban,Bar,Bel,Brin,Cal,Car,Cran,Cren,Crew,Dal,Dur,Fan,Fen,Hal,Her,Ger,Mon,Nul,Pearl,Rad,Raf,San,Sal,Tan,Tol,Zil",
         "B:del,der,ben,bin,ger,gen,gil,mer,mel,sel,sten",
@@ -51,7 +51,7 @@
       "type": "human",
       "flavor": "male",
       "show": "true",
-      "rule": " ABCDEFGHIJKLMNO,-ZZZZ",
+      "rules": " ABCDEFGHIJKLMNO,-ZZZZ",
       "blocks": [
         "A:Abram,Alan,Alaric,Albus,Aldus,Alister,Ambaum,Andrew,Archibald,Asok,Avrus",
         "B:Barnard,Bandol,Ben,Bergen,Bern,Bonus,Bordo,Boris,Bufrid,Bulmick,Burris",
@@ -74,7 +74,7 @@
     { 
       "type": "orc",
       "show": "true",
-      "rule": ["A,B,C","A,B,C,D,E","A,B,C,D,E","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G,D,E"],
+      "rules": ["A,B,C","A,B,C,D,E","A,B,C,D,E","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G","A,B,C,F,---G,D,E"],
       "blocks": [
         "A:B,B,D,D,F,G,G,G,K,K,M,N,P,T,V,X",
         "B:r,r,r,l,l,h,-,-,-",
@@ -89,45 +89,49 @@
       "type": "town",
       "flavor": "normal",
       "show": "true",
-      "rule": ["A,H","B,H"," R,T"," S,T"],
+      "rules": ["A,HI","B,HI"," R,T"," S,T"],
       "blocks": [
         "A:Apple,Birch,Elm,Pine,Maple,Oak",
         "B:Arrow,Black,Burl,Fair,Fern,Robins,Sand,Sparrows,Tarn",
-        "H:berg,born,bridge,dale,dale,darn,deep,den,dorn,gard,gate,haven,hold,home,point,stead,ton,ton,town,well,wind,wyn,wood",
+        "H:berg,born,bridge,dale,dale,darn,deep,den,den,dorn,down,gard,gate,gate,haven,haven,hold,hold",
+        "I:holm,holm,home,home,point,stead,stead,ton,ton,ton,ton,town,town,well,wind,wyn,wood,wood",
         "R:{elf},{dwarf}",
         "S:{elf}'s,{dwarf}'s",
-        "T:Bend,Bridge,Crossing,Dale,Deep,Gate,Haven,Hold,Peak,Point,Reach,Town,Well,Wood"
+        "T:Bend,Bridge,Crossing,Dale,Deep,Gate,Gate,Haven,Haven,Hold,Hold,Hollow,Hollow,Peak,Point,Reach,Roost,Town,Town,Town,Spit,Well,Wood"
       ]
     },
     { 
       "type": "town",
       "flavor": "dismal",
       "show": "true",
-      "rule": "AB,C",
+      "rules": "ABC,DE",
       "blocks": [
-        "A:Angst,Bad,Bale,Charnel,Cringe,Crypt,Damp,Dark,Death,Deep,Dirge,Dire,Dismal,Dolor,Doom,Dooms,Down,Dull,Dusk,Fester,Filth,Gloom,Glum,Grim,Hang,Hark",
-        "B:Harsh,Lonely,Mala,Mourn,Mud,Murk,Night,Ochre,Omens,Pale,Pall,Pallor,Perils,Pitys,Putrid,Rancid,Rank,Reaper,Retch,Rotting,Sad,Sallow,Scorn,Scythe,Shrill,Sorrow,Squalor,Tolling,Wail,Wan,Weeping,Wretch",
-        "C:bane,born,cliff,dale,damp,dark,darn,darn,deep,dire,dire,dirge,doom,dorn,dorn,gloom,gnash,grim,grim,march,marsh,marsh,moon,mourn,muir,thorn,thorn,vale,wail,woe,wood,wood,wood"
+        "A:Angst,Bad,Bale,Charnel,Cringe,Crypt,Damp,Dark,Death,Deep,Dirge,Dire,Dire,Dismal,Dolor,Doom,Dooms,Down,Dull,Dusk,Fester",
+        "B:Filth,Gloom,Glum,Grim,Grim,Hang,Hard,Harsh,Lonely,Mals,Mourn,Mud,Murk,Night,Ochre,Omens,Pale,Pall,Pallor,Perils,Pitys",
+        "C:Putrid,Rancid,Rank,Reaper,Retch,Rot,Rotten,Rotling,Rotting,Sad,Sallow,Scorn,Scythe,Shrill,Sorrow,Squalor,Tolling,Wail,Wan,Weeping,Wretch",
+        "D:bane,bane,born,cliff,dale,dale,damp,dark,darn,darn,darn,deep,deep,dire,dire,dirge,doom,dorn,dorn,gloom",
+        "E:glum,gnash,grim,grim,march,marsh,marsh,moon,mourn,muir,thorn,thorn,vail,vale,veil,wail,woe,wood,worm,worn"
       ]
     },
     { 
       "type": "inn",
       "show": "true",
-      "rule": [" AABBBCC,DEEFFF", " DDEFFF,G,DEEFFF"],
+      "rules": [" AABBBCC,DEEFFF", " DDEFFF,G,DEEFFF"],
       "blocks": [
         "A:Black,White,Green,Blue,Purple,Scarlet,Crimson,Silver,Golden,Gray,Bronze,Copper",
         "B:Rusty,Velvet,Angry,Cozy,Cozy,Happy,Happy,Tipsy,Sleepy,Grumpy,Bashful,Smiling,Lucky,Lucky,Cheerful,Laughing,Well Fed,Skinny",
         "C:Blind,Spotted,Ticklish,Growling,Scowling,Greasy,Greedy,Slippery,Wily,Crafty,Grinning,Steady,Welcome",
         "D:Troll,Goblin,Kobold,Witch,Minotaur,Ogre,Eye",
-        "E:Cauldron,Pot,Spoon,Shield,Axe,Sword,Halberd,Baldric",
+        "E:Cauldron,Pot,Spoon,Shield,Axe,Sword,Halberd,Baldric,Bracer,Greaves,Lock,Key",
         "F:Duck,Duck,Goose,Goose,Cow,Mare,Hen,Rooster,Hound,Hound,Dog,Cat,Eagle,Bunny,Hare,Rabbit,Stoat,Weasel,Frog,Toad,Squirrel,Badger",
-        "G:and"
+        "G:and",
+        "H:Roost,Nest,Lair,Hutch,Den,Burrow,Hollow"
       ]
     },
     { 
       "type": "wizard",
       "show": "true",
-      "rule": ["AB,CD,E,F","AB,E,FGH","AB,CD,E,FGH","AB,-CD,E,F,E,GH","AB,CD,E,F,E,GH"],
+      "rules": ["AB,CD,E,F","AB,E,FGH","AB,CD,E,FGH","AB,-CD,E,F,E,GH","AB,CD,E,F,E,GH"],
       "blocks": [
         "A:Al,Ar,An,Alza,Altha,Ama,Bar,Bal,Bon,Del,Dar,Dag,Dan,Eth,En,El,Em,Ez,Fro,Fla,Gra,Gro,Grey,Hon,Kor,Kan,Kaz",
         "B:Lin,Len,Mor,Mal,Mang,Naga,Ol,Og,Odi,Ovi,Peri,Pan,Par,Qua,Sah,Sen,Sel,Trel,Tron,Tag,Taz,U,Ung,Vol,Var,Ven",
@@ -142,14 +146,14 @@
     { 
       "type": "author",
       "show": "true",
-      "rule": "A",
+      "rules": "A",
       "blocks": [
         "A:{elf},{elf},{human},{human},{human},{dwarf},{orc},{wizard},{wizard}"
       ]
     },
     {
       "type": "animal",
-      "rule": [" AB"],
+      "rules": [" AB"],
       "blocks": [
         "A:Arctic Animal,Fur-Bearing Animal,Fish,Insect,Livestock,Mammal,Reptile,Snake,Woodland Creature",
         "B:Bear,Fox,Squirrel,[Wolf|Wolves]"
@@ -157,14 +161,14 @@
     },
     {
       "type": "monster",
-      "rule": [" A"],
+      "rules": [" A"],
       "blocks": [
         "A:Arachnid,Giant Insect,Spider"
       ]
     },
     {
       "type": "plant",
-      "rule": ["ABB"," ---CD,AB"],
+      "rules": ["ABB"," ---CD,AB"],
       "blocks": [
         "A:Plant",
         "B:Blossom,Blossom,Flower,Flower,Lichen,Lichen,Moss,Moss,Slime,Vine",
@@ -174,14 +178,14 @@
     },
     {
       "type": "armor",
-      "rule": [" A"],
+      "rules": [" A"],
       "blocks": [
         "A:[armor],[armor],[armor],helmet,helmet,gauntlet,bracer,shield,shield"
       ]
     },
     {
       "type": "making stuff",
-      "rule": [" A,B"," A,B"," C,D"],
+      "rules": [" A,B"," A,B"," C,D"],
       "blocks": [
         "A+:Making",
         "B:Brush,Quill,Pen Nib,Shoe,Clothing,Fishing Net,Snares and Trap,Fishhook,Rope",
@@ -191,7 +195,7 @@
     },
     {
       "type": "mundane topic",
-      "rule": [" ABCDEFGH"],
+      "rules": [" ABCDEFGH"],
       "blocks": [
         "A:Accounting,Mathematics,Geometry,Higher Mathematics,Cartography,Celestial Navigation",
         "B:Baking,Brining,Butchering,Cookery,Cooking,Food Preservation,Meat Preservation,Sauces,Salting Meat,Stewings",
@@ -205,28 +209,28 @@
     },
     {
       "type": "arcane topic",
-      "rule": [" A"],
+      "rules": [" A"],
       "blocks": [
         "A:Blessings,Constructs,Charms,Corpses,Crystals,Curses,Enchantment,Golems,Healing,Mental Control,Potions,Scrying,the Spirit World,Summoning,Theurgy,Wands"
       ]
     },
     {
       "type": "topic",
-      "rule": [" A"],
+      "rules": [" A"],
       "blocks": [
         "A:{mundane topic},{mundane topic},{mundane topic},{mundane topic},{arcane topic},{arcane topic}"
       ]
     },
     {
       "type": "type of magic item",
-      "rule": [" A"],
+      "rules": [" A"],
       "blocks": [
         "A:Magical Construct,Charm,Golem,Magic {Armor},Magic Weapon,Miscellaneous Magic Item,Potion,Ring,Rod,[Staff|Staves],Wand"
       ]
     },
     {
       "type": "plural topic",
-      "rule": [" A,B"," A,B"," A,B"," A,B"," C,D,E,A,F"],
+      "rules": [" A,B"," A,B"," A,B"," A,B"," C,D,E,A,F"],
       "blocks": [
         "A+:",
         "B:{plant},{animal},{monster}",
@@ -238,7 +242,7 @@
     },
     {
       "type": "guild handbook",
-      "rule": ["A,B,C,D"],
+      "rules": ["A,B,C,D"],
       "blocks": [
         "A:Armorer,Blacksmith,Boatwright,Cartwright,Cobbler,Cooper,Falconer,Fletcher,Horseman,Millner,Muckman,Scribe,Scribner,Seneschal,Sewerman,Shoemaker,Tailor,Tanner,Wheelwright,Yeoman",
         "B:'s",
@@ -248,7 +252,7 @@
     },
     {
       "type": "common book",
-      "rule": [" AABB--X,----Y,--C,DDE,F"," AABB--X,----Y,--C,DDE,F,-K"," ---A,--C,DDE,F,K","F","F,K"],
+      "rules": [" AABB--X,----Y,--C,DDE,F"," AABB--X,----Y,--C,DDE,F,-K"," ---A,--C,DDE,F,K","F","F,K"],
       "blocks": [
         "A:A(n)",
         "B:{author}'s",
@@ -266,14 +270,14 @@
     },
     {
       "type": "uncommon book",
-      "rule": [" A"],
+      "rules": [" A"],
       "blocks": [
         "A:{guild handbook}"
       ]
     },
     {
       "type": "rare book",
-      "rule": [" A,B"],
+      "rules": [" A,B"],
       "blocks": [
         "A:Tome of",
         "B:Abjuration,Alteration,Conjuration,Divination,Enchantment,Illusion,Invocation,Necromancy"
@@ -281,7 +285,7 @@
     },
     {
       "type": "unique book",
-      "rule": " A,B,C",
+      "rules": " A,B,C",
       "blocks": [
         "A+:Folio of notes on negotiating with",
         "B:Air Elemental,[Drow],[Dwarf|Dwarves],Earth Elemental,[Elf|Elves],Fire Elemental,Giant,Goblin,Hobgoblin,Half-[elf|elves],Half-orc,Halfling,Human,Kobold,Modron,Orc,Spider,Water Elemental",
@@ -291,7 +295,7 @@
     { 
       "type": "book",
       "show": "true",
-      "rule": " AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBCCD",
+      "rules": " AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBCCD",
       "blocks": [
         "A:{common book}",
         "B:{uncommon book}",
@@ -302,7 +306,7 @@
     { 
       "type": "sword",
       "show": "true",
-      "rule": [" A,C"," B,C"],
+      "rules": [" A,C"," B,C"],
       "blocks": [
         "A:Soul,Blessed,Astral,Shard of,Author of,Blinding,Celestial,Death's,Grim,Valorous,Truth,Hope,Abyssal,Crescent,Titan's,Rabid,Storm,Stone,Dire,Whispering,Shining,Grinning,Dark,Trickster's,Moon,Herald of,Dire,Widow's",
         "B:Red,Black,Silver,Crimson,Azure,Cerulean,Ochre,Noir,Dark,Golden,Crystal",
@@ -312,7 +316,7 @@
     { 
       "type": "dragon",
       "show": "true",
-      "rule": "AB,CCC-,DDDD.,EF-",
+      "rules": "AB,CCC-,DDDD.,EF-",
       "blocks": [
         "A:Ab,Ack,Ag,Al,Am,Ar,Ash,Az,Bar,Bon,Bru,Ceph,Cil,Cim,Crel,Cur,Cuar,Cuel,Dol,Dur,Durn,For,Ful,Gar,Gral,Gron,Grag,Lex,Lim,Lir,Liz,Meph,Mez,Nar,Nog,Pa,Phor,Phar,Phel,Po",
         "B:Quan,Quag,Quel,Ro,Ru,Rul,Sar,Sel,Sen,Star,Stur,Tal,Tel,Tra,Tren,Tiz,Tox,Vax,Var,Vel,Van,Von,Vox,Vur,Vurl,Xa,Xe,Xan,Xen,Xur,Yal,Yan,Yel,Za,Zah,Zal,Zam,Zan,Zaph,Zar,Zer,Zor,Zul,Zuth",
@@ -325,7 +329,7 @@
     { 
       "type": "cult",
       "show": "true",
-      "rule": [" AABCCC,D"," AABCCC,D"," D,Z,ABB"],
+      "rules": [" AABCCC,D"," AABCCC,D"," D,Z,ABB"],
       "blocks": [
         "A:Red,Green,Blue,Black,White,Gray,Crimson,Silver,Azure,Cerulean",
         "B:Ivory,Ebony,Ruby,Emerald,Oak,Granite,Silk,Iron,Copper,Gold,Bronze,Steel",
@@ -336,14 +340,75 @@
     },
     {
       "type": "flower",
-      "show": "true",
-      "rule": [" ---Y,----Z,A"," ---Y,----Z,A"," ---Y,----Z,A"," X,----Z,A"," ---Y,--X,B,--X,--Z,A"],
+      "//show": "true",
+      "comment": "created to demonstrate pluralization (+) and delayed pluralization (*)",
+      "rules": [" ---Y,----Z,A"," ---Y,----Z,A"," ---Y,----Z,A"," X,----Z,A"," ---Y,--X,B,--X,--Z,A"],
       "blocks": [
         "A:daisy,rose,carnation,dahlia,lily,orchid",
         "B+:bouquet of,handful of,bunch of",
         "X*:big,giant,very large,enormous",
         "Y+:many,lots of,tons of",
         "Z*:blue,pink,purple,red,white"
+      ]
+    },
+    {
+      "type": "magical school",
+      "rules": [" A"],
+      "blocks": [
+        "A:Abjuration,Alteration,Conjuration/Summoning,Divination,Enchantment/Charm,Evocation,Illusion/Phantasm,Necromantic"
+      ]
+    },
+    {
+      "type": "effect type",
+      "rules": [" A"],
+      "blocks": [
+        "A:fire,heat,ice,cold,force,earth or stone,water",
+        "B:disease,healing,fear,mental control,illusion,summoning,alteration of shape or form,weapon enhancement,armor enhancement",
+        "C:animation,gravity,movement,speed,dimensional effects,interplanar effects"
+      ]
+    },
+    {
+      "type": "overall improvement",
+      "rules": [" A,B,C,DDDDE"],
+      "blocks": [
+        "A:improve any",
+        "B:{magical school}",
+        "C:spell by",
+        "D:one caster level or effect die",
+        "E:two caster levels or effect dice"
+      ]
+    },
+    {
+      "type": "aspect improvement",
+      "rules": [" AAAABBC,D,E,F"],
+      "blocks": [
+        "A:improve by 50%",
+        "B:double",
+        "C:triple",
+        "D:the",
+        "E:range,duration,area of effect",
+        "F:of any {magical school} spell"
+      ]
+    },
+    {
+      "type": "saving throw difficulty",
+      "rules": [" A,B,C,D"],
+      "blocks": [
+        "A:saving throws against your",
+        "B:{magical school} spells",
+        "C:are rolled at",
+        "D:-1,-1,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-3,-3,-4"
+      ]
+    },
+    {
+      "type": "school tome",
+      "show": "true",
+      "comment": "A school tome improves spellcasting ability in a specific school of magic.",
+      "rules": [" AABC"],
+      "blocks": [
+        "A:{aspect improvement}",
+        "B:{overall improvement}",
+        "C:{saving throw difficulty}"
       ]
     }
   ]

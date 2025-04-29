@@ -2,7 +2,7 @@
       {
         "type": "Dinner",
         "show": "true",
-        "rule": [" Z,ABCD,E,F"],
+        "rules": [" Z,ABCD,E,F"],
         "blocks": [
           "Z:--",
           "A:Annie's Alfredo Shells,Annie's Shells Macaroni with Pesto,Breaded Chicken Tenders,Breakfast for Dinner,Broasted Chicken",

@@ -34,7 +34,7 @@ function doBlock(block) {
   let st = arr[pos].replace(comma, ',')
   if (st.includes('{') && st.includes('}')) {
     const gen = st.substring(st.indexOf('{') + 1, st.indexOf('}'))
-    st = st.replace(`\{${gen}\}`, getName(gen))
+    st = st.replace(`\{${gen}\}`, generate(gen))
   }
 
   st = (st.length > 1) ? st.trimEnd() : st // remove trailing spaces unless the string is a single space
@@ -78,7 +78,7 @@ function doRule(gen, rule) {
   return result.trim()
 }
 
-function getName(type='', flavor='') {
+function generate(type='', flavor='') {
   // return a generated name of a given type and flavor
 
   // First fill an array with generators that satisfy the criteria:
@@ -95,7 +95,7 @@ function getName(type='', flavor='') {
   if (arr.length > 0) {
   // perform one of the found generators
     let gen = arr[Math.floor(Math.random() * arr.length)]
-    return doRule(gen, (Array.isArray(gen.rule)) ? gen.rule[Math.floor(Math.random() * gen.rule.length)] : gen.rule) 
+    return doRule(gen, (Array.isArray(gen.rules)) ? gen.rules[Math.floor(Math.random() * gen.rules.length)] : gen.rules) 
   } else {
     // return a dummy result
     return `random ${type}`.trim()
@@ -115,6 +115,6 @@ function getGeneratorNames(type=null) {
 
 module.exports = {
   load,
-  getName, 
+  generate, 
   getGeneratorNames
 }

@@ -132,7 +132,7 @@ app.get('/names/:count/:type/:flavor', (req, res) => {
   // return a random name with type and flavor
   const json = []
   for (let i=0; i<req.params.count; i++) {
-    json.push(names.getName(req.params.type, req.params.flavor))
+    json.push(names.generate(req.params.type, req.params.flavor))
   }
   res.json(json)
 })
@@ -141,7 +141,7 @@ app.get('/names/:count/:type', (req, res) => {
   // return a random name of a given type (elf, dwarf, inn...)
   const json = []
   for (let i=0; i<req.params.count; i++) {
-    json.push(names.getName(req.params.type))
+    json.push(names.generate(req.params.type))
   }
   res.json(json)
 })

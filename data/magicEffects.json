@@ -1,231 +1,231 @@
 [
   {
     "type": "protection",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "interference",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "cancellation",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "abjuration",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "change shape",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "change property",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "alteration",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "divination",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "enchantment",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "evocation",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "illusion",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "conjuration",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "summoning",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "transportation",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "manifestation",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
 {
     "type": "necromancy",
-    "rule": [" A"],
+    "rules": [" A"],
     "blocks": [
       "A:"
     ]
   },
   {
     "type": "effect",
-    "rule": [" ABCDEF"],
+    "rules": [" ABCDEF"],
     "blocks": [
       "A:{abjuration}",
       "B:{alteration}",
