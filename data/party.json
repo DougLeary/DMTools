@@ -2,7 +2,7 @@
   {
     "name": "Baker Street Bakers",
     "system": "AD&D",
-    "xp": 415294,
+    "xp": 686634,
     "members": [
       {
         "name": "Vaseria Dalmov II",
@@ -11,16 +11,16 @@
         "classes": [
           {
             "name": "Illusionist",
-            "level": 9,
-            "xp": 207650,
-            "xpToNext": 12351
+            "level": 10,
+            "xp": 288945,
+            "xpToNext": 151056
           },
           {
             "name": "Magic-User",
-            "level": 9,
-            "xp": 228417,
+            "level": 10,
+            "xp": 317842,
             "getsBonus": true,
-            "xpToNext": 19621
+            "xpToNext": 51962
           }
         ],
         "ac": 1,
@@ -38,10 +38,10 @@
         "classes": [
           {
             "name": "Wu Jen",
-            "level": 10,
-            "xp": 456824,
+            "level": 11,
+            "xp": 755298,
             "getsBonus": true,
-            "xpToNext": 39251
+            "xpToNext": 40639
           }
         ],
         "ac": -1,
@@ -68,9 +68,9 @@
           },
           {
             "name": "Bard",
-            "level": 12,
-            "xp": 217751,
-            "xpToNext": 182250
+            "level": 13,
+            "xp": 489091,
+            "xpToNext": 110910
           }
         ],
         "ac": 4,
@@ -88,10 +88,10 @@
         "classes": [
           {
             "name": "Witch",
-            "level": 11,
-            "xp": 456824,
+            "level": 12,
+            "xp": 755298,
             "getsBonus": true,
-            "xpToNext": 130160
+            "xpToNext": 131548
           }
         ],
         "ac": -1,
@@ -126,16 +126,16 @@
         "classes": [
           {
             "name": "Wu Jen",
-            "level": 9,
-            "xp": 228417,
+            "level": 10,
+            "xp": 377661,
             "getsBonus": true,
-            "xpToNext": 46894
+            "xpToNext": 111218
           },
           {
             "name": "Ninja",
-            "level": 7,
-            "xp": 207650,
-            "xpToNext": 32351
+            "level": 8,
+            "xp": 343323,
+            "xpToNext": 156678
           }
         ],
         "ac": 1,
@@ -150,56 +150,13 @@
           {
             "name": "Paladin",
             "level": 9,
-            "xp": 415294,
-            "xpToNext": 284707
+            "xp": 686634,
+            "xpToNext": 13367
           }
         ],
         "ac": 2,
         "int": 18,
         "wis": 13
-      },
-      {
-        "name": "Skelver",
-        "hide": true,
-        "race": "Elf",
-        "edition": "1e",
-        "classes": [
-          {
-            "name": "Ranger",
-            "level": 10,
-            "xp": 420854,
-            "getsBonus": true,
-            "xpToNext": 208315
-          }
-        ],
-        "ac": -1,
-        "int": 15,
-        "wis": 16
-      },
-      {
-        "name": "Evelina",
-        "hide": true,
-        "race": "Elf",
-        "edition": "1e",
-        "classes": [
-          {
-            "name": "Magic-User",
-            "level": 9,
-            "xp": 210431,
-            "getsBonus": true,
-            "xpToNext": 35972
-          },
-          {
-            "name": "Cleric",
-            "level": 8,
-            "xp": 210431,
-            "getsBonus": true,
-            "xpToNext": 13245
-          }
-        ],
-        "ac": 4,
-        "int": 18,
-        "wis": 16
       },
       {
         "name": "Goreguts",
@@ -209,15 +166,15 @@
           {
             "name": "Thief",
             "level": 11,
-            "xp": 228417,
+            "xp": 377661,
             "getsBonus": true,
-            "xpToNext": 192349
+            "xpToNext": 56672
           },
           {
             "name": "Illusionist",
-            "level": 9,
-            "xp": 207650,
-            "xpToNext": 12351
+            "level": 10,
+            "xp": 343323,
+            "xpToNext": 96678
           }
         ],
         "ac": 2,
@@ -235,10 +192,10 @@
         "classes": [
           {
             "name": "Ranger",
-            "level": 10,
-            "xp": 456824,
+            "level": 11,
+            "xp": 755298,
             "getsBonus": true,
-            "xpToNext": 175615
+            "xpToNext": 199729
           }
         ],
         "ac": 2,
@@ -248,13 +205,33 @@
         "dex": 16,
         "con": 9,
         "cha": 14
+      },
+      {
+        "name": "Zultamba Antzamba",
+        "race": "Human",
+        "edition": "1e",
+        "classes": [
+          {
+            "name": "Fighter",
+            "level": 10,
+            "xp": 686634,
+            "xpToNext": 63367
+          }
+        ],
+        "ac": 2,
+        "str": 16,
+        "int": 8,
+        "wis": 10,
+        "dex": 11,
+        "con": 9,
+        "cha": 10
       }
     ]
   },
   {
     "name": "Some Other Party",
     "system": "AD&D",
-    "xp": 88500,
+    "xp": 17750,
     "members": [
       {
         "name": "Maxie",
@@ -263,16 +240,16 @@
         "classes": [
           {
             "name": "Cleric",
-            "level": 0,
-            "xp": 48675,
+            "level": 3,
+            "xp": 3255,
             "getsBonus": true,
-            "xpToNext": 1
+            "xpToNext": 2496
           },
           {
             "name": "Assassin",
-            "level": 0,
-            "xp": 44250,
-            "xpToNext": 1
+            "level": 2,
+            "xp": 2959,
+            "xpToNext": 42
           }
         ],
         "ac": 2,
@@ -286,9 +263,9 @@
         "classes": [
           {
             "name": "Fighter",
-            "level": 0,
-            "xp": 88500,
-            "xpToNext": 1
+            "level": 3,
+            "xp": 5917,
+            "xpToNext": 2084
           }
         ],
         "ac": 2,
@@ -296,7 +273,7 @@
         "wis": 12
       },
       {
-        "name": "Splitty",
+        "name": "Dual-Class Dudley",
         "race": "Human",
         "edition": "1e",
         "splitClass": "Thief",
@@ -309,15 +286,67 @@
           },
           {
             "name": "Thief",
-            "level": 0,
-            "xp": 18150,
+            "level": 4,
+            "xp": 6509,
             "getsBonus": true,
-            "xpToNext": 1
+            "xpToNext": 3174
           }
         ],
         "ac": 2,
         "int": 10,
         "wis": 12
+      }
+    ]
+  },
+  {
+    "name": "Dolmenwood Party",
+    "system": "DW",
+    "xp": 6327,
+    "members": [
+      {
+        "name": "Brother Bunk Logueweave",
+        "race": "Human",
+        "edition": "DW",
+        "classes": [
+          {
+            "name": "Friar",
+            "level": 3,
+            "xp": 6960,
+            "xpToNext": 40
+          }
+        ],
+        "ac": 12,
+        "hp": 8
+      },
+      {
+        "name": "Mossy McMossface",
+        "race": "Mossling",
+        "edition": "DW",
+        "classes": [
+          {
+            "name": "Fighter",
+            "level": 3,
+            "xp": 6327,
+            "xpToNext": 1673
+          }
+        ],
+        "ac": 14,
+        "hp": 16
+      },
+      {
+        "name": "Grimy Grimstone",
+        "race": "Grimalkin",
+        "edition": "DW",
+        "classes": [
+          {
+            "name": "Thief",
+            "level": 4,
+            "xp": 6327,
+            "xpToNext": 3273
+          }
+        ],
+        "ac": 13,
+        "hp": 9
       }
     ]
   }

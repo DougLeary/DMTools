@@ -52,7 +52,7 @@ function savePartyData() {
 }
 
 function updateMemberXp(action, party, member, xp, toClass = null) {
-  console.log(`MemberXp(${party.name}, ${member.name}, ${xp}, ${toClass}`)
+  console.log(`updateMemberXp (${party.name}, ${member.name}, ${xp}, ${toClass}`)
   // internal function to add xp to a whole party (divided between active members),
   // or to a single member (divided between their classes), or optionally to one of a member's classes
   if (!member || isNaN(xp) || member.hide) return false
@@ -146,7 +146,7 @@ function updateXp(action, xp, party, member = null, toClass = null) {
 
 function getPartyLevels(party, showHidden) {
   // return each party member's name, class/class/..., level/level/..., xpToNext/xpToNext/...
-  console.log(`getPartyLevels, ${showHidden ? "" : "don't "}show hidden`)
+  //console.log(`getPartyLevels, ${showHidden ? "" : "don't "}show hidden`)
   const result = {name: party.name, xp: party.xp, members: []}
   party.members.forEach((mem) => {
     if (showHidden || !mem.hasOwnProperty("hide")) {
@@ -185,7 +185,7 @@ function getPartyLevels(party, showHidden) {
             member.classes += `${cls.name}/`
             member.levels += `${cls.level}/`
             member.xpToNext += `${cls.xpToNext} / `
-            console.log(`${member.name} class #{cls.name} xptoNext: ${cls.xpToNext}, reporting ${member.xpToNext}`)
+            //console.log(`${member.name} class #{cls.name} xptoNext: ${cls.xpToNext}, reporting ${member.xpToNext}`)
           })
         }
         // remove trailing /

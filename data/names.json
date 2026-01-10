@@ -92,7 +92,7 @@
       "rules": ["A,HI","B,HI"," R,T"," S,T"],
       "blocks": [
         "A:Apple,Birch,Elm,Pine,Maple,Oak",
-        "B:Arrow,Black,Burl,Fair,Fern,Robins,Sand,Sparrows,Tarn",
+        "B:Arrow,Black,Burl,Fair,Fern,Robin,Sand,Sparrow,Tarn",
         "H:berg,born,bridge,dale,dale,darn,deep,den,den,dorn,down,gard,gate,gate,haven,haven,hold,hold",
         "I:holm,holm,home,home,point,stead,stead,ton,ton,ton,ton,town,town,well,wind,wyn,wood,wood",
         "R:{elf},{dwarf}",
@@ -104,13 +104,13 @@
       "type": "town",
       "flavor": "dismal",
       "show": "true",
-      "rules": "ABC,DE",
+      "rules": ["ABC,DE","ABC,DE","ABC,DE","ABC"],
       "blocks": [
         "A:Angst,Bad,Bale,Charnel,Cringe,Crypt,Damp,Dark,Death,Deep,Dirge,Dire,Dire,Dismal,Dolor,Doom,Dooms,Down,Dull,Dusk,Fester",
-        "B:Filth,Gloom,Glum,Grim,Grim,Hang,Hard,Harsh,Lonely,Mals,Mourn,Mud,Murk,Night,Ochre,Omens,Pale,Pall,Pallor,Perils,Pitys",
+        "B:Filth,Gloom,Glum,Grim,Grim,Hang,Hard,Harsh,Lonely,Mals,Mourn,Mud,Murk,Night,Ochre,Omens,Pale,Pall,Pallor,Peril,Pitys",
         "C:Putrid,Rancid,Rank,Reaper,Retch,Rot,Rotten,Rotling,Rotting,Sad,Sallow,Scorn,Scythe,Shrill,Sorrow,Squalor,Tolling,Wail,Wan,Weeping,Wretch",
-        "D:bane,bane,born,cliff,dale,dale,damp,dark,darn,darn,darn,deep,deep,dire,dire,dirge,doom,dorn,dorn,gloom",
-        "E:glum,gnash,grim,grim,march,marsh,marsh,moon,mourn,muir,thorn,thorn,vail,vale,veil,wail,woe,wood,worm,worn"
+        "D:bane,bane,born,cliff,dale,dale,dale,damp,dark,darn,darn,darn,deep,deep,dire,dire,dirge,doom,dorn,dorn,gloom,glum,gnash",
+        "E:grim,grim,march,march,marsh,marsh,moon,mourn,muir,thorn,thorn,vail,vale,veil,wail,well,well,woe,wood,wood,wood,worm,worn"
       ]
     },
     { 
@@ -121,11 +121,11 @@
         "A:Black,White,Green,Blue,Purple,Scarlet,Crimson,Silver,Golden,Gray,Bronze,Copper",
         "B:Rusty,Velvet,Angry,Cozy,Cozy,Happy,Happy,Tipsy,Sleepy,Grumpy,Bashful,Smiling,Lucky,Lucky,Cheerful,Laughing,Well Fed,Skinny",
         "C:Blind,Spotted,Ticklish,Growling,Scowling,Greasy,Greedy,Slippery,Wily,Crafty,Grinning,Steady,Welcome",
-        "D:Troll,Goblin,Kobold,Witch,Minotaur,Ogre,Eye",
-        "E:Cauldron,Pot,Spoon,Shield,Axe,Sword,Halberd,Baldric,Bracer,Greaves,Lock,Key",
-        "F:Duck,Duck,Goose,Goose,Cow,Mare,Hen,Rooster,Hound,Hound,Dog,Cat,Eagle,Bunny,Hare,Rabbit,Stoat,Weasel,Frog,Toad,Squirrel,Badger",
+        "D:Troll,Goblin,Kobold,Witch,Minotaur,Ogre,Cauldron,Pot,Spoon",
+        "E:Axe,Sword,Halberd,Baldric,Bracer,Greaves,Shield,Lock,Key,Eye,Ear,Nose",
+        "F:{animal}",
         "G:and",
-        "H:Roost,Nest,Lair,Hutch,Den,Burrow,Hollow"
+        "H:Roost,Nest,Lair,Hutch,Den,Burrow,Haven,Hollow"
       ]
     },
     { 
@@ -152,11 +152,18 @@
       ]
     },
     {
-      "type": "animal",
-      "rules": [" AB"],
+      "type": "animal type",
+      "rules": ["A"],
       "blocks": [
-        "A:Arctic Animal,Fur-Bearing Animal,Fish,Insect,Livestock,Mammal,Reptile,Snake,Woodland Creature",
-        "B:Bear,Fox,Squirrel,[Wolf|Wolves]"
+        "A:Arctic Animal,Fur-Bearing Animal,Fish,Insect,Livestock,Mammal,Reptile,Snake,Woodland Creature"
+      ]
+    },
+    {
+      "type": "animal",
+      "rules": ["AB"],
+      "blocks": [
+        "A:Badger,Bat,Bear,Beast,Beaver,Cat,Chicken,Cow,Dog,Duck,Duck,Eagle,Ferret,Fox,Frog,Goose,Goose",
+        "B:Hare,Hen,Hound,Hound,Mare,Mole,Mule,Rabbit,Rat,Rooster,Sheep,Squirrel,Stoat,Toad,Varmint,Weasel,[Wolf|Wolves]"
       ]
     },
     {
@@ -295,11 +302,11 @@
     { 
       "type": "book",
       "show": "true",
-      "rules": " AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBCCD",
+      "rules": " AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBCCCCCD",
       "blocks": [
         "A:{common book}",
         "B:{uncommon book}",
-        "C:{rare book}",
+        "C:{rare book},{school tome}",
         "D:{unique book}"
       ]
     },

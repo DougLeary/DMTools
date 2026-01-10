@@ -1,0 +1,13 @@
+[Unit]
+Description=DM Tools App - various DM utilities for AD&D
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3002
+Type=simple
+User=doug
+ExecStart=/usr/bin/node /media/doug/Titan/Dev/DMTools/app.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

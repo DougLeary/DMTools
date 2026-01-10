@@ -21,7 +21,7 @@ const client = new Client({
 function formatPartyLevels(party) {
   const line = party.name.length + 15
   let st = `\`\`\`\n${party.name}, XP: ${party.xp}\n${'-'.repeat(line)}\n`
-  let maxName = 9
+  let maxName = 9       // layout values for monospace column positions 
   let maxClass = 5
   const maxLevel = 5
   const gutter = 3
@@ -35,11 +35,11 @@ function formatPartyLevels(party) {
   st += 'Character' + ' '.repeat(maxName - 9 + indent + gutter)    // headings
   + 'Class' + ' '.repeat(maxClass - 5 + gutter)
   + 'Level' + ' '.repeat(maxLevel - 5 + gutter)
-  + 'Xp to Next\n'
-  + '-'.repeat(9 + indent) + ' '.repeat(maxName - 9 + gutter)
+  + 'XP to Next Level\n'
+  + '-'.repeat(9 + indent) + ' '.repeat(maxName - 9 + gutter)     // heading underlines
   + '-'.repeat(5) + ' '.repeat(maxClass - 5 + gutter)
   + '-'.repeat(5) + ' '.repeat(maxLevel - 5 + gutter)
-  + '-'.repeat(10) + '\n'
+  + '-'.repeat(16) + '\n'
   
   party.members.forEach((member) => {     
     st += ((member.boss) ? ' '.repeat(indent) : '')
@@ -78,7 +78,7 @@ client.on('messageCreate', message => {
 //  console.log(message)
 
   if (message.content.startsWith("!party xp")) {  // add xp to party
-  if (!message.member.roles.cache.find(role => role.name === 'DM')) {
+    if (!message.member.roles.cache.find(role => role.name === 'DM')) {
       message.channel.send("Command requires DM role.")
       return
     }
