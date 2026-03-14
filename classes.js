@@ -222,6 +222,7 @@ function rollSaves(saves, editionName, className, level) {
 }
 
 module.exports = {
+  getEditions,
   getClasses,
   getEffects,
   getClass,

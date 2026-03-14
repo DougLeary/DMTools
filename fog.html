@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!-- Standalone HTML page to fog/reveal areas of a map (or any image) 
+
+  Open this page in a web browser.
+  Click "Choose File" and select a map file.
+  The entire map starts out fogged. 
+  To unfog areas drag the mouse with the left button held down; to re-fog use Ctrl-drag.
+  Click "Capture" to copy the map in its current state of foggedness to the clipboard.
+  Paste into any app or website (such as Discord) that allows pasting images.
+  Rinse, repeat.
+
+  Other functions:
+    Click Reset to completely refog the map. 
+    Move the on-screen slider to change the brush size. 
+  The original image is never changed. 
+  You can't simply paste a map image into the fogger; it has to be an image file. 
+-->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Map Masking Tool</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial;
+        }
+        menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 40px;
+        }
+        button {
+            height: 30px;
+            margin-top: 3px;
+            margin-left: 3px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-load-label {
+            font: 400 13.3333px Arial;
+            border: 1px solid black;
+            border-style: outset;
+            box-sizing: border-box;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: default;
+        }
+        .file-load-label:hover {
+            background-color:#e0e0e0;
+        }
+        canvas {
+            position: absolute;
+            top: 45px;
+            left: 0;
+            z-index: 100;
+            cursor: none !important;
+        }
+        #cursor-ring {
+            left: -200px;
+            top: -200px;
+            width: 0;
+            height: 0;
+            border: 2px solid #00ff00;
+            position: absolute;
+            z-index: 102;
+            pointer-events: none;
+        }
+        .slidecontainer {
+          width: 300px;
+          display: inline;
+          margin-top:10px;
+        }
+
+        /* The slider itself */
+        .slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 300px;
+          height: 10px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+        }
+
+        /* Mouse-over effects */
+        .slider:hover {
+          opacity: 1; /* Fully shown on mouse-over */
+        }
+
+        /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none; /* Override default look */
+          appearance: none;
+          width: 25px; /* Set a specific slider handle width */
+          height: 25px; /* Slider handle height */
+          background: #4CAF50; /* Green background */
+          cursor: pointer; /* Cursor on hover */
+        }
+
+        .slider::-moz-range-thumb {
+          width: 25px; /* Set a specific slider handle width */
+          height: 25px; /* Slider handle height */
+          background: #4CAF50; /* Green background */
+          cursor: pointer; /* Cursor on hover */
+        }
+        #brushSizeLabel, #slider-value {
+            font: 400 13.3333px Arial;
+        }
+        #slider-value {
+            width: 50px;
+            display: inline;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <canvas id="copy"></canvas>
+        <canvas id="main"></canvas>
+        <canvas id="dark"></canvas>
+    </div>
+    <div id="cursor-ring"></div>
+    <script>
+        let image = new Image();
+        let fogness = 0.4;
+        let darkness = 1;
+        let darkColor = "black";
+        let marks = [];
+        let width = 0;
+        let height = 0;
+        let brushSize = 50;     // default
+        let mouseDown = 0;
+        let cursorRing = null;
+
+        // init canvases and drawing contexts
+        let canvases = {
+            main: document.getElementById("main"),
+            dark: document.getElementById("dark"),
+            copy: document.getElementById("copy")
+        };
+
+        let main = canvases.main.getContext("2d");
+        let dark = canvases.dark.getContext("2d");
+
+        function drawMap(alpha) {
+            // draw map completely fogged
+            main.clearRect(0, 0, width, height);
+            dark.clearRect(0, 0, width, height);
+
+            main.drawImage(image, 0, 0, width, height);
+
+            dark.globalAlpha = alpha;
+            dark.fillStyle = darkColor;
+            dark.fillRect(0, 0, width, height);
+            dark.globalCompositeOperation = 'destination-out';
+
+            for (let i = 0; i < marks.length; i++) {
+                let pos = marks[i];
+                let darkGradient = dark.createRadialGradient(pos.x, pos.y, pos.radius, pos.x, pos.y, pos.radius / 1.2);
+                if (pos.show) {
+                    darkGradient.addColorStop(0, 'black'); //'rgba(0,0,0,0)');
+                    darkGradient.addColorStop(1, 'white'); //'rgba(255,0,0,1)');
+                    dark.globalCompositeOperation = 'destination-out';
+                } else {
+                    darkGradient.addColorStop(0, 'rgba(0,0,0,0.6)');
+                    darkGradient.addColorStop(1, 'rgba(0,0,0,0.6)');
+                    dark.globalCompositeOperation = 'destination-over';
+                }
+                dark.fillStyle = darkGradient;
+                dark.beginPath();
+                dark.arc(pos.x, pos.y, pos.radius, 0, 2 * Math.PI);
+                dark.closePath();
+                dark.fill();
+            }
+            dark.globalCompositeOperation = 'source-over';
+        }
+
+        function captureMap() {
+            // change fog to darkness and save map
+            drawMap(darkness);
+            let copy = canvases.copy.getContext("2d");
+            copy.globalCompositeOperation = 'source-over';
+            copy.clearRect(0, 0, width, height);
+            copy.drawImage(image, 0, 0, width, height);
+            copy.drawImage(canvases.dark, 0, 0);
+            canvases.copy.toBlob(function (blob) {
+                console.log(navigator);
+                const item = new ClipboardItem({ "image/png": blob });
+                navigator.clipboard.write([item]);
+            });
+        }
+
+        function resetMap() {
+            for (let i = marks.length; i > 0; i--) {
+                marks.pop();
+            }
+            drawMap(fogness);
+        }
+
+        function initCursor() {
+            cursorRing = document.getElementById('cursor-ring');
+            cursorRing.style.width = brushSize * 2 + 'px';
+            cursorRing.style.height = brushSize * 2 + 'px';
+            cursorRing.style.borderRadius = brushSize * 2 + 'px';
+            document.getElementById("slider-value").innerHTML = brushSize;
+        }
+
+        function getDistance(pos1, pos2) {
+            let dx = Math.abs(pos1.x - pos2.x);
+            let dy = Math.abs(pos1.y - pos2.y);
+            return Math.sqrt(dx*dx + dy*dy);
+        }
+
+        function moveCursor(e) {
+            // show cursor
+            cursorRing.style.top = e.clientY - brushSize + 'px';
+            cursorRing.style.left = e.clientX - brushSize + 'px';
+            if (!mouseDown) return;
+                let pos = {
+                    x: e.clientX,
+                    y: e.clientY - canvases.main.offsetTop,
+                    radius: brushSize,
+                    show: !e.ctrlKey        // true=show, false=hide
+                };
+                if (marks.length == 0) {
+                    marks.push(pos);
+                }
+                if (getDistance(pos, marks[marks.length - 1]) > pos.radius) {
+                    marks.push(pos);
+                }
+            drawMap(fogness);
+        }
+
+        document.body.onmousedown = function () {
+            mouseDown = true;
+        }
+        document.body.onmouseup = function () {
+            mouseDown = false;
+        }
+        document.body.onload = function () {
+            initCursor();
+            cursorRing.addEventListener("mousemove", moveCursor);
+            canvases.dark.addEventListener("mousemove", moveCursor);
+
+            let slider = document.getElementById("brushResizer");
+            slider.value = brushSize;
+            slider.oninput = function () {
+                brushSize = this.value;
+                initCursor();
+            }
+            document.getElementById('file-load').addEventListener('change', function (e) {
+                let file = e.target.files[0];
+                if (!file) return;
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    image.src = e.target.result;
+                    image.onload = function () {
+                        width = this.width;
+                        height = this.height;
+                        canvases.main.width = canvases.dark.width = canvases.copy.width = width;
+                        canvases.main.height = canvases.dark.height = canvases.copy.height = height;
+                        resetMap();
+                        drawMap(fogness);
+                    };
+                };
+                reader.readAsDataURL(file);
+            }, false);
+//                drawMap(fogness);
+        }
+        document.addEventListener("keydown", function (e) {
+            if (e.which == 90 && e.ctrlKey == true) {
+                marks.pop();
+                drawMap(fogness);
+            }
+        });
+
+    </script>
+    <div class="menu">
+        <label for="file-load" class="file-load-label">Choose File</label>
+        <input type="file" id="file-load" style="height: 30px" />
+        <button onclick="captureMap();">Capture</button>
+        <button onclick="resetMap();">Reset</button>
+        <span id="brushSizeLabel">Brush Size: </span><div id="slider-value"></div>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="brushResizer">
+        </div>
+    </div>
+</body>
+</html>

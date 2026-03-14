@@ -1,13 +1,16 @@
-const appName = "Dmt"
 const express = require('express')
 const path = require('path')
+
+const appName = "Dmt"
+const dataPath = './data/'
+
 const classes = require('./classes')
 const attack = require('./attacks')
-const names = require('./names')
-const dataPath = './data/'
-const defaultFilename = 'names'
-names.load(`${dataPath}${defaultFilename}.json`)
 const party = require('./party')
+
+const names = require('./names')
+const defaultNameGeneratorFile = 'names'
+names.load(`${dataPath}${defaultNameGeneratorFile}.json`)
 
 const app = express()
 app.use(express.json())
@@ -18,10 +21,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'))
 })
 
-app.get('/editions', (req, res) => {
+app.get('/editions/:sysname', (req, res) => {
   // return names of known editions
-  console.log('Edition names')
-  const results = classes.getEditions()
+  console.log(`Get Edition names for ${req.params.sysname}`)
+  const st = classes.getEditions(req.params.sysname)
   res.json(st)
 })
 
@@ -112,14 +115,14 @@ app.get('/names', (req, res) => {
 })
 
 app.get('/names/reload/:filename', (req, res) => {
-  const source = `${dataPath}${req.params.filename || defaultFilename}.json`
+  const source = `${dataPath}${req.params.filename || defaultNameGeneratorFile}.json`
 //  console.log(`param: ${req.params.filename}, reloading ${source}`)
   names.load(source)
   res.json(true)
 })
 
 app.get('/names/reload', (req, res) => {
-  names.load(`${dataPath}${defaultFilename}.json`)
+  names.load(`${dataPath}${defaultNameGeneratorFile}.json`)
   res.json(true)
 })
 

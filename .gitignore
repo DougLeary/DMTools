@@ -1,3 +1,5 @@
+########### Copied from github; add project-specific items at the bottom
+
 # Logs
 logs
 *.log
@@ -40,7 +42,6 @@ build/Release
 node_modules/
 jspm_packages/
 coverage/
-junk
 daemon/
 
 # TypeScript v1 declaration files
@@ -82,8 +83,12 @@ typings/
 # FuseBox cache
 .fusebox/
 
-# Miscellaneous
+########
+# Project-specific items
+########
+
 .vscode
+junk/
 junk.txt
 rules.js
 secret.js
