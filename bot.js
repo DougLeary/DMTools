@@ -14,6 +14,7 @@ const botName = "OSDnD"
 const configChannelName = "osdnd-config"
 const commandRole = "DM"
 const defaultPartyName = "Unknown"
+let isBotConnected = false
 
 const client = new Discord.Client({
 	intents: [
@@ -230,4 +231,49 @@ client.once('ready', () => {
   console.log(`${botName} connected to Discord`)
 })
 
-client.login(secret.loginToken)
+function start() {
+  async function login() {
+      try {
+        const returnedToken = await client.login(secret.loginToken)
+        isRunning = true
+      } catch (error) {
+        isRunning = false
+      }
+    }
+    login()
+
+  // // non-async version
+  // client.login(secret.loginToken)
+  //   .then((returnedToken) => {
+  //     isBotConnected = true
+  //   })
+  //   .catch(error) {
+  //     isBotConnected = false
+  //   }
+}
+
+function stop() {
+  async function shutdown() {
+    await client.destroy()
+    isBotConnected = false
+  }
+
+  // // Using .then()
+  // function shutdownWithThen() {
+  //   console.log('Shutting down...')
+  //   client.destroy().then(() => { // The callback receives no value
+  //     isBotConnected = false
+  //   })
+  // }
+}
+
+function isRunning() {
+  return isBotConnected
+}
+
+module.exports = {
+  start,
+  stop,
+  isRunning,
+  showPartyInfo
+}
