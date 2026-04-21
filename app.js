@@ -19,10 +19,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/editions', (req, res) => {
-  // return names of known editions
+  // return names of known editions for a system (?system=AD&D)
   console.log('Edition names')
-  const results = classes.getEditions()
-  res.json(st)
+  const systemName = req.query.system || 'AD&D'
+  const results = classes.getEditions(systemName)
+  res.json(results)
 })
 
 app.get('/classes', (req, res) => {
@@ -46,16 +47,14 @@ app.get('/attack/:attacks/:thaco/:damage/:ac', (req, res) => {
 app.get('/saves/:edition/:className/:level', (req, res) => {
   // return saving throws for an edition class and level
   console.log(`Saving throws for ${req.params.edition} ${req.params.className} level ${req.params.level}`)
-  const json = classes.getSaves(req.params.edition, req.params.className, req.params.level)
-//  console.log(`Returning ${JSON.stringify(json)}`)
+  const json = classes.getSaves(null, req.params.edition, req.params.className, parseInt(req.params.level, 10))
   res.json(json)
 })
 app.get('/saves/:className/:level', (req, res) => {
   // return saving throws for a class and level, using the first class instance found across editions
   // TODO: probably should return results for ALL instances found, always returning an array
   console.log(`Saving throws for ${req.params.className} level ${req.params.level}`)
-  const json = classes.getSaves(null, req.params.className, req.params.level)
-//  console.log(`Returning ${JSON.stringify(json)}`)
+  const json = classes.getSaves(null, null, req.params.className, parseInt(req.params.level, 10))
   res.json(json)
 })
 app.get('/rollsaves/:saves/:edition/:className/:level', (req, res) => {
@@ -80,13 +79,13 @@ app.get('/classlevels/:xp', (req, res) => {
   res.json(json)
 })
 
-app.get('/party/xp/:action/:partyname/:xp', (req, res) => {
+app.get('/party/xp/:action/:partyname/:xp', async (req, res) => {
   // add or set party xp
   const xp = req.params.xp
   const action = req.params.action.toLowerCase()
   console.log(`${action} ${xp} party xp, ${req.params.partyname}`)
   const pty = party.getParty(req.params.partyname)
-  const json = party.updateXp(action, pty, !isNaN(xp) ? xp : 0)
+  const json = await party.updateXp(action, !isNaN(xp) ? xp : 0, pty)
   res.json(json)
 })
 
@@ -146,12 +145,24 @@ app.get('/names/:count/:type', (req, res) => {
   res.json(json)
 })
 
-const nodeJsPorts = (process.env.node_js_ports ? JSON.parse(process.env.node_js_ports) : [])
-if (nodeJsPorts) {
-  const now = new Date()
-  console.log(`Starting ${appName} server    ${now.toDateString()} ${now.toTimeString().substring(0,8)}`)
-  const port = nodeJsPorts[appName] || 3000
-  app.listen(port, () => console.log(`============= Listening on port ${port} ==============`))
-} else {
-  app.listen() 
-}
+const nodeJsPorts = process.env.node_js_ports ? JSON.parse(process.env.node_js_ports) : []
+const secret = require('./secret')
+const gameData = require('./gameData')
+
+;(async () => {
+  try {
+    await gameData.initialize(secret)
+  } catch (e) {
+    console.error('gameData.initialize failed', e)
+    process.exit(1)
+  }
+
+  if (nodeJsPorts) {
+    const now = new Date()
+    console.log(`Starting ${appName} server    ${now.toDateString()} ${now.toTimeString().substring(0, 8)}`)
+    const port = nodeJsPorts[appName] || 3000
+    app.listen(port, () => console.log(`============= Listening on port ${port} ==============`))
+  } else {
+    app.listen()
+  }
+})()

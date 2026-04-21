@@ -6,13 +6,20 @@ function eq(str1, str2) {
   return (String(str1).toLowerCase() == String(str2).toLowerCase())
 }
 
-const systems = require("./data/classes.json").systems
-// systems.forEach((sys) => { 
-//   console.log(`${sys.name}: ${sys.text}`)
-//   sys.editions.forEach((ed) => {
-//     console.log(`  ${ed.name}: ${ed.text}`)
-//   })
-// })
+/** @type {Array<{ name: string, text: string, editions: object[] }>} */
+let systems = []
+
+function setSystems(tree) {
+  systems = Array.isArray(tree) ? tree : []
+}
+
+function loadSystemsFromFile() {
+  const data = require('./data/classes.json')
+  systems = data.systems || []
+}
+
+// Default: file-based until gameData.initialize() calls setSystems()
+loadSystemsFromFile()
 
 function getSystem(systemName) {
   for (let s in systems) {
@@ -46,30 +53,33 @@ function getEditions(systemName) {
 
 function getEffects(systemName, editionName) {
   const edition = getEdition(systemName, editionName)
-  return (edition) ? edition.effects : []
+  if (!edition) return []
+  const fx = edition.effects
+  return Array.isArray(fx) ? fx : []
 }
 
 function getClasses(systemName, editionName) {
-  // systemName is required; if editionName is present get that edition's classes, else get all classes in the system 
+  // systemName is required; if editionName is present get that edition's classes, else get all classes in the system
   const list = []
   if (editionName) {
     const edition = getEdition(systemName, editionName)
+    if (!edition) return list
     edition.classes.forEach((cls) => {
       list.push(cls.name)
     })
-  } else {
-    const system = getSystem(systemName)
-    if (system) {
-      system.editions.forEach((ed) => {
-        const item = { edition: ed.name, text: ed.text, classes: [] }
-        ed.classes.forEach ((cls) => {
-          item.classes.push(ed.classes[c].name)
-        })
-        list.push(item)
-      })
-    }
     return list
   }
+  const system = getSystem(systemName)
+  if (system) {
+    system.editions.forEach((ed) => {
+      const item = { edition: ed.name, text: ed.text, classes: [] }
+      ed.classes.forEach((cls) => {
+        item.classes.push(cls.name)
+      })
+      list.push(item)
+    })
+  }
+  return list
 }
 
 function getClass(systemName, editionName, className) {
@@ -78,24 +88,41 @@ function getClass(systemName, editionName, className) {
   if (system) {
     if (editionName) {
       const ed = getEdition(systemName, editionName)
+      if (!ed) return null
       for (let c in ed.classes) {
         const cls = ed.classes[c]
         if (eq(cls.name, className)) {
-          return {edition: ed.name, class: cls}
+          return { edition: ed, class: cls }
         }
       }
     } else {
       // find the first matching class in any edition
       for (let ed in system.editions) {
-        for (cls in system.editions[ed].classes) {
+        const edition = system.editions[ed]
+        for (const cls of edition.classes) {
           if (eq(cls.name, className)) {
-            return {edition: system.editions[ed].name, class: cls}
+            return { edition, class: cls }
           }
         }
       }
     }
   }
-  // no matching edition
+  return null
+}
+
+function findClassAcrossSystems(editionName, className) {
+  for (const sys of systems) {
+    const c = getClass(sys.name, editionName, className)
+    if (c) return c
+  }
+  return null
+}
+
+function findClassByNameOnly(className) {
+  for (const sys of systems) {
+    const c = getClass(sys.name, null, className)
+    if (c) return c
+  }
   return null
 }
 
@@ -106,8 +133,8 @@ function getClassLevel(cls, xp) {
   const result = { level: 0, xpToNext: 1 }
 
   let level = 0
-  let xpToNext = 1      // XP to reach the next level (i.e. top of current level +1)
-  let levelRange = 0    // XP per level, for levels above the table
+  let xpToNext = 1 // XP to reach the next level (i.e. top of current level +1)
+  let levelRange = 0 // XP per level, for levels above the table
 
   if (nLevels == 1) {
     // use the one level value we have as levelRange and calculate the current level
@@ -116,22 +143,21 @@ function getClassLevel(cls, xp) {
     result.xpToNext = levelRange * level + 1 - xp
     return result
   } else if (nLevels > 1) {
-    for (let i=0; i < nLevels; i++) {
-      // found xp in the levels array 
+    for (let i = 0; i < nLevels; i++) {
+      // found xp in the levels array
       if (levels[i] >= xp) {
-        result.level = i+1
+        result.level = i + 1
         result.xpToNext = levels[i] + 1 - xp
         return result
-      } 
+      }
     }
     if (level == 0) {
       // xp is beyond the table
-      levelRange = levels[nLevels-1] - levels[nLevels-2]
-      const xpExcess = xp - levels[nLevels-1]
+      levelRange = levels[nLevels - 1] - levels[nLevels - 2]
+      const xpExcess = xp - levels[nLevels - 1]
       const extraLevels = Math.floor(xpExcess / levelRange) + 1
       result.level = nLevels + extraLevels
-      //console.log(`${cls.p ${xp} beyond table, range=${levelRange}, highest=${nLevels} (${levels[nLevels-1]}), excess=${xpExcess}, extraLevels=${extraLevels}, result=${result.level}`)
-      result.xpToNext = (extraLevels * levelRange) - xpExcess
+      result.xpToNext = extraLevels * levelRange - xpExcess
     }
   }
   return result
@@ -146,13 +172,12 @@ function getCharacterLevel(systemName, editionName, className, xp) {
 
 function getAllLevels(systemName, xp) {
   // for each class in the system find the level corresponding to xp
-  const result = {name: "All Classes", xp: xp, members: []}
+  const result = { name: 'All Classes', xp: xp, members: [] }
   const system = getSystem(systemName)
   if (system) {
     system.editions.forEach((ed) => {
       ed.classes.forEach((cls) => {
         const obj = getClassLevel(cls, xp)
-//      console.log(`xp=${xp}, level=${obj.level}, xpToNext=${obj.xpToNext}`)
         obj.edition = ed.name
         obj.class = cls.name
         result.members.push(obj)
@@ -164,21 +189,25 @@ function getAllLevels(systemName, xp) {
 
 function getSaves(systemName, editionName, className, level) {
   // Get saving throw values for a class and level
-  // A class saves as its saveAs class or multiple classes ("class1/class2/...");
-  //   if multiple get the best save for each effect
-  // console.log(`getSaves ${className} ${level}`)
-  const theClass = classes.getClass(systemName, className, editionName)
+  let theClass = null
+  if (systemName) {
+    theClass = getClass(systemName, editionName, className)
+  } else if (editionName) {
+    theClass = findClassAcrossSystems(editionName, className)
+  } else {
+    theClass = findClassByNameOnly(className)
+  }
 
-  if (theClass) {
-    // found the class, now get their best saves
+  if (theClass && theClass.class.saves) {
     const rawSaveAs = theClass.class.saveAs || theClass.class.name
     const saveAs = rawSaveAs.split('/')
     const needs = []
+    const effects = Array.isArray(theClass.edition.effects) ? theClass.edition.effects : []
     // start with a list of worst possible saves for all effects
-    for (let e in theClass.edition.effects) {
+    for (let e in effects) {
       needs.push({
-        effect: theClass.edition.effects[e],
-        need: maxSave
+        effect: effects[e],
+        need: maxSave,
       })
     }
     // for every class the class can save as, update the needs list with best values
@@ -186,15 +215,14 @@ function getSaves(systemName, editionName, className, level) {
       for (let c in theClass.edition.classes) {
         const aClass = theClass.edition.classes[c]
         if (eq(aClass.name, saveClass)) {
-          // console.log(`  getting ${aClass.name} saves`)
-          for (let v in aClass.levels) {
-            // console.log(`  is level ${level} upto ${aClass.saves[v].upto}`)
+          if (!aClass.saves) return
+          for (let v in aClass.saves) {
             if (aClass.saves[v].upto >= level) {
-              // console.log(`save as upto ${aClass.saves[v].upto}`)
-              // found the level; replace needs values if the found values are better
-              for (let e in theClass.edition.effects) {
-                // console.log(`  comparing ${needs[e].need} with ${aClass.saves[v].need[e]}`)
-                needs[e].need = Math.min(needs[e].need, aClass.saves[v].need[e])
+              for (let e in effects) {
+                const needArr = aClass.saves[v].need
+                if (needArr && needArr[e] !== undefined) {
+                  needs[e].need = Math.min(needs[e].need, needArr[e])
+                }
               }
               break
             }
@@ -202,26 +230,36 @@ function getSaves(systemName, editionName, className, level) {
         }
       }
     })
-    return { edition: theClass.edition.name, class: theClass.class.name, saveAs: theClass.class.saveAs, level: level, saves: needs }
+    return {
+      edition: theClass.edition.name,
+      class: theClass.class.name,
+      saveAs: theClass.class.saveAs,
+      level: level,
+      saves: needs,
+    }
   }
   return {}
 }
 
 function rollSaves(saves, editionName, className, level) {
-  // roll a series of saving throws and return results (true=success, false=failure) for all effects
-  const results = getSaves(editionName, className, level)
+  // roll a series of saving throws and return results (true=success, false=failure) for all things
+  const lvl = typeof level === 'number' ? level : parseInt(level, 10)
+  const results = getSaves(null, editionName, className, lvl)
   results.rolls = []
-  for (let i=0; i < saves; i++) {
+  const saveRows = results.saves || []
+  const n = parseInt(saves, 10) || 0
+  for (let i = 0; i < n; i++) {
     const roll = savingThrow.roll().total
-    results.rolls.push({roll: roll, saves: []})
-    for (let n=0; n < results.saves.length; n++) {
-      results.rolls[i].saves.push(roll >= results.saves[n].need)
+    results.rolls.push({ roll: roll, saves: [] })
+    for (let j = 0; j < saveRows.length; j++) {
+      results.rolls[i].saves.push(roll >= saveRows[j].need)
     }
   }
   return results
 }
 
 module.exports = {
+  setSystems,
   getClasses,
   getEffects,
   getClass,
@@ -229,5 +267,6 @@ module.exports = {
   getCharacterLevel,
   getAllLevels,
   getSaves,
-  rollSaves
+  rollSaves,
+  getEditions,
 }
