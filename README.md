@@ -1,5 +1,5 @@
 # DMTools
-Tools for DMing 1st Edition AD&amp;D. Some of them work with .json files containing hand-entered data from AD&D books - currently the 1e Player's Handbook, Unearthed Arcana, and Oriental Adventures, which the software calls "editions". There is also an edition called "Custom" for things from Dragon Magazine, homebrew material, or whatever. 
+Tools for DMing 1st Edition AD&amp;D. Some of them work with .json files containing hand-entered data from AD&D books - currently the 1e Player's Handbook, Unearthed Arcana, and Oriental Adventures, which the software calls "editions". There is an edition called "Custom" for things from Dragon Magazine, homebrew material, or whatever. 
 
 ## Available Tools ## 
 1. Display class experience levels for an XP value, and how far it is to the next level.

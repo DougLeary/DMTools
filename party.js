@@ -1,60 +1,52 @@
+const partyFilename = './data/party.json'
 const parties = []
-const classes = require('./classes')
-const Actions = { set: 'set', add: 'add' }
+const classes = require("./classes")
+const fs = require('fs')
+const Actions = { set:"set", add:"add" }
 
-/** @type {null | ((party: object) => Promise<void>)} */
-let _persistHandler = null
-
-function setPersistHandler(fn) {
-  _persistHandler = typeof fn === 'function' ? fn : null
-}
-
-function importParties(arr) {
+function loadParties() {
+  const resolved = require.resolve(partyFilename)
+  delete require.cache[resolved]
+  const data = require(partyFilename)
   parties.length = 0
-  if (!Array.isArray(arr)) return
-  arr.forEach((p) => parties.push(p))
+  data.forEach((party) => {
+    parties.push(party)
+  })
 }
 
 function eq(str1, str2) {
-  return String(str1).toLowerCase() == String(str2).toLowerCase()
+  return (String(str1).toLowerCase() == String(str2).toLowerCase())
 }
 
 function getPartyNames() {
   const arr = []
-  parties.forEach((party) => {
-    arr.push(party.name)
-  })
+  parties.forEach((party) => { arr.push(party.name) })
   return arr
 }
 
 function getParty(name) {
   let result = null
-  parties.forEach((party) => {
-    if (eq(party.name, name)) {
-      result = party
-    }
+  parties.forEach((party) => { 
+    if (eq(party.name, name)) { result = party }
   })
   return result
 }
 
 function getPartyMember(party, memberName) {
-  for (const member of party.members) {
-    if (eq(member.name, memberName)) {
-      return member
-    }
+  for (let member in party.members) {
+    if (eq(member.name, memberName)) { return member }
   }
   return null
 }
 
-async function savePartyData(party) {
-  const result = { success: true }
-  if (_persistHandler && party) {
-    try {
-      await _persistHandler(party)
-    } catch (error) {
-      console.log('Error persisting party to DisDB', error)
-      result.success = false
-    }
+function savePartyData() {
+  const result = {success: true}
+  try {
+    fs.writeFileSync(partyFilename, JSON.stringify(parties, null, 2), 'utf8')
+    console.log(`${partyFilename} updated`)
+  } catch (error) {
+    console.log(`Error writing file ${partyFilename}`)
+    result.success = false
   }
   return result
 }
@@ -89,9 +81,9 @@ function updateMemberXp(action, party, member, xp, toClass = null) {
         if (!toClass || eq(cls.name, toClass)) {
           console.log(`${member.name}  ${cls.name}  adding ${classXp}`)
           if (action == Actions.add) {
-            cls.xp += cls.getsBonus ? Math.round(classXp * 1.1) : classXp
+            cls.xp += (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
           } else {
-            cls.xp = cls.getsBonus ? Math.round(classXp * 1.1) : classXp
+            cls.xp = (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
           }
           const obj = classes.getCharacterLevel(party.system, member.edition, cls.name, cls.xp)
           cls.level = obj.level
@@ -101,13 +93,14 @@ function updateMemberXp(action, party, member, xp, toClass = null) {
     })
   } else {
     // divide xp between classes or add entirely to toClass
-    let classXp = toClass ? xp / 1 : Math.round(xp / member.classes.length)
+    let classXp = (toClass) ? xp / 1 : Math.round(xp / member.classes.length)
     member.classes.forEach((cls) => {
       if (!toClass || eq(cls.name, toClass)) {
+        const prevXp = cls.xp
         if (action == Actions.add) {
-          cls.xp += cls.getsBonus ? Math.round(classXp * 1.1) : classXp
+          cls.xp += (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
         } else {
-          cls.xp = cls.getsBonus ? Math.round(classXp * 1.1) : classXp
+          cls.xp = (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
         }
         const obj = classes.getCharacterLevel(party.system, member.edition, cls.name, cls.xp)
         cls.level = obj.level
@@ -118,53 +111,46 @@ function updateMemberXp(action, party, member, xp, toClass = null) {
   return true
 }
 
-function updatePartyXp(action, party, xp) {
-  // add to the common party xp and add a share to all members, +10% bonus for those who get it
+function updateAllMembersXp(action, party, xp) {
+  // add to every member's xp, +10% bonus for those who get it
   if (!party || isNaN(xp) || !xp) return false
   // determine member share
-  let shares = 0
-  party.members.forEach((member) => {
-    if (!member.hide) shares++
-  })
-  const memberXp = Math.round(xp / shares)
+  // let shares = 0
+  // party.members.forEach((member) => {
+  //   if (!member.hide) shares++ 
+  // })
+  const memberXp = xp   //Math.round(xp / shares)
 
   let ok = true
   party.members.forEach((member) => {
-    if (!member.hide) {
-      ok = ok && updateMemberXp(action, party, member, memberXp)
-    }
-  })
-  if (!ok) return false
+    if (!member.hide) { ok = ok && updateMemberXp(action, party, member, memberXp) }
+  }) 
+  if (!ok) return false     // to do: if one update fails roll back those that have succeeded, otherwise we leave member xp in a weird state 
 
   if (action == Actions.add) {
     party.xp = parseInt(party.xp) + parseInt(memberXp)
   } else {
     party.xp = parseInt(xp)
   }
-
+  
   return true
 }
 
-async function updateXp(action, xp, party, member = null, toClass = null) {
-  // update member xp or party xp, persisting to DisDB if successful
+function updateXp(action, xp, party, member = null, toClass = null) {
+  // update member xp or party xp, saving JSON if successful
   if (member) {
-    const ok = updateMemberXp(action, party, member, xp, toClass)
-    if (!ok) return { success: false }
-    const r = await savePartyData(party)
-    return { success: r.success }
+    return updateMemberXp(action, xp, party, member, toClass) && savePartyData()
   }
-  const ok = updatePartyXp(action, party, xp)
-  if (!ok) return { success: false }
-  const r = await savePartyData(party)
-  return { success: r.success }
+  return updateAllMembersXp(action, xp, party) && savePartyData()
 }
 
 function getPartyLevels(party, showHidden) {
   // return each party member's name, class/class/..., level/level/..., xpToNext/xpToNext/...
-  const result = { name: party.name, xp: party.xp, members: [] }
+  //console.log(`getPartyLevels, ${showHidden ? "" : "don't "}show hidden`)
+  const result = {name: party.name, xp: party.xp, members: []}
   party.members.forEach((mem) => {
-    if (showHidden || !mem.hasOwnProperty('hide')) {
-      const member = { name: mem.name, classes: '', levels: '', xpToNext: '' }
+    if (showHidden || !mem.hasOwnProperty("hide")) {
+      const member = {name: mem.name, classes: "", levels: "", xpToNext: ""}
       if (mem.splitClass) {
         mem.classes.forEach((cls) => {
           if (cls.name == mem.splitClass) {
@@ -174,7 +160,7 @@ function getPartyLevels(party, showHidden) {
           }
         })
       } else {
-        if (mem.hasOwnProperty('boss')) {
+        if (mem.hasOwnProperty("boss")) {
           // henchman; report all class levels as their boss's lowest level - 2
           member.boss = mem.boss
           let minBossLevel = 99999
@@ -199,12 +185,13 @@ function getPartyLevels(party, showHidden) {
             member.classes += `${cls.name}/`
             member.levels += `${cls.level}/`
             member.xpToNext += `${cls.xpToNext} / `
+            //console.log(`${member.name} class #{cls.name} xptoNext: ${cls.xpToNext}, reporting ${member.xpToNext}`)
           })
         }
         // remove trailing /
-        member.classes = member.classes.substring(0, member.classes.length - 1)
-        member.levels = member.levels.substring(0, member.levels.length - 1)
-        member.xpToNext = member.xpToNext.substring(0, member.xpToNext.length - 3)
+        member.classes = member.classes.substring(0, member.classes.length-1)
+        member.levels = member.levels.substring(0, member.levels.length-1)
+        member.xpToNext = member.xpToNext.substring(0, member.xpToNext.length-3)
       }
       result.members.push(member)
     }
@@ -212,12 +199,13 @@ function getPartyLevels(party, showHidden) {
   return result
 }
 
+loadParties()
+
 module.exports = {
   Actions,
-  importParties,
-  setPersistHandler,
+  loadParties,
   getParty,
   getPartyNames,
   getPartyLevels,
-  updateXp,
+  updateXp
 }

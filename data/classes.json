@@ -1,5 +1,5 @@
 { "systems": [
-  { "name": "AD&D",
+  { "name": "ADD",
     "text": "Advanced Dungeons & Dragons",
     "editions": [
       { "name": "1e",
@@ -58,7 +58,7 @@
             "saveAs": "Fighter"},
           { "name": "Ranger",
             "hitDie": "d10",
-            "bonusDie": 0,
+            "bonusDie": 1,
             "maxHD": 10,
             "thenHP": 2,
             "levels": [2250, 4500, 10000, 20000, 40000, 90000, 150000, 225000, 325000, 650000, 975000, 1300000],
@@ -121,6 +121,20 @@
             "thenHP": 1,
             "levels": [2000, 4000, 8000, 16000, 25000, 40000, 60000, 85000, 110000, 150000, 200000, 400000, 600000, 800000, 1000000, 1200000, 1400000, 1600000, 1800000, 2000000, 2200000, 3000000, 2000000000],
             "saveAs": "Cleric/Fighter/Thief"}
+        ]
+      },
+      { "name": "2e",
+        "text": "Second Edition",
+        "classes": [
+          {
+            "name": "Bard",
+            "hitDie": "d6",
+            "bonusDie": 0,
+            "maxHD": 10,
+            "thenHP": 2,
+            "levels": [1250, 2500, 5000, 10000, 20000, 40000, 70000, 110000, 160000, 220000, 440000],
+            "saveAs": "1e:Thief"
+          }
         ]
       },
       { "name": "UA",
