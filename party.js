@@ -57,7 +57,7 @@ function updateMemberXp(action, party, member, xp, toClass = null) {
   // or to a single member (divided between their classes), or optionally to one of a member's classes
   if (!member || isNaN(xp) || member.hide) return false
   if (member.boss) {
-    // henchman; set levels = boss's lowest level-2; henchman cannot be split-class
+    // henchman; set levels = boss's lowest level-2; henchmen cannot be multiclassed or split
     let minBossLevel = 99999
     // find the boss and get their lowest level
     party.members.forEach((mem) => {

@@ -2,7 +2,7 @@
   {
     "name": "Arden Vooligans",
     "system": "ADD",
-    "xp": 12270,
+    "xp": 13120,
     "members": [
       {
         "name": "Theodora Silvia",
@@ -12,8 +12,9 @@
           {
             "name": "Bard",
             "level": 5,
-            "xp": 12270,
-            "xpToNext": 7731
+            "getsBonus": true,
+            "xp": 13205,
+            "xpToNext": 6178
           }
         ]
       },
@@ -25,8 +26,9 @@
           {
             "name": "Bushi",
             "level": 4,
-            "xp": 12270,
-            "xpToNext": 1731
+            "getsBonus": true,
+            "xp": 13205,
+            "xpToNext": 723
           }
         ]
       },
@@ -38,14 +40,14 @@
           {
             "name": "Cleric",
             "level": 4,
-            "xp": 6137,
-            "xpToNext": 6864
+            "xp": 6562,
+            "xpToNext": 6439
           },
           {
             "name": "Thief",
             "level": 4,
-            "xp": 6137,
-            "xpToNext": 3864
+            "xp": 6562,
+            "xpToNext": 3439
           }
         ]
       },
@@ -57,14 +59,15 @@
           {
             "name": "Fighter",
             "level": 3,
-            "xp": 6137,
-            "xpToNext": 1864
+            "getsBonus": true,
+            "xp": 6605,
+            "xpToNext": 1269
           },
           {
             "name": "Magic-User",
             "level": 3,
-            "xp": 6137,
-            "xpToNext": 3864
+            "xp": 6562,
+            "xpToNext": 3439
           }
         ]
       },
@@ -76,8 +79,8 @@
           {
             "name": "Barbarian",
             "level": 3,
-            "xp": 12270,
-            "xpToNext": 11731
+            "xp": 13120,
+            "xpToNext": 10881
           }
         ]
       },
@@ -89,40 +92,41 @@
           {
             "name": "Magic-User",
             "level": 4,
-            "xp": 12270,
-            "xpToNext": 10231
+            "xp": 13120,
+            "xpToNext": 9381
           }
         ]
       },
       {
-        "name": "St. ABBA John",
+        "name": "St. Abba John",
         "race": "Duergar",
         "edition": "1e",
         "classes": [
           {
             "name": "Paladin",
             "level": 4,
-            "xp": 12270,
-            "xpToNext": 11731
+            "xp": 13120,
+            "xpToNext": 10881
           }
         ]
       },
       {
         "name": "Olaf Petersen",
-        "race": "Human",
+        "race": "Half-Elf",
         "edition": "1e",
         "classes": [
           {
             "name": "Ranger",
             "level": 3,
-            "xp": 6137,
-            "xpToNext": 3864
+            "xp": 6605,
+            "getsBonus": true,
+            "xpToNext": 3087
           },
           {
             "name": "Magic-User",
             "level": 3,
-            "xp": 6137,
-            "xpToNext": 3864
+            "xp": 6562,
+            "xpToNext": 3439
           }
         ]
       }

@@ -1,4 +1,5 @@
-const appName = "Dmt"
+const appId = "Dmt"
+const appName = "DMTools"
 const express = require('express')
 const path = require('path')
 const classes = require('./classes')
@@ -149,9 +150,9 @@ app.get('/names/:count/:type', (req, res) => {
 const nodeJsPorts = (process.env.node_js_ports ? JSON.parse(process.env.node_js_ports) : [])
 if (nodeJsPorts) {
   const now = new Date()
-  console.log(`Starting ${appName} server    ${now.toDateString()} ${now.toTimeString().substring(0,8)}`)
-  const port = nodeJsPorts[appName] || 3000
-  app.listen(port, () => console.log(`============= Listening on port ${port} ==============`))
+  console.log(`Starting on ${now.toDateString()} ${now.toTimeString().substring(0,8)}`)
+  const port = nodeJsPorts[appId] || 3000
+  app.listen(port, () => console.log(`============= ${appName} Listening on port ${port} ==============`))
 } else {
   app.listen() 
 }
