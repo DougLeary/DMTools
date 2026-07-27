@@ -20,7 +20,7 @@ const client = new Client({
 ]})
 
 function formatPartyLevels(party) {
-  const line = party.name.length + 15
+  const line = party.name.length + 30
   let st = `\`\`\`\n${party.name}, XP: ${party.xp} (+10% = ${Math.floor(party.xp * 1.1)})\n${'-'.repeat(line)}\n`
   let maxName = 9       // layout values for monospace column positions 
   let maxClass = 5
@@ -63,6 +63,7 @@ function isDeletable(msg) {
 
 async function scrubChannel(channel, criteriaFn) {
   // delete messages up to 14 days old that meet the criteria, in batches of 100
+  console.log("Scrub Channel")
   if (!channel) throw new Error("scrubMessages requires a valid channel.")
 
   let lastMessageId = null
@@ -96,19 +97,23 @@ async function scrubChannel(channel, criteriaFn) {
 }
 
 function showPartyLevels(channel) {
-  console.log(`Get party levels for ${partyName}`)
+  console.log(`Show party levels for ${partyName}`)
   const pty = party.getParty(partyName)
   const json = party.getPartyLevels(pty, 0)
-  const partyInfo = formatPartyLevels(json)
-  channel.send(partyInfo)
+  const result = formatPartyLevels(json)
+  console.log(`--- Sending discord msg:\n${json.name}, ${json.members[0].name}\nformatted:\n   ${result}`)
+  try {
+    channel.send(result)
+    console.log("Message sent to Discord")
+  } catch(err) {
+    console.log(`Error sending message ${result.substring(0,4)}... \nError: ${err.message}`)
+  }
 }
 
 function addPartyXp(channel, xpToAdd) {
-  console.log(`Add ${xpToAdd} xp to ${partyName}`)
+  console.log(`Add ${xpToAdd} xp to each member of ${partyName}`)
   const pty = party.getParty(partyName)
-  party.updateXp(party.Actions.add, pty, xpToAdd)
-  
-  showPartyLevels(channel)
+  party.updateXp(party.Actions.add, xpToAdd, pty)
 }
 
 client.once('ready', () => {
@@ -121,25 +126,35 @@ client.on('messageCreate', message => {
 //  console.log(message)
 
   // tokenize and parse command
-  const tokens = message.content.trim().split(' ')
-  const cmd = tokens[0].toLowerCase()
-  if (cmd == "!party") {
-    if (tokens[1] == "xp") {
-      const xp = !isNaN(tokens[3]) ? parseInt(tokens[3]) : 0
-      if (xp == 0) return
-      if (tokens[2] == "set") {
-        // setting party xp to a flat number not implemented; start with all member xp = 0 and use !party xp add 
-      } else if (tokens[2] == "add") {
-        addPartyXp(message.channel, xp)
+  if (message.content.startsWith('!')) {
+    console.log(`-- Handling ${message.content}`)
+    const tokens = message.content.trim().split(' ')
+    const cmd = tokens[0].toLowerCase()
+    if (cmd == "!party") {
+      if (tokens[1] == "xp") {
+        const xp = !isNaN(tokens[3]) ? parseInt(tokens[3]) : 0
+        if (xp == 0) return
+        if (tokens[2] == "set") {
+          // setting party xp to a flat number not implemented; until then manually set all member xp to 0 and use !party xp add 
+        } else if (tokens[2] == "add") {
+          addPartyXp(message.channel, xp)
+        }
+        showPartyLevels(message.channel)
+      } else {    // show party levels
+        showPartyLevels(message.channel)
       }
-    } else {    // show party levels
-      showPartyLevels(message.channel)
+      // try {
+      //   message.delete()
+      //   console.log(`Command ${cmd} deleted.`)
+      // } catch(err) {
+      //   console.log(`Error trying to delete message ${cmd}; Error:\n${err.message}`)
+      // }
+    } else if (cmd == "!scrub") {
+        scrubChannel(message.channel, isDeletable);
+        message.delete();
     }
-    message.delete()
-  } else if (cmd == "!scrub") {
-      scrubChannel(message.channel, isDeletable);
-      message.delete();
   }
 })
 
+//client.on('disconnect',)
 client.login(secret.loginToken)

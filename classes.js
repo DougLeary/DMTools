@@ -17,7 +17,7 @@ const systems = require("./data/classes.json").systems
 function getSystem(systemName) {
   for (let s in systems) {
     const system = systems[s]
-    if (eq(system.name, systemName)) return system
+    if (eq(system.name.toLowerCase(), systemName.toLowerCase())) return system
   }
   return null
 }
@@ -145,6 +145,7 @@ function getCharacterLevel(systemName, editionName, className, xp) {
 }
 
 function getAllLevels(systemName, xp) {
+  console.log('classes.getAllLevels')
   // for each class in the system find the level corresponding to xp
   const result = {name: "All Classes", xp: xp, members: []}
   const system = getSystem(systemName)
@@ -164,27 +165,28 @@ function getAllLevels(systemName, xp) {
 
 function getSaves(systemName, editionName, className, level) {
   // Get saving throw values for a class and level
-  // A class saves as its saveAs class or multiple classes ("class1/class2/...");
+  // A class saves as its saveAs class or uses the best save for multiple classes ("class1/class2/...");
   //   if multiple get the best save for each effect
+  // TO DO: also implement "edition:class" syntax in saveAs classes, as in "2e:thief"
   // console.log(`getSaves ${className} ${level}`)
-  const theClass = classes.getClass(systemName, className, editionName)
+  const classObj = getClass(systemName, className, editionName)
 
-  if (theClass) {
+  if (classObj) {
     // found the class, now get their best saves
-    const rawSaveAs = theClass.class.saveAs || theClass.class.name
-    const saveAs = rawSaveAs.split('/')
+    const rawSaveAs = classObj.class.saveAs || classObj.class.name
+    const saveAs = rawSaveAs.split('/')   // best-of list 
     const needs = []
     // start with a list of worst possible saves for all effects
-    for (let e in theClass.edition.effects) {
+    for (let e in classObj.edition.effects) {
       needs.push({
-        effect: theClass.edition.effects[e],
+        effect: classObj.edition.effects[e],
         need: maxSave
       })
     }
     // for every class the class can save as, update the needs list with best values
     saveAs.forEach((saveClass) => {
-      for (let c in theClass.edition.classes) {
-        const aClass = theClass.edition.classes[c]
+      for (let c in classObj.edition.classes) {
+        const aClass = classObj.edition.classes[c]
         if (eq(aClass.name, saveClass)) {
           // console.log(`  getting ${aClass.name} saves`)
           for (let v in aClass.levels) {
@@ -192,7 +194,7 @@ function getSaves(systemName, editionName, className, level) {
             if (aClass.saves[v].upto >= level) {
               // console.log(`save as upto ${aClass.saves[v].upto}`)
               // found the level; replace needs values if the found values are better
-              for (let e in theClass.edition.effects) {
+              for (let e in classObj.edition.effects) {
                 // console.log(`  comparing ${needs[e].need} with ${aClass.saves[v].need[e]}`)
                 needs[e].need = Math.min(needs[e].need, aClass.saves[v].need[e])
               }
@@ -202,7 +204,7 @@ function getSaves(systemName, editionName, className, level) {
         }
       }
     })
-    return { edition: theClass.edition.name, class: theClass.class.name, saveAs: theClass.class.saveAs, level: level, saves: needs }
+    return { edition: classObj.edition.name, class: classObj.class.name, saveAs: classObj.class.saveAs, level: level, saves: needs }
   }
   return {}
 }
@@ -222,6 +224,7 @@ function rollSaves(saves, editionName, className, level) {
 }
 
 module.exports = {
+  getEditions,
   getClasses,
   getEffects,
   getClass,

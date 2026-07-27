@@ -104,13 +104,16 @@
       "type": "town",
       "flavor": "dismal",
       "show": "true",
-      "rules": ["ABC,DE","ABC,DE","ABC,DE","ABC"],
+      "rules": ["ABC,DE","ABC,DE","ABC,DE","ABC","ABC"," ABC,FG"," ABC,FG"],
       "blocks": [
-        "A:Angst,Bad,Bale,Charnel,Cringe,Crypt,Damp,Dark,Death,Deep,Dirge,Dire,Dire,Dismal,Dolor,Doom,Dooms,Down,Dull,Dusk,Fester",
-        "B:Filth,Gloom,Glum,Grim,Grim,Hang,Hard,Harsh,Lonely,Mals,Mourn,Mud,Murk,Night,Ochre,Omens,Pale,Pall,Pallor,Peril,Pitys",
-        "C:Putrid,Rancid,Rank,Reaper,Retch,Rot,Rotten,Rotling,Rotting,Sad,Sallow,Scorn,Scythe,Shrill,Sorrow,Squalor,Tolling,Wail,Wan,Weeping,Wretch",
-        "D:bane,bane,born,cliff,dale,dale,dale,damp,dark,darn,darn,darn,deep,deep,dire,dire,dirge,doom,dorn,dorn,gloom,glum,gnash",
-        "E:grim,grim,march,march,marsh,marsh,moon,mourn,muir,thorn,thorn,vail,vale,veil,wail,well,well,woe,wood,wood,wood,worm,worn"
+        "A:Angst,Bad,Bale,Bitter,Charnel,Cringe,Crypt,Damp,Dark,Death,Deep,Dim,Dirge,Dire,Dire,Dismal,Dolor,Doom,Dooms,Down,Dull,Dusk,Fester,Festering,Filth,Gloom",
+        "B:Glum,Grim,Grim,Hang,Hard,Harsh,Leaky,Lonely,Mal,Mals,Mire,Mourn,Mud,Murk,Night,Ochre,Omens,Pale,Pall,Pallor,Peat,Peril,Pitys,Putrid,Rancid,Rank,Reaper,Retch",
+        "C:Rot,Rotten,Rotling,Rotting,Sad,Sallow,Scorn,Scythe,Shrill,Sorrow,Sour,Squalor,Tolling,Wail,Wailing,Wan,Weeping,Widow's,Withering,Wretch,Wretched",
+        "D:bane,bane,born,cliff,dale,dale,dale,damp,dark,darn,darn,darn,deep,deep,dire,dire,dirge,doom,dorn,dorn,down,down,gloom,glum,gnash",
+        "E:grim,grim,march,march,marsh,marsh,mire,moon,mourn,muir,thorn,thorn,vail,vale,veil,wail,well,well,woe,wood,wood,wood,worm,worn",
+        "F:Bend,Brook,Canyon,Cliff,Copse,Cove,Crag,Creek,Crest,Crook,Crossing,Dale,Falls,Fen,Flat,Ford,Gap,Glen,Gully,Harbor,Heights",
+        "G:Hill,Knoll,Knot,Marsh,Meadow,Mouth,Neck,Peak,Point,Pond,Port,Prairie,Ridge,Springs,Summit,Town,Valley,Wood,Woods",
+        "H:bend,burg,dale,dell,dill,dole"
       ]
     },
     { 

@@ -5,9 +5,10 @@ const fs = require('fs')
 const Actions = { set:"set", add:"add" }
 
 function loadParties() {
+  console.log('Loading parties')
   const resolved = require.resolve(partyFilename)
   delete require.cache[resolved]
-  const data = require(partyFilename)
+  const data = require(resolved)
   parties.length = 0
   data.forEach((party) => {
     parties.push(party)
@@ -51,8 +52,8 @@ function savePartyData() {
   return result
 }
 
-function updateMemberXp(action, party, member, xp, toClass = null) {
-  console.log(`updateMemberXp (${party.name}, ${member.name}, ${xp}, ${toClass}`)
+function updateMemberXp(action, xp, party, member, toClass = null) {
+  console.log(`updateMemberXp (${action} ${xp} to ${party.name}, member ${member.name}, class ${toClass}`)
   // internal function to add xp to a whole party (divided between active members),
   // or to a single member (divided between their classes), or optionally to one of a member's classes
   if (!member || isNaN(xp) || member.hide) return false
@@ -95,14 +96,19 @@ function updateMemberXp(action, party, member, xp, toClass = null) {
     // divide xp between classes or add entirely to toClass
     let classXp = (toClass) ? xp / 1 : Math.round(xp / member.classes.length)
     member.classes.forEach((cls) => {
-      if (!toClass || eq(cls.name, toClass)) {
+      // parse class name, getting edition if it's edition:class, otherwise default to party edition
+      const arr = cls.name.split(':')
+      const tClass = arr[1] || arr[0]
+      const tEdition = (arr[1]) ? arr[0] : party.edition
+      if (!toClass || eq(tClass, toClass)) {
         const prevXp = cls.xp
         if (action == Actions.add) {
           cls.xp += (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
         } else {
           cls.xp = (cls.getsBonus) ? Math.round(classXp * 1.1) : classXp
         }
-        const obj = classes.getCharacterLevel(party.system, member.edition, cls.name, cls.xp)
+        console.log(`Getting class ${party.system}, ${tEdition}, ${tClass}`)
+        const obj = classes.getCharacterLevel(party.system, tEdition, tClass, cls.xp)
         cls.level = obj.level
         cls.xpToNext = cls.getsBonus ? Math.floor(obj.xpToNext / 1.1) : obj.xpToNext
       }
@@ -111,7 +117,7 @@ function updateMemberXp(action, party, member, xp, toClass = null) {
   return true
 }
 
-function updateAllMembersXp(action, party, xp) {
+function updateAllMembersXp(action, xp, party) {
   // add to every member's xp, +10% bonus for those who get it
   if (!party || isNaN(xp) || !xp) return false
   // determine member share
@@ -123,7 +129,7 @@ function updateAllMembersXp(action, party, xp) {
 
   let ok = true
   party.members.forEach((member) => {
-    if (!member.hide) { ok = ok && updateMemberXp(action, party, member, memberXp) }
+    if (!member.hide) { ok = ok && updateMemberXp(action, memberXp, party, member) }
   }) 
   if (!ok) return false     // to do: if one update fails roll back those that have succeeded, otherwise we leave member xp in a weird state 
 
@@ -137,6 +143,7 @@ function updateAllMembersXp(action, party, xp) {
 }
 
 function updateXp(action, xp, party, member = null, toClass = null) {
+  console.log(`party.updateXP(action ${action}, xp ${xp}, party ${party.name}, member ${member}, toClass ${toClass})`)
   // update member xp or party xp, saving JSON if successful
   if (member) {
     return updateMemberXp(action, xp, party, member, toClass) && savePartyData()
@@ -146,7 +153,7 @@ function updateXp(action, xp, party, member = null, toClass = null) {
 
 function getPartyLevels(party, showHidden) {
   // return each party member's name, class/class/..., level/level/..., xpToNext/xpToNext/...
-  //console.log(`getPartyLevels, ${showHidden ? "" : "don't "}show hidden`)
+  console.log(`getPartyLevels, ${showHidden ? "" : "don't "}show hidden`)
   const result = {name: party.name, xp: party.xp, members: []}
   party.members.forEach((mem) => {
     if (showHidden || !mem.hasOwnProperty("hide")) {
@@ -194,6 +201,7 @@ function getPartyLevels(party, showHidden) {
         member.xpToNext = member.xpToNext.substring(0, member.xpToNext.length-3)
       }
       result.members.push(member)
+      //console.log(`${member.name}: ${member.classes}`)
     }
   })
   return result

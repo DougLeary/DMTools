@@ -2,131 +2,147 @@
   {
     "name": "Arden Vooligans",
     "system": "ADD",
-    "xp": 13120,
+    "edition": "1e",
+    "xp": 14970,
     "members": [
       {
         "name": "Theodora Silvia",
         "race": "Valley Elf",
-        "edition": "2e",
         "classes": [
           {
-            "name": "Bard",
-            "level": 5,
+            "name": "2e:Bard",
+            "level": 4,
             "getsBonus": true,
-            "xp": 13205,
-            "xpToNext": 6178
+            "xp": 7578,
+            "xpToNext": 2202
+          },
+          {
+            "name": "Magic-User",
+            "edition": "1e",
+            "level": 3,
+            "getsBonus": true,
+            "xp": 7578,
+            "xpToNext": 2202
           }
         ]
       },
       {
         "name": "Quinton Quintus",
         "race": "Imperial Goblin",
-        "edition": "OA",
         "classes": [
           {
-            "name": "Bushi",
-            "level": 4,
+            "name": "OA:Bushi",
+            "level": 5,
             "getsBonus": true,
-            "xp": 13205,
-            "xpToNext": 723
+            "xp": 15240,
+            "xpToNext": 13419
           }
         ]
       },
       {
         "name": "Corvin Whiteroot",
         "race": "Halfling",
-        "edition": "1e",
         "classes": [
           {
             "name": "Cleric",
             "level": 4,
-            "xp": 6562,
-            "xpToNext": 6439
+            "xp": 7485,
+            "xpToNext": 5516
           },
           {
             "name": "Thief",
             "level": 4,
-            "xp": 6562,
-            "xpToNext": 3439
+            "xp": 7485,
+            "xpToNext": 2516
           }
         ]
       },
       {
         "name": "Seth Erandi",
         "race": "Albino Drow",
-        "edition": "1e",
         "classes": [
           {
             "name": "Fighter",
             "level": 3,
             "getsBonus": true,
-            "xp": 6605,
-            "xpToNext": 1269
+            "xp": 7578,
+            "xpToNext": 384
           },
           {
             "name": "Magic-User",
             "level": 3,
-            "xp": 6562,
-            "xpToNext": 3439
+            "xp": 7485,
+            "xpToNext": 2516
           }
         ]
       },
       {
         "name": "Altille Gorbon Garvonne",
         "race": "Tortle",
-        "edition": "UA",
         "classes": [
           {
-            "name": "Barbarian",
+            "name": "UA:Barbarian",
             "level": 3,
-            "xp": 13120,
-            "xpToNext": 10881
+            "xp": 14970,
+            "xpToNext": 9031
           }
         ]
       },
       {
-        "name": "Arvin Falice Owlyeare",
-        "race": "Olwbear",
-        "edition": "1e",
+        "name": "Arvan Falice",
+        "race": "Owlbear",
         "classes": [
           {
             "name": "Magic-User",
             "level": 4,
-            "xp": 13120,
-            "xpToNext": 9381
+            "getsBonus": true,
+            "xp": 15155,
+            "xpToNext": 6678
           }
         ]
       },
       {
         "name": "St. Abba John",
         "race": "Duergar",
-        "edition": "1e",
         "classes": [
           {
             "name": "Paladin",
             "level": 4,
-            "xp": 13120,
-            "xpToNext": 10881
+            "xp": 14970,
+            "xpToNext": 9031
           }
         ]
       },
       {
         "name": "Olaf Petersen",
         "race": "Half-Elf",
-        "edition": "1e",
         "classes": [
           {
             "name": "Ranger",
             "level": 3,
-            "xp": 6605,
+            "xp": 7578,
             "getsBonus": true,
-            "xpToNext": 3087
+            "xpToNext": 2202
           },
           {
             "name": "Magic-User",
             "level": 3,
-            "xp": 6562,
-            "xpToNext": 3439
+            "xp": 7485,
+            "xpToNext": 2516
+          }
+        ]
+      },
+      {
+        "name": "Champ (Henchman)",
+        "race": "Canine Beastman",
+        "boss": "Olaf Petersen",
+        "classes": [
+          {
+            "name": "Fighter",
+            "level": 1,
+            "xp": 0,
+            "getsBonus": true,
+            "xpToNext": 0
           }
         ]
       }
@@ -135,12 +151,12 @@
   {
     "name": "Baker Street Bakers",
     "system": "ADD",
+    "edition": "1e",
     "xp": 686634,
     "members": [
       {
         "name": "Vaseria Dalmov II",
         "race": "Orc",
-        "edition": "1e",
         "classes": [
           {
             "name": "Illusionist",
@@ -167,10 +183,9 @@
       {
         "name": "Maggie Pie",
         "race": "Hengeyokai",
-        "edition": "OA",
         "classes": [
           {
-            "name": "Wu Jen",
+            "name": "OA:Wu Jen",
             "level": 11,
             "xp": 755298,
             "getsBonus": true,
@@ -184,7 +199,6 @@
       {
         "name": "Birch (Ulfgar)",
         "race": "Dwarf",
-        "edition": "1e",
         "splitClass": "Bard",
         "classes": [
           {
@@ -217,10 +231,9 @@
       {
         "name": "Æthelflæd Wickerroot",
         "race": "Giant Rat",
-        "edition": "Custom",
         "classes": [
           {
-            "name": "Witch",
+            "name": "Custom:Witch",
             "level": 12,
             "xp": 755298,
             "getsBonus": true,
@@ -239,10 +252,9 @@
         "name": "Renee Veloute Bechamel",
         "hide": true,
         "race": "Halfling",
-        "edition": "Custom",
         "classes": [
           {
-            "name": "Chef",
+            "name": "Custom:Chef",
             "level": 0,
             "xp": 0,
             "xpToNext": 1
@@ -255,17 +267,16 @@
       {
         "name": "Thri-Kreen 1",
         "race": "Thri-Kreen",
-        "edition": "OA",
         "classes": [
           {
-            "name": "Wu Jen",
+            "name": "OA:Wu Jen",
             "level": 10,
             "xp": 377661,
             "getsBonus": true,
             "xpToNext": 111218
           },
           {
-            "name": "Ninja",
+            "name": "OA:Ninja",
             "level": 8,
             "xp": 343323,
             "xpToNext": 156678
@@ -278,7 +289,6 @@
       {
         "name": "Borbugulus",
         "race": "Bugbear",
-        "edition": "1e",
         "classes": [
           {
             "name": "Paladin",
@@ -294,7 +304,6 @@
       {
         "name": "Goreguts",
         "race": "Gnome",
-        "edition": "1e",
         "classes": [
           {
             "name": "Thief",
@@ -321,7 +330,6 @@
       {
         "name": "Harl",
         "race": "Half-Elf",
-        "edition": "1e",
         "classes": [
           {
             "name": "Ranger",
@@ -342,7 +350,6 @@
       {
         "name": "Zultamba Antzamba",
         "race": "Human",
-        "edition": "1e",
         "classes": [
           {
             "name": "Fighter",
@@ -364,12 +371,12 @@
   {
     "name": "Some Other Party",
     "system": "ADD",
+    "edition": "1e",
     "xp": 17750,
     "members": [
       {
         "name": "Maxie",
         "race": "Gnome",
-        "edition": "1e",
         "classes": [
           {
             "name": "Cleric",
@@ -392,7 +399,6 @@
       {
         "name": "Minnie",
         "race": "Minotaur",
-        "edition": "1e",
         "classes": [
           {
             "name": "Fighter",
@@ -407,13 +413,13 @@
       },
       {
         "name": "Dual-Class Dudley",
+        "comment": "Dual class means he was one class for a while and changed classes; only the split class gets new XP",
         "race": "Human",
-        "edition": "1e",
         "splitClass": "Thief",
         "classes": [
           {
             "name": "Fighter",
-            "level": 0,
+            "level": 7,
             "xp": 72000,
             "xpToNext": 1
           },
@@ -434,12 +440,12 @@
   {
     "name": "Dolmenwood Party",
     "system": "DW",
+    "edition": "DW",
     "xp": 6327,
     "members": [
       {
         "name": "Brother Bunk Logueweave",
         "race": "Human",
-        "edition": "DW",
         "classes": [
           {
             "name": "Friar",
@@ -454,7 +460,6 @@
       {
         "name": "Mossy McMossface",
         "race": "Mossling",
-        "edition": "DW",
         "classes": [
           {
             "name": "Fighter",
@@ -469,7 +474,6 @@
       {
         "name": "Grimy Grimstone",
         "race": "Grimalkin",
-        "edition": "DW",
         "classes": [
           {
             "name": "Thief",

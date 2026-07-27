@@ -19,11 +19,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'))
 })
 
-app.get('/editions', (req, res) => {
+app.get('/editions/:systemName', (req, res) => {
   // return names of known editions
-  console.log('Edition names')
-  const results = classes.getEditions()
-  res.json(st)
+  //console.log(`${req.params.systemName} Editions`)
+  const results = classes.getEditions(req.params.systemName)
+  res.json(results)
 })
 
 app.get('/classes', (req, res) => {
