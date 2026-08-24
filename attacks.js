@@ -1,4 +1,6 @@
-// roll a number of attacks by a creature with thaco and damage dice against an AC and display the number of hits and total damage
+// AD&D-specific; roll a number of attacks using a creature's thaco and damage dice against a list of ACs and return the number of hits and total damage.
+// This module needs no D&D system data, it just uses the DieRoll class and hard-coded D&D logic for rolling an attack against an AC.
+
 const DieRoll = require('./dieRoll')
 
 const attackDice = DieRoll.parse('d20')

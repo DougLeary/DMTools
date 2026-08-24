@@ -26,11 +26,19 @@ app.get('/editions/:systemName', (req, res) => {
   res.json(results)
 })
 
-app.get('/classes', (req, res) => {
+app.get('/classes/:systemName/:editionName', (req, res) => {
   // return class names by edition
   console.log(`Get editions and classes`)
-  const json = classes.getClasses()
-//  console.log(`Returning ${JSON.stringify(json)}`)
+  const json = classes.getClasses(req.params.systemName, req.params.editionName || null)
+  console.log(`Returning ${JSON.stringify(json)}`)
+  res.json(json)
+})
+
+app.get('/classes/:systemName', (req, res) => {
+  // return editions and classes for system
+  console.log(`Get editions and classes`)
+  const json = classes.getClasses(req.params.systemName)
+  console.log(`Returning ${JSON.stringify(json)}`)
   res.json(json)
 })
 

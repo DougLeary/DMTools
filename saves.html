@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="dnd.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
-    const state = { editions: [], currentEdition: "" }
+    const state = { currentSystem: "ADD", editions: [], currentEdition: "" }
 
     function loadClasses(forEdition) {
       elem = $('#className')
@@ -64,7 +64,7 @@
     }
 
     $(function() {    // document.ready
-      $.get('./classes', (data) => {
+      $.get(`./classes/${state.currentSystem}`, (data) => {
         loadEditions(data)
       })
     })
@@ -76,7 +76,7 @@
   <p>Rolls multiple saving throws and reports successes and failures. 
   </p>
   <div style="margin:10px; width: 400px; text-align: center;">
-    <label for="edition">Book:</label>
+    <label for="edition">Edition:</label>
     <select name="edition" id="edition" onchange="loadClasses(this.value)">
     </select><br />
     <label for="className">Class:</label>

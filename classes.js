@@ -51,6 +51,7 @@ function getEffects(systemName, editionName) {
 
 function getClasses(systemName, editionName) {
   // systemName is required; if editionName is present get that edition's classes, else get all classes in the system 
+  console.log(`get classes for ${systemName}`)
   const list = []
   if (editionName) {
     const edition = getEdition(systemName, editionName)
@@ -63,7 +64,7 @@ function getClasses(systemName, editionName) {
       system.editions.forEach((ed) => {
         const item = { edition: ed.name, text: ed.text, classes: [] }
         ed.classes.forEach ((cls) => {
-          item.classes.push(ed.classes[c].name)
+          item.classes.push(cls.name)
         })
         list.push(item)
       })
