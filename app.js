@@ -37,9 +37,8 @@ app.get('/classes', (req, res) => {
 app.get('/attack', (req, res) => {
   res.sendFile(path.join(__dirname, '/attack.html'))
 })
-app.get('/attack/:attacks/:thaco/:damage/:ac', (req, res) => {
-  // roll a series of attacks against ac using thaco, return a string showing hits and damage
-  console.log(`Attacks: ${req.params.attacks}, Thaco: ${req.params.thaco}, Damage: ${req.params.damage}, AC: ${req.params.ac}`)
+app.get('/attack/:thaco/:damage/:ac', (req, res) => {
+  // roll one or more attacks with specified damage against a list of ACs; return a string showing hits and damage for each AC
   const st = attack.roll(req.params.attacks, req.params.thaco, req.params.damage, req.params.ac)
 //  console.log(`Returning ${st}`)
   res.json(st)

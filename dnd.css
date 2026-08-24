@@ -32,7 +32,7 @@ button:hover {
   background-color: #a0ffa0;
 }
 #results {
-  height: 200px;
+  height: 300px;
   width: 600px;
   overflow-y: auto;
   scrollbar-gutter: stable;

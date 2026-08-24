@@ -6,15 +6,17 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     function roll() {
-      const x = $('#attacks')
-      console.log(x.innerHTML)
-      const attacks = $('#attacks').val()
       const thaco = $('#thaco').val()
-      const damage = $('#damage').val().replaceAll('/', '%2f')
+      const damage = $('#damage').val().replaceAll('/', ',')
       const ac = $('#ac').val()
-      // console.log(`Calling api at ./attack/${attacks}/${thaco}/${damage}/${ac}`)
-      $.get(`./attack/${attacks}/${thaco}/${damage}/${ac}`, (data) => {
-        $('#results').append(`${data}<br />`)
+      // console.log(`Calling api at ./attack/${thaco}/${damage}/${ac}`)
+      $.get(`./attack/${thaco}/${damage}/${ac}`, (data) => {
+        const box = $('#results')
+        box.append("---<br/>")
+
+        for (let i in data) {
+          box.append(`${data[i].text}<br />`)
+        }
         const elem = document.getElementById('results')
         elem.scrollTop = elem.scrollHeight
       });
@@ -28,9 +30,23 @@
 <!--  <a href="index.html">◀ Home</a> -->
 <a href="index.html">< Home</a>
 <h1>Attacks</h1>
-  <p>Rolls multiple attacks and reports successful hits and damage. 
+  <p>Roll single or multiple attacks against one or more targets. 
   </p>
   <div id="attackForm" style="margin:10px; width: 600px; text-align: center;">
+    <label for="thaco">Attacker THAC0: </label><input id="thaco" type="text" /><br />
+    <label for="damage">Attacker Damage Dice: </label><input id="damage" type="text" /><br />
+    <label for="ac">Target AC(s): </label><input id="ac" type="text" /><br />
+    <p>This tool rolls attacks by a group of creatures of the same type (or with the same THAC0, number of attacks and damage dice),
+      against one or more targets.
+    </p><p>Enter damage dice for all attacks per round, such as "d8+1" or "d4/d4/d6".
+    </p><p>Enter ACs for all targets as a comma-separated list, indicating targets with multiple attackers as ACx#. 
+      For example, if a target with AC0 is being attacked by 2 creatures, enter it as "0x2". 
+      Example: A party is attacked by five ghouls. PCs with AC 3 and 0 are attacked by two ghouls each, The remaining one attacks another PC with AC0.
+      The AC list would be "3x2, 0x2, 0". Spaces are optional.
+      </p><p>Clicking Roll performs all attacks and reports hits and damage for all targets.
+    </p>
+
+    <!--
     <label for="attacks">Attack(er)s: </label><input id="attacks" type="text" /><br />
     <label for="thaco">THAC0: </label><input id="thaco" type="text" /><br />
     <label for="damage">Damage Dice: </label><input id="damage" type="text" /><br />
@@ -38,9 +54,12 @@
     <p>For multiple attacks per attacker, Damage Dice can be like d4/d4/d6+1.<br />
       3 Attackers with d8 are the same as 1 Attacker with d8/d8/d8.
     </p>
+    -->
+
     <button type="button" onclick="roll()">Roll</button>
     <button type="button" onclick="clearResults()" style="margin:left:20px">Clear</button>
   </div>
 
   <div id="results"></div>
 </body>
+""
