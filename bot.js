@@ -116,7 +116,7 @@ function addPartyXp(channel, xpToAdd) {
   party.updateXp(party.Actions.add, xpToAdd, pty)
 }
 
-client.once('ready', () => {
+client.once('clientReady', () => {
   console.log('OSDnD bot connected to Discord')
 })
 
